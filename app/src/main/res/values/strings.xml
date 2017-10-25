@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TRAK</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="io_tag">I/O</string>
+    <string name="sos_tag">SOS</string>
+    <string name="det_tag">Details</string>
+    <string name="desc">Image button</string>
+</resources>
