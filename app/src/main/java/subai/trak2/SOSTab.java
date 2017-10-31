@@ -59,7 +59,6 @@ public class SOSTab extends Fragment {
         return v;
     }
 
-
     public void roadAccClick() {
         bus.setStatus("RoadAccident");
     }

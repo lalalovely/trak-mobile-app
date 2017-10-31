@@ -16,17 +16,17 @@
         android:id="@+id/emerStop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        android:text="Emergency Stop"
         android:layout_below="@+id/engFail"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="98dp"
-        android:text="Emergency Stop" />
+        android:layout_alignStart="@+id/engFail" />
 
     <Button
         android:id="@+id/roadAcc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:text="Road Accident"
         android:layout_below="@+id/emerStop"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="107dp"
-        android:text="Road Accident" />
+        android:layout_alignStart="@+id/emerStop" />
 </RelativeLayout>
