@@ -6,4 +6,30 @@
     <string name="sos_tag">SOS</string>
     <string name="det_tag">Details</string>
     <string name="desc">Image button</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_intro">IntroActivity</string>
+
+
+    <string name="next">Next</string>
+    <string name="skip">Skip</string>
+    <string name="start">Start</string>
+    <string name="title_slide1">Connect the charger</string>
+    <string name="desc_slide1">It will start automatically when charger is connected</string>
+    <string name="title_slide2">Battery status update</string>
+    <string name="desc_slide2">It will  keep you updated on battery charging status through notification and home screen widget</string>
+    <string name="title_slide3">Alert on 100%</string>
+    <string name="desc_slide3">It will alert you when battery reaches 100%</string>
 </resources>

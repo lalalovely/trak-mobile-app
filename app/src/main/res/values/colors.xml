@@ -4,4 +4,22 @@
     <color name="colorPrimaryDark">#1fa6b0</color>
     <color name="colorAccent">#1fa6b0</color>
     <color name="colorTabs">#f9f9f9</color>
+    <color name="blue">#33ccff</color>
+    <color name="white">#ffffff</color>
+    <color name="buttonColor">#1fa6b0</color>
+    <color name="fontColor">#303030</color>
+    <color name="bgColor">#f9f9f9</color>
+    <color name="mainColor">#9fc03c</color>
+
+    <!-- Screens background -->
+    <color name="bg_screen1">#b12515</color>
+    <color name="bg_screen2">#FFBB00</color>
+    <color name="bg_screen3">#74a443</color>
+
+    <!-- dots active colors -->
+    <color name="dot_active">#000000</color>
+
+
+    <!-- dots inactive colors -->
+    <color name="dot_inactive">#cccccc</color>
 </resources>

@@ -1,8 +1,13 @@
 package subai.trak2;
 
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ListFragment;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,6 +26,15 @@ import android.view.ViewGroup;
 
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.firebase.database.DatabaseReference;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
@@ -40,15 +54,27 @@ public class MainActivity extends AppCompatActivity {
 
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
-        ////getSupportActionBar().setLogo(R.drawable.logo);
         getSupportActionBar().setTitle("TRAK");
 
         mViewPager = (ViewPager) findViewById(R.id.container);
+        mViewPager.setAdapter(mSectionPageAdapter);
         setupViewPager(mViewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
+
+//        final TabLayout.Tab io = tabLayout.newTab();
+//        final TabLayout.Tab sos = tabLayout.newTab();
+//        final TabLayout.Tab deet = tabLayout.newTab();
+//
+//        io.setIcon(R.drawable.io_icon);
+//        sos.setIcon(R.drawable.sos_icon);
+//        deet.setIcon(R.drawable.details_icon);
+//
+//        tabLayout.addTab(io, 0);
+//        tabLayout.addTab(sos, 1);
+//        tabLayout.addTab(deet, 2);
+
         tabLayout.setupWithViewPager(mViewPager);
-        //setUpIcons();
 
         try {
             View view1 = getLayoutInflater().inflate(R.layout.customtab, null);
@@ -62,17 +88,6 @@ public class MainActivity extends AppCompatActivity {
             View view3 = getLayoutInflater().inflate(R.layout.customtab, null);
             view3.findViewById(R.id.icon).setBackgroundResource(R.drawable.details_icon);
             tabLayout.getTabAt(2).setCustomView(view3);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    private void setUpIcons() {
-        try {
-            tabLayout.getTabAt(0).setIcon(R.drawable.icon_io);
-            tabLayout.getTabAt(1).setIcon(R.drawable.ic_sos_icon);
-            tabLayout.getTabAt(2).setIcon(R.drawable.ic_details_icon);
         } catch (NullPointerException e) {
             e.printStackTrace();
         }
