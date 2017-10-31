@@ -59,6 +59,11 @@ public class IOTab extends Fragment implements LocationListener {
 
     private String busCompany = "";
     private String accommodation = "";
+    private Bus bus;
+
+    public void setBus(Bus bus){
+        this.bus = bus;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -85,6 +90,13 @@ public class IOTab extends Fragment implements LocationListener {
             @Override
             public void onClick(View v) {
                 onClickStart();
+            }
+        });
+
+        send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                sendLocation();
             }
         });
 
@@ -182,7 +194,9 @@ public class IOTab extends Fragment implements LocationListener {
             });
             Log.d("herre", accommodation);
             Log.d("herre", busCompany);
-            pushRef.setValue(new Bus(lat, lng, busNumber, route, accommodation, busCompany));
+            bus.setBusDetails(lat,lng,busNumber,route,accommodation,busCompany);
+            pushRef.setValue(bus); //instead of new always, we only have 1 bus reference. //calling new buses is weird
+
             Toast.makeText(getActivity().getApplicationContext(), "DATA SENT", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getActivity().getApplicationContext(), "DATA NOT SENT", Toast.LENGTH_LONG).show();

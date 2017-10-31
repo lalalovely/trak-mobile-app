@@ -1,7 +1,7 @@
 package subai.trak2;
 
 /**
- * Created by lovely grace on 10/30/2017.
+ * Created by - on 30/10/2017.
  */
 
 public class Bus {
@@ -12,9 +12,7 @@ public class Bus {
             this.lat = lat;
             this.lng = lon;
         }
-
     }
-
 
     public Coordinates position, destination;
     public String busNumber, busCompany, route, accommodation, status;
@@ -29,7 +27,17 @@ public class Bus {
 //        this.accomodation = accomodation;
 //    }
 
-    Bus(String x2, String y2, String busNumber, String route, String accommodation, String busCompany){
+    Bus(String x2, String y2){
+        destination = new Coordinates(String.valueOf(10.298237), String.valueOf(123.893133));
+        position = new Coordinates(x2, y2);
+        busCompany = "Ceres";
+        route = "Bato";
+        accommodation = "Aircon";
+        status = "In-transit";
+        busNumber = "ABC1234";
+    }
+
+    Bus(String x2, String y2, String busNumber, String route, String accommodation, String busCompany) {
         destination = new Coordinates(String.valueOf(10.298237), String.valueOf(123.893133));
         position = new Coordinates(x2, y2);
         this.route = route;
@@ -39,8 +47,34 @@ public class Bus {
 //        this.accommodation = "Ordinary";
         this.busCompany = busCompany;
         this.accommodation = accommodation;
-
-
     }
+
+    Bus(){
+        //dummy values
+        destination = new Coordinates(String.valueOf(10.298237), String.valueOf(123.893133));
+        position = new Coordinates("", "");
+        busCompany = "Ceres";
+        route = "Bato";
+        accommodation = "Aircon";
+        status = "In-transit";
+        busNumber = "ABC1234";
+    }
+
+
+    public void setBusDetails(String lat, String lng, String busNumber, String route, String acc, String busComp){
+        destination = new Coordinates(String.valueOf(10.298237), String.valueOf(123.893133));
+        position = new Coordinates(lat,lng);
+        this.busNumber = busNumber;
+        this.route = route;
+        this.accommodation = acc;
+        this.busCompany = busComp;
+    }
+
+    //lat, lng, busNumber, route, accommodation, busCompany
+
+    public void setStatus(String st) {
+        status = st;
+    }
+
 }
 
