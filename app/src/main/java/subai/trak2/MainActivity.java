@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
+import android.telecom.Call;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -43,6 +44,11 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager mViewPager;
     private TabLayout tabLayout;
     private Toolbar mToolBar;
+
+    private IOTab ioTab;
+    private SOSTab sosTab;
+    private Bus bus;
+    private DetailsTab detailsTab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,9 +101,19 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
-        adapter.addFragment(new IOTab(), "I/O");
-        adapter.addFragment(new SOSTab(), "SOS");
-        adapter.addFragment(new DetailsTab(), "DETAILS");
+
+        ioTab = new IOTab();
+        sosTab = new SOSTab();
+        detailsTab = new DetailsTab();
+        bus = new Bus();
+
+        ioTab.setBus(bus);
+        sosTab.setBus(bus);
+        //make a details tab
+
+        adapter.addFragment(ioTab, "I/O");
+        adapter.addFragment(sosTab, "SOS");
+        adapter.addFragment(detailsTab, "DETAILS");
         viewPager.setAdapter(adapter);
     }
 
