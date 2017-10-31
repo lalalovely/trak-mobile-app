@@ -18,10 +18,13 @@
         android:theme="@style/AppTheme.NoActionBar">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <activity
             android:name=".MainActivity"
-            android:label="Trak"></activity>
+            android:label="Trak">
+        </activity>
         <activity
             android:name=".IntroActivity"
             android:label="@string/title_activity_intro"
