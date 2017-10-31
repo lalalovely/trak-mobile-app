@@ -41,7 +41,7 @@ public class IntroActivity extends AppCompatActivity {
 
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_intro);
 
@@ -52,8 +52,7 @@ public class IntroActivity extends AppCompatActivity {
 
         layouts = new int[]{
                 R.layout.slide_1,
-                R.layout.slide_2,
-                R.layout.slide_3};
+                R.layout.slide_2,};
 
         // adding bottom dots
         addBottomDots(0);

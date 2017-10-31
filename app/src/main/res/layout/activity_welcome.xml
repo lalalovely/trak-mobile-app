@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="subai.trak2.WelcomeActivity">
+    tools:context="subai.trak2.WelcomeActivity"
+    android:background="#f6f6f6">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,8 +25,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="WELCOME!"
-            android:textSize="50sp" />
+            android:text="TRAK"
+            android:textColor="@color/fontColor"
+            android:textSize="50sp"
+            android:textStyle="bold"/>
 
     </LinearLayout>
 
