@@ -9,6 +9,13 @@ import android.view.ViewGroup;
 
 public class DetailsTab extends Fragment {
     private static final String TAG = "@string/det_tag";
+    private Bus bus;
+
+    public void setBus(Bus bus){
+        this.bus = bus;
+    }
+
+
 
     @Nullable
     @Override

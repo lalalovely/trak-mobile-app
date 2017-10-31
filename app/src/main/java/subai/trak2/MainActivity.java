@@ -109,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
 
         ioTab.setBus(bus);
         sosTab.setBus(bus);
+        detailsTab.setBus(bus);
         //make a details tab
 
         adapter.addFragment(ioTab, "I/O");
