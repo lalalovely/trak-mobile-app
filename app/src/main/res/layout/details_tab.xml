@@ -16,11 +16,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.4"
+        app:layout_constraintVertical_bias="0.61"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="1.0"
-        tools:layout_editor_absoluteX="145dp" />
+        app:layout_constraintHorizontal_bias="1.0" />
 
     <TextView
         android:id="@+id/busCompany"
@@ -35,10 +34,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.071"
+        app:layout_constraintVertical_bias="0.120000005"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.022" />
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <TextView
         android:id="@+id/status"
@@ -50,7 +49,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.336"
+        app:layout_constraintVertical_bias="0.57"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
         app:layout_constraintHorizontal_bias="0.05" />
@@ -65,7 +64,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.231"
+        app:layout_constraintVertical_bias="0.44"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
         app:layout_constraintHorizontal_bias="0.063" />
@@ -79,7 +78,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.185"
+        app:layout_constraintVertical_bias="0.26999998"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
         app:layout_constraintHorizontal_bias="0.057" />
@@ -93,7 +92,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256"
+        app:layout_constraintVertical_bias="0.39"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
         app:layout_constraintHorizontal_bias="0.05" />
@@ -110,7 +109,8 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
         app:layout_constraintHorizontal_bias="0.9"
-        android:layout_marginTop="62dp" />
+        android:layout_marginTop="87dp"
+        android:layout_marginLeft="0dp" />
 
     <TextView
         android:id="@+id/accommodation_txt"
@@ -122,7 +122,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.332"
+        app:layout_constraintVertical_bias="0.51"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
         app:layout_constraintHorizontal_bias="0.9" />
@@ -137,7 +137,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.256"
+        app:layout_constraintVertical_bias="0.39"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
         app:layout_constraintHorizontal_bias="0.9" />
@@ -154,7 +154,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.184"
+        app:layout_constraintVertical_bias="0.26999998"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
         app:layout_constraintHorizontal_bias="0.9" />

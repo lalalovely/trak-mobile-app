@@ -14,8 +14,8 @@ public class Bus {
         }
     }
 
-    public Coordinates position, destination;
-    public String  busCompany, route, accommodation, status;
+    private Coordinates position, destination;
+    private String  busCompany, route, accommodation, status;
 
     Bus(){
         //dummy values
@@ -44,5 +44,13 @@ public class Bus {
     public void setRoute(String route) {
         this.route = route;
     }
+
+    public String getBusCompany() { return busCompany; }
+
+    public String getRoute() { return route; }
+
+    public String getAccommodation() { return accommodation; }
+
+    public String getStatus() { return status; }
 }
 
