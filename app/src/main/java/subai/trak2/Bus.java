@@ -14,7 +14,7 @@ public class Bus {
         }
     }
 
-    private Coordinates position, destination;
+    public Coordinates position, destination;
     private String  busCompany, route, accommodation, status;
 
     Bus(){
