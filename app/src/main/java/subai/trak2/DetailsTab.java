@@ -19,8 +19,6 @@ public class DetailsTab extends Fragment {
         this.bus = bus;
     }
 
-
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,7 +30,11 @@ public class DetailsTab extends Fragment {
         txtAcc = (TextView) v.findViewById(R.id.accommodation_txt);
         txtStatus = (TextView) v.findViewById(R.id.status_txt);
 
-        txtStatus.setText(bus.status);
+        txtStatus.setText(bus.getStatus());
+        txtCompany.setText(bus.getBusCompany());
+        txtRoute.setText(bus.getRoute());
+        txtAcc.setText(bus.getAccommodation());
+        txtNumber.setText(LoginActivity.getBusNumber());
 
         return v;
     }
