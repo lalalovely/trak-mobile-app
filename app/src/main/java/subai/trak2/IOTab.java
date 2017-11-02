@@ -1,17 +1,13 @@
 package subai.trak2;
 
-import android.*;
 import android.Manifest;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.provider.Settings;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
@@ -33,10 +29,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 
 public class IOTab extends Fragment implements LocationListener {
     private static final String TAG = "@string/io_tag";
@@ -58,8 +51,6 @@ public class IOTab extends Fragment implements LocationListener {
     private String longiText = "";
     private String status = "START";
 
-    private String busCompany = "";
-    private String accommodation = "";
     private Bus bus;
 
     public void setBus(Bus bus){
@@ -180,42 +171,14 @@ public class IOTab extends Fragment implements LocationListener {
         if(!(latVal.equals("") || longVal.equals("") || latVal.equals("Latitude not found") || longVal.equals("Longitude not found"))) {
             String lat = String.valueOf(getFusedLatitude());
             String lng = String.valueOf(getFusedLongitude());
-            final String busNumber = LoginActivity.getBuNumber();
-            String route = LoginActivity.getRoute();
+            final String busNumber = LoginActivity.getBusNumber();
             DatabaseReference pushRef = mRoot.child("Bus").child(busNumber);
-//            pushRef.setValue(new Bus(lat, lng, busNumber, route));
-            DatabaseReference accounts = mRoot.child("Bus_Accounts");
-            accounts.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    Iterable<DataSnapshot> children = dataSnapshot.child(busNumber).getChildren();
-                    for (DataSnapshot child : children){
-                        if (child.getKey().equals("accommodation")){
-                            setAccommodation(child.getValue().toString());
-                        }
-                        if (child.getKey().equals("busCompany")){
-                            setBusCompany(child.getValue().toString());
-                        }
-                    }
-                }
-                public void onCancelled(DatabaseError databaseError) {}
-            });
-            Log.d("herre", accommodation);
-            Log.d("herre", busCompany);
-            bus.setBusDetails(lat,lng,busNumber,route,accommodation,busCompany);
+            bus.setPosition(lat,lng);
             pushRef.setValue(bus); //instead of new always, we only have 1 bus reference. //calling new buses is weird
-
             Toast.makeText(getActivity().getApplicationContext(), "DATA SENT", Toast.LENGTH_LONG).show();
         } else {
             Toast.makeText(getActivity().getApplicationContext(), "DATA NOT SENT", Toast.LENGTH_LONG).show();
         }
-    }
-
-    public void setBusCompany(String b){
-        busCompany = b;
-    }
-    public void setAccommodation(String a){
-        accommodation = a;
     }
 
     public void startFusedLocation() {
