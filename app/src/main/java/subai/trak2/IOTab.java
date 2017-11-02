@@ -165,8 +165,8 @@ public class IOTab extends Fragment implements LocationListener {
     }
 
     public void sendLocation() {
-        String latVal = latitude.getText().toString();
-        String longVal = longitude.getText().toString();
+        String latVal = String.valueOf(fusedLatitude);
+        String longVal = String.valueOf(fusedLongitude);
 
         if(!(latVal.equals("") || longVal.equals("") || latVal.equals("Latitude not found") || longVal.equals("Longitude not found"))) {
             String lat = String.valueOf(getFusedLatitude());
@@ -221,7 +221,7 @@ public class IOTab extends Fragment implements LocationListener {
     public void registerRequestUpdate(final LocationListener listener) {
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(3 * 1000); // every 3 seconds //1000
+        mLocationRequest.setInterval(5 * 1000); // every 3 seconds //1000
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -240,6 +240,8 @@ public class IOTab extends Fragment implements LocationListener {
                 }
             }
         }, 1000);
+
+
     }
 
     public void stopRequestUpdate() {
@@ -306,11 +308,13 @@ public class IOTab extends Fragment implements LocationListener {
             String longi = "Longitude is " + String.valueOf(getFusedLongitude());
             latiText = lati;
             longiText = longi;
+            sendLocation();
         }
 //        latitude.setText("" + getFusedLatitude());
 //        longitude.setText("" + getFusedLongitude());
         latitude.setText(latiText);
         longitude.setText(longiText);
+
     }
 
     public void setFusedLatitude(double lat) {
