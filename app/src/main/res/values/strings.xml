@@ -32,4 +32,6 @@
     <string name="desc_slide2">It will  keep you updated on battery charging status through notification and home screen widget</string>
     <string name="title_slide3">Alert on 100%</string>
     <string name="desc_slide3">It will alert you when battery reaches 100%</string>
+
+    <string name="routePrompt">Select Route</string>
 </resources>

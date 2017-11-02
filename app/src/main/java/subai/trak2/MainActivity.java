@@ -105,7 +105,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // set route
-        bus.setRoute(LoginActivity.getRoute());
+        //changed upon chaging the EditText to Spinner
+        //bus.setRoute(LoginActivity.getRoute());
 
         ioTab.setBus(bus);
         sosTab.setBus(bus);

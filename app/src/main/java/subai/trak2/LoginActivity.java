@@ -1,14 +1,19 @@
 package subai.trak2;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.util.StringBuilderPrinter;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.view.View;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -17,7 +22,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     private static EditText busNumber;
     private static EditText route;
     private Button login;
@@ -25,6 +30,9 @@ public class LoginActivity extends AppCompatActivity {
     private boolean checked = false;
     private boolean busChecked = false;
     private boolean routeChecked = false;
+    private Spinner routeSpinner;
+    private String selectedRoute = "";
+    public String[] routeItems = {"Argao", "Alcoy", "Badian", "Naga", "Oslob"};
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,9 +43,23 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         busNumber = (EditText) findViewById(R.id.busNumText);
-        route = (EditText) findViewById(R.id.routeText);
+        //route = (EditText) findViewById(R.id.routeText);
         login = (Button) findViewById(R.id.btnLogin);
+        routeSpinner = (Spinner) findViewById(R.id.routeList);
 
+        //getting items from resource file
+//        ArrayAdapter<CharSequence> routeAdapter = ArrayAdapter
+//                .createFromResource(this, R.array.route_array,
+//                        android.R.layout.simple_spinner_item);
+
+        //getting items from a String array (routeItems) set in this class
+        ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, routeItems);
+
+        routeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        routeSpinner.setAdapter(routeAdapter);
+        routeSpinner.setOnItemSelectedListener(this);
 
         login.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
@@ -70,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                     }
                     else {
                         busChecked = true;
-                        checkRoute();
+                        //checkRoute();
                     }
                 }
             }
@@ -81,6 +103,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
+    /*
     public void checkRoute(){
         DatabaseReference routeRef = ref.child("Route");
         routeRef.addValueEventListener(new ValueEventListener() {
@@ -104,15 +127,28 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+    */
 
     public static String getBusNumber(){
         return busNumber.getText().toString();
     }
 
+    /*
     public static String getRoute(){
         return route.getText().toString();
     }
+    */
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        selectedRoute = parent.getItemAtPosition(position).toString();
+        Toast.makeText(this, selectedRoute, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
 
 

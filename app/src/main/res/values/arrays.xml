@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="route_array">
+        <item>Argao</item>
+        <item>Alcoy</item>
+        <item>Badian</item>
+        <item>Naga</item>
+        <item>Oslob</item>
+    </string-array>
+</resources>
