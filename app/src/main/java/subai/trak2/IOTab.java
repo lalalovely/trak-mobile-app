@@ -56,6 +56,7 @@ public class IOTab extends Fragment implements LocationListener {
 
     private String latiText = "";
     private String longiText = "";
+    private String status = "START";
 
     private String busCompany = "";
     private String accommodation = "";
@@ -72,18 +73,23 @@ public class IOTab extends Fragment implements LocationListener {
         latitude = (TextView) v.findViewById(R.id.textview_latitude);
         longitude = (TextView) v.findViewById(R.id.textview_longitude);
         display = (Button) v.findViewById(R.id.btnDisplay);
-        update = (Button) v.findViewById(R.id.btnUpdate);
-        send = (Button) v.findViewById(R.id.btnSend);
+        display.setText(status);
+        //update = (Button) v.findViewById(R.id.btnUpdate);
+        //send = (Button) v.findViewById(R.id.btnSend);
 
         if (savedInstanceState == null) {
         } else {
             latiText = savedInstanceState.getString("latitude");
             longiText = savedInstanceState.getString("longitude");
+            status = savedInstanceState.getString("stat");
+
             latitude = (TextView) v.findViewById(R.id.textview_latitude);
             longitude = (TextView) v.findViewById(R.id.textview_longitude);
+            display = (Button) v.findViewById(R.id.btnDisplay);
 
             latitude.setText(latiText);
             longitude.setText(longiText);
+            display.setText(status);
         }
 
         display.setOnClickListener(new View.OnClickListener() {
@@ -93,12 +99,12 @@ public class IOTab extends Fragment implements LocationListener {
             }
         });
 
-        send.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sendLocation();
-            }
-        });
+//        send.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                sendLocation();
+//            }
+//        });
 
         return v;
     }
@@ -107,7 +113,8 @@ public class IOTab extends Fragment implements LocationListener {
         if (checkPlayServices()) {
             startFusedLocation();
             registerRequestUpdate(this);
-            display.setText("IN-TRANSIT");
+            status = "In-transit";
+            display.setText(status);
             display.setClickable(false);
         }
     }
@@ -138,6 +145,7 @@ public class IOTab extends Fragment implements LocationListener {
         super.onSaveInstanceState(outState);
         outState.putString("latitude", latiText);
         outState.putString("longitude", longiText);
+        outState.putString("stat", status);
     }
 
     @Override
