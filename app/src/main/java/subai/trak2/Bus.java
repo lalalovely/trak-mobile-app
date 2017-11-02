@@ -15,29 +15,7 @@ public class Bus {
     }
 
     public Coordinates position, destination;
-    public String busNumber, busCompany, route, accommodation, status;
-
-    Bus(String x2, String y2){
-        destination = new Coordinates(String.valueOf(10.298237), String.valueOf(123.893133));
-        position = new Coordinates(x2, y2);
-        busCompany = "Ceres";
-        route = "Bato";
-        accommodation = "Aircon";
-        status = "In-transit";
-        busNumber = "ABC1234";
-    }
-
-    Bus(String x2, String y2, String busNumber, String route, String accommodation, String busCompany) {
-        destination = new Coordinates(String.valueOf(10.298237), String.valueOf(123.893133));
-        position = new Coordinates(x2, y2);
-        this.route = route;
-        status = "In-transit";
-        this.busNumber = busNumber;
-//        this.busCompany= "Ceres";
-//        this.accommodation = "Ordinary";
-        this.busCompany = busCompany;
-        this.accommodation = accommodation;
-    }
+    public String  busCompany, route, accommodation, status;
 
     Bus(){
         //dummy values
@@ -47,14 +25,12 @@ public class Bus {
         route = "Bato";
         accommodation = "Aircon";
         status = "In-transit";
-        busNumber = "ABC1234";
     }
 
 
-    public void setBusDetails(String lat, String lng, String busNumber, String route, String acc, String busComp){
+    public void setBusDetails(String lat, String lng, String route, String acc, String busComp){
         destination = new Coordinates(String.valueOf(10.298237), String.valueOf(123.893133));
         position = new Coordinates(lat,lng);
-        this.busNumber = busNumber;
         this.route = route;
         this.accommodation = acc;
         this.busCompany = busComp;
@@ -65,6 +41,15 @@ public class Bus {
     public void setStatus(String st) {
         status = st;
     }
+    public void setPosition(String lat, String lng) {position = new Coordinates(lat,lng);}
+    public void setAccommodation(String accommodation) {this.accommodation = accommodation;}
 
+    public void setBusCompany(String busCompany) {
+        this.busCompany = busCompany;
+    }
+
+    public void setRoute(String route) {
+        this.route = route;
+    }
 }
 

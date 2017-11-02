@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
     }
-    public static String getBuNumber(){
+    public static String getBusNumber(){
         return busNumber.getText().toString();
     }
 
