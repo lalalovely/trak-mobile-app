@@ -22,7 +22,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+//implements AdapterView.OnItemSelectedListener
+
+public class LoginActivity extends AppCompatActivity {
     private static EditText busNumber;
     private static EditText route;
     private Button login;
@@ -43,9 +45,9 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         setContentView(R.layout.activity_login);
 
         busNumber = (EditText) findViewById(R.id.busNumText);
-        //route = (EditText) findViewById(R.id.routeText);
+        route = (EditText) findViewById(R.id.routeText);
         login = (Button) findViewById(R.id.btnLogin);
-        routeSpinner = (Spinner) findViewById(R.id.routeList);
+        //routeSpinner = (Spinner) findViewById(R.id.routeList);
 
         //getting items from resource file
 //        ArrayAdapter<CharSequence> routeAdapter = ArrayAdapter
@@ -53,13 +55,13 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 //                        android.R.layout.simple_spinner_item);
 
         //getting items from a String array (routeItems) set in this class
-        ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, routeItems);
-
-        routeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        routeSpinner.setAdapter(routeAdapter);
-        routeSpinner.setOnItemSelectedListener(this);
+//        ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_item, routeItems);
+//
+//        routeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//        routeSpinner.setAdapter(routeAdapter);
+//        routeSpinner.setOnItemSelectedListener(this);
 
         login.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
@@ -92,7 +94,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                     }
                     else {
                         busChecked = true;
-                        //checkRoute();
+                        checkRoute();
                     }
                 }
             }
@@ -103,7 +105,6 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         });
     }
 
-    /*
     public void checkRoute(){
         DatabaseReference routeRef = ref.child("Route");
         routeRef.addValueEventListener(new ValueEventListener() {
@@ -127,28 +128,25 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             }
         });
     }
-    */
 
     public static String getBusNumber(){
         return busNumber.getText().toString();
     }
 
-    /*
     public static String getRoute(){
         return route.getText().toString();
     }
-    */
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        selectedRoute = parent.getItemAtPosition(position).toString();
-        Toast.makeText(this, selectedRoute, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+//    @Override
+//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//        selectedRoute = parent.getItemAtPosition(position).toString();
+//        Toast.makeText(this, selectedRoute, Toast.LENGTH_SHORT).show();
+//    }
+//
+//    @Override
+//    public void onNothingSelected(AdapterView<?> parent) {
+//
+//    }
 }
 
 

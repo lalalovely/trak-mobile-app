@@ -1,64 +1,79 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="top"
+    android:orientation="vertical"
+    android:weightSum="1">
 
-    <Button
-        android:id="@+id/engFail"
-        android:layout_width="241dp"
-        android:layout_height="49dp"
-        android:layout_marginTop="68dp"
-        android:text="Engine Failure"
-        android:textColor="@color/white"
-        android:background="@drawable/login_btn_background"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.544"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.504" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1">
 
-    <Button
-        android:id="@+id/emerStop"
-        android:layout_width="245dp"
-        android:layout_height="47dp"
-        android:layout_marginTop="23dp"
-        android:text="Emergency Stop"
-        android:textColor="@color/white"
-        android:background="@drawable/login_btn_background"
-        android:layout_below="@+id/engFail"
-        android:layout_alignStart="@+id/engFail"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.408"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.504" />
+        <Button
+            android:id="@+id/engFail"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:background="@drawable/engine_failure_button"
+            android:scaleType="fitXY" />
 
-    <Button
-        android:id="@+id/roadAcc"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="38dp"
-        android:text="Road Accident"
-        android:textColor="@color/white"
-        android:background="@drawable/login_btn_background"
-        android:layout_below="@+id/emerStop"
-        android:layout_alignStart="@+id/emerStop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.206"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        <Button
+            android:id="@+id/emerStop"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:background="@drawable/emergency_stop_button"
+            android:scaleType="fitXY" />
 
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/roadAcc"
+            android:layout_width="wrap_content"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:background="@drawable/accident_button"
+            android:scaleType="fitXY"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="vertical"-->
+        <!--android:weightSum="1">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/emerStop"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@drawable/emergency_stop_button"-->
+            <!--android:scaleType="fitXY" />-->
+    <!--</LinearLayout>-->
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="vertical"-->
+        <!--android:weightSum="1">-->
+
+        <!--<Button-->
+            <!--android:id="@+id/roadAcc"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="150dp"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:background="@drawable/accident_button"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:textSize="18sp" />-->
+    <!--</LinearLayout>-->
+
+</LinearLayout>

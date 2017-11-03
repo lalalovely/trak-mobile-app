@@ -1,129 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:background="#f6f6f6"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:gravity="top"
+    android:orientation="vertical"
+    android:weightSum="1">
 
     <!--<LinearLayout-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--tools:layout_editor_absoluteY="0dp"-->
-        <!--tools:layout_editor_absoluteX="8dp"-->
-        <!--android:id="@+id/linearLayout" /><![CDATA[-->
-        <!--android:layout_marginTop="8dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:background="@drawable/background"-->
-        <!--android:gravity="center"-->
-        <!--android:orientation="vertical"-->
-        <!--android:weightSum="1">-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="10dp">-->
 
-        <!--]]>-->
+    <!--</LinearLayout>-->
+
+    <LinearLayout
+
+        android:layout_width="wrap_content"
+        android:layout_height="341dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/io_background"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1">
 
 
-    <TextView
-        android:id="@+id/textview_latitude"
-        android:layout_width="323dp"
-        android:layout_height="56dp"
-        android:layout_gravity="left"
-        android:textColor="#303030"
-        android:textSize="23dp"
-        android:background="@drawable/edit_text_background"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.383"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.513" />
-        <!--android:layout_alignTop="@+id/textView3"-->
-        <!--android:layout_toEndOf="@+id/btnDisplay"-->
+        <TextClock
+            android:id="@+id/textClock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="0.04"
+            android:textColor="#f9f9f9"
+            android:textSize="30sp" />
 
-    <TextView
-        android:id="@+id/textview_longitude"
-        android:layout_width="320dp"
-        android:layout_height="56dp"
-        android:layout_gravity="left"
-        android:textColor="#303030"
-        android:textSize="23dp"
-        android:background="@drawable/edit_text_background"
-        android:layout_above="@+id/textview_latitude"
-        android:layout_alignEnd="@+id/textview_latitude"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.532"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
-        <!--android:layout_alignStart="@+id/btnUpdate"-->
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="0dp"
+            android:text="Latitude"
+            android:textColor="#303030"
+            android:textSize="18sp" />
 
-    <!--<Button-->
-        <!--android:id="@+id/btnUpdate"-->
-        <!--android:layout_width="180dp"-->
-        <!--android:layout_height="40dp"-->
-        <!--android:background="#9FC03C"-->
-        <!--android:scaleType="fitXY"-->
-        <!--android:text="UPDATE"-->
-        <!--android:textSize="18sp"-->
-        <!--android:textStyle="bold"-->
-        <!--android:layout_marginStart="27dp"-->
-        <!--android:layout_alignTop="@+id/btnDisplay"-->
-        <!--android:layout_toEndOf="@+id/btnDisplay" />-->
+        <TextView
+            android:id="@+id/textview_latitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="70dp"
+            android:textColor="#303030"
+            android:textSize="23dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="70dp"
+            android:text="Longitude"
+            android:textColor="#303030"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/textview_longitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_marginLeft="70dp"
+            android:textColor="#303030"
+            android:textSize="23dp" />
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="7dp">
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnDisplay"
-        android:layout_width="166dp"
-        android:layout_height="39dp"
+        android:layout_width="120dp"
+        android:layout_height="52dp"
+        android:background="@drawable/start_button_bg"
         android:scaleType="fitXY"
+        android:text="START"
+        android:layout_gravity="center"
         android:textSize="18sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:background="@drawable/login_btn_background"
-        android:layout_alignParentBottom="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.803"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="You're at"
-        android:textSize="25sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.154"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.501" />
-
-    <!--<Button-->
-        <!--android:id="@+id/btnSend"-->
-        <!--android:layout_width="166dp"-->
-        <!--android:layout_height="39dp"-->
-        <!--android:layout_centerHorizontal="true"-->
-        <!--android:text="SEND"-->
-        <!--android:textSize="18sp"-->
-        <!--android:textStyle="bold"-->
-        <!--android:textColor="@color/white"-->
-        <!--android:background="@drawable/login_btn_background"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.732"-->
-        <!--tools:layout_constraintLeft_creator="1"-->
-        <!--tools:layout_constraintTop_creator="1"/>-->
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
