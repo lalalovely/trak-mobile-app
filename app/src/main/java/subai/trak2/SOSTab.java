@@ -1,8 +1,10 @@
 package subai.trak2;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,27 +40,24 @@ public class SOSTab extends Fragment {
         roadAccident.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.startAnimation(animAlpha);
+//                v.startAnimation(animAlpha);
                 roadAccClick();
-                sendBus();
             }
         });
 
         emerStop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.startAnimation(animAlpha);
+//                v.startAnimation(animAlpha);
                 emerStopClick();
-                sendBus();
             }
         });
 
         engineFail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.startAnimation(animAlpha);
+//                v.startAnimation(animAlpha);
                 engineFailCLick();
-                sendBus();
             }
         });
 
@@ -66,15 +65,34 @@ public class SOSTab extends Fragment {
     }
 
     public void roadAccClick() {
-        bus.setStatus("RoadAccident");
+        alertView("Road Accident");
     }
 
     public void emerStopClick() {
-        bus.setStatus("Emergency Stop");
+        alertView("Emergency Stop");
     }
 
     public void engineFailCLick() {
-        bus.setStatus("Engine Failure");
+        alertView("Engine Failure");
+    }
+
+    private void alertView(final String message) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity().getApplicationContext());
+        dialog.setTitle(message)
+                .setIcon(R.drawable.sos_icon)
+                .setMessage("Are you sure?")
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+                    }
+                })
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+                        bus.setStatus(message);
+                        sendBus();
+                    }
+                });
+        dialog.create();
+        dialog.show();
     }
 
     public void sendBus(){
