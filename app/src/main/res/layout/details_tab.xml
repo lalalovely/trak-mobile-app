@@ -1,169 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/status_txt"
-        android:text="status"
-        android:background="@drawable/det_text"
-        android:layout_width="190dp"
-        android:layout_height="26dp"
-        android:layout_marginEnd="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.874"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.082" />
 
-    <TextView
-        android:id="@+id/busCompany"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:text="Bus Company:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.054"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.129"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+    <RelativeLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/status"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_marginTop="55dp"
-        android:text="Status:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.788"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.047" />
+        <TextView
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:text="STATUS"
+            android:layout_height="25dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="13sp"
+            android:textColor="#303030" />
 
-    <TextView
-        android:id="@+id/accommodation"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:layout_marginTop="71dp"
-        android:text="Accommodation:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.583"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.057" />
+        <TextView
+            android:id="@+id/status_txt"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="40dp"
+            android:layout_marginLeft="40dp"
+            android:background="@drawable/det_text"
+            android:text="status" />
 
-    <TextView
-        android:id="@+id/busNumber"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:text="Bus Number:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.052"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.3"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/route"
-        android:layout_width="wrap_content"
-        android:layout_height="25dp"
-        android:text="Route:"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.046"
-        app:layout_constraintVertical_bias="0.466" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/bus_company_txt"
-        android:layout_width="200dp"
-        android:layout_height="25dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="104dp"
-        android:background="@drawable/det_text"
-        android:text="name of bus company"
-        app:layout_constraintHorizontal_bias="0.086"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+        <TextView
+            android:id="@+id/busCompany"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="13sp"
+            android:textColor="#303030"
+            android:layout_marginTop="15dp"
+            android:text="BUS COMPANY" />
 
-    <TextView
-        android:id="@+id/accommodation_txt"
-        android:text="accommodation"
-        android:background="@drawable/det_text"
-        android:layout_width="200dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.699"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.086" />
+        <TextView
+            android:id="@+id/bus_company_txt"
+            android:text="name of bus company"
+            android:background="@drawable/det_text"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="40dp"/>
 
-    <TextView
-        android:id="@+id/route_txt"
-        android:text="route"
-        android:background="@drawable/det_text"
-        android:layout_width="200dp"
-        android:layout_height="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.086"
-        app:layout_constraintVertical_bias="0.527" />
+    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/bus_number_txt"
-        android:text="bus number"
-        android:background="@drawable/det_text"
-        android:layout_width="200dp"
-        android:layout_height="25dp"
-        android:layout_alignBaseline="@+id/textView2"
-        android:layout_alignBottom="@+id/textView2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.367"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.086" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/bus_details"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Bus Details"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="34dp" />
+        <TextView
+            android:id="@+id/busNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="13sp"
+            android:textColor="#303030"
+            android:layout_marginTop="15dp"
+            android:text="BUS NUMBER" />
 
-</android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/bus_number_txt"
+            android:text="bus number"
+            android:background="@drawable/det_text"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginLeft="40dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/route"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="13sp"
+            android:layout_marginTop="15dp"
+            android:textColor="#303030"
+            android:text="ROUTE" />
+
+        <TextView
+            android:id="@+id/route_txt"
+            android:text="route"
+            android:background="@drawable/det_text"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="47dp"
+            android:layout_marginLeft="40dp"  />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/accommodation"
+            android:layout_width="wrap_content"
+            android:layout_height="25dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginBottom="5dp"
+            android:textSize="13sp"
+            android:layout_marginTop="15dp"
+            android:textColor="#303030"
+            android:text="ACCOMMODATION" />
+
+        <TextView
+            android:id="@+id/accommodation_txt"
+            android:text="accommodation"
+            android:background="@drawable/det_text"
+            android:layout_width="250dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginLeft="40dp" />
+    </RelativeLayout>
+
+</LinearLayout>

@@ -304,14 +304,14 @@ public class IOTab extends Fragment implements LocationListener {
     public void onLocationChanged(Location location) {
         //mLocation = location;
         if (location == null) {
-            latiText = "Location not founc";
+            latiText = "Location not found";
             longiText = "Longitude not found";
         } else {
             setFusedLatitude(location.getLatitude());
             setFusedLongitude(location.getLongitude());
             Toast.makeText(getActivity().getApplicationContext(), "NEW LOCATION RECEIVED", Toast.LENGTH_LONG).show();
-            String lati = "Latitude is " + String.valueOf(getFusedLatitude());
-            String longi = "Longitude is " + String.valueOf(getFusedLongitude());
+            String lati = String.valueOf(getFusedLatitude());
+            String longi = String.valueOf(getFusedLongitude());
             latiText = lati;
             longiText = longi;
             sendLocation();

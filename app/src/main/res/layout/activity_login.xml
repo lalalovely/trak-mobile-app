@@ -42,42 +42,42 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"/>
 
-    <Spinner
-        android:layout_width="249dp"
-        android:layout_height="40dp"
-        android:id="@+id/routeList"
-        android:spinnerMode="dropdown"
-        android:hint="Select Route"
-        android:prompt="@string/routePrompt"
-        style="@android:style/Widget.Holo.Light.Spinner"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.597"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.504">
-    </Spinner>
-
-    <!--<EditText-->
-        <!--android:id="@+id/routeText"-->
-        <!--android:layout_width="250dp"-->
-        <!--android:layout_height="45dp"-->
-        <!--android:ems="10"-->
-        <!--android:hint="Route"-->
-        <!--android:gravity="center"-->
-        <!--android:background="@drawable/edit_text_background"-->
-        <!--android:inputType="textPersonName"-->
-        <!--android:layout_below="@+id/busNumText"-->
-        <!--android:layout_centerHorizontal="true"-->
+    <!--<Spinner-->
+        <!--android:layout_width="249dp"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:id="@+id/routeList"-->
+        <!--android:spinnerMode="dropdown"-->
+        <!--android:hint="Select Route"-->
+        <!--android:prompt="@string/routePrompt"-->
+        <!--style="@android:style/Widget.Holo.Light.Spinner"-->
         <!--app:layout_constraintBottom_toBottomOf="parent"-->
         <!--app:layout_constraintLeft_toLeftOf="parent"-->
         <!--app:layout_constraintRight_toRightOf="parent"-->
         <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--app:layout_constraintVertical_bias="0.586"-->
+        <!--app:layout_constraintVertical_bias="0.597"-->
         <!--tools:layout_constraintLeft_creator="1"-->
-        <!--tools:layout_constraintTop_creator="1"/>-->
+        <!--tools:layout_constraintTop_creator="1"-->
+        <!--app:layout_constraintHorizontal_bias="0.504">-->
+    <!--</Spinner>-->
+
+    <EditText
+        android:id="@+id/routeText"
+        android:layout_width="250dp"
+        android:layout_height="45dp"
+        android:ems="10"
+        android:hint="Route"
+        android:gravity="center"
+        android:background="@drawable/edit_text_background"
+        android:inputType="textPersonName"
+        android:layout_below="@+id/busNumText"
+        android:layout_centerHorizontal="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.586"
+        tools:layout_constraintLeft_creator="1"
+        tools:layout_constraintTop_creator="1"/>
 
     <Button
         android:id="@+id/btnLogin"
