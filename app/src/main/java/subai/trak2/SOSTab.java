@@ -60,7 +60,7 @@ public class SOSTab extends Fragment {
     }
 
     public void roadAccClick() {
-        bus.setStatus("RoadAccident");
+        bus.setStatus("Road Accident");
     }
 
     public void emerStopClick() {

@@ -2,6 +2,7 @@ package subai.trak2;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
@@ -10,6 +11,7 @@ import android.os.Handler;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,6 +53,9 @@ public class IOTab extends Fragment implements LocationListener {
     private String longiText = "";
     private String status = "START";
 
+    private String latiToDisplay = "";
+    private String longiToDisplay = "";
+
     private boolean isClicked;
 
     private Bus bus;
@@ -84,7 +89,15 @@ public class IOTab extends Fragment implements LocationListener {
             latitude.setText(latiText);
             longitude.setText(longiText);
             display.setText(status);
+            bus.setStatus(status);
             display.setClickable(isClicked);
+        }
+
+        //don't know if it works
+        if (bus.getStatus().equals("Engine Failure") || bus.getStatus().equals("Emergency Stop") ||
+                bus.getStatus().equals("Road Accident")) {
+            stopRequestUpdate();
+            latiToDisplay = bus.getStatus();
         }
 
         display.setOnClickListener(new View.OnClickListener() {
@@ -93,13 +106,6 @@ public class IOTab extends Fragment implements LocationListener {
                 onClickStart();
             }
         });
-
-//        send.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                sendLocation();
-//            }
-//        });
 
         return v;
     }
@@ -111,6 +117,7 @@ public class IOTab extends Fragment implements LocationListener {
             status = "In-transit";
             isClicked = false;
             display.setText(status);
+            bus.setStatus(status);
             display.setClickable(isClicked);
         }
     }
@@ -139,8 +146,8 @@ public class IOTab extends Fragment implements LocationListener {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("latitude", latiText);
-        outState.putString("longitude", longiText);
+        outState.putString("latitude", latiToDisplay); //change lang diri latiText
+        outState.putString("longitude", longiToDisplay); //change lang longiText
         outState.putString("stat", status);
         outState.putBoolean("clickable", isClicked);
     }
@@ -246,8 +253,6 @@ public class IOTab extends Fragment implements LocationListener {
                 }
             }
         }, 1000);
-
-
     }
 
     public void stopRequestUpdate() {
@@ -302,10 +307,16 @@ public class IOTab extends Fragment implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
-        //mLocation = location;
+        mLocation = location;
+        //add function here that would alert the user to turn on location
         if (location == null) {
+            alertView("Turn on Location");
+
             latiText = "Location not found";
             longiText = "Longitude not found";
+
+            latiToDisplay = latiText;
+            longiToDisplay = longiText;
         } else {
             setFusedLatitude(location.getLatitude());
             setFusedLongitude(location.getLongitude());
@@ -314,18 +325,32 @@ public class IOTab extends Fragment implements LocationListener {
             String longi = String.valueOf(getFusedLongitude());
             latiText = lati;
             longiText = longi;
+
+            latiToDisplay = LocationConverter.getLatitudeAsDMS(location, 4);
+            longiToDisplay = LocationConverter.getLongitudeAsDMS(location, 4);
             sendLocation();
         }
 //        latitude.setText("" + getFusedLatitude());
 //        longitude.setText("" + getFusedLongitude());
-        latitude.setText(latiText);
-        longitude.setText(longiText);
-
+//        latitude.setText(latiText);
+//        longitude.setText(longiText);
+        latitude.setText(latiToDisplay);
+        longitude.setText(longiToDisplay);
     }
 
-    public void setFusedLatitude(double lat) {
-        fusedLatitude = lat;
+    private void alertView(String message) {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity().getApplicationContext());
+
+        dialog.setTitle("Location not found")
+                .setIcon(R.drawable.sos_icon)
+                .setMessage(message)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialoginterface, int i) {
+                    }
+                }).show();
     }
+
+    public void setFusedLatitude(double lat) { fusedLatitude = lat; }
 
     public void setFusedLongitude(double lon) {
         fusedLongitude = lon;
