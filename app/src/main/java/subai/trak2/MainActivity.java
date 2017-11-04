@@ -164,9 +164,7 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {}
         });
 
-        // set route
-        //changed upon chaging the EditText to Spinner
-        //bus.setRoute(LoginActivity.getRoute());
+        bus.setRoute(LoginActivity.getRoute());
 
         ioTab.setBus(bus);
         sosTab.setBus(bus);

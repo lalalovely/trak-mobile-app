@@ -80,7 +80,7 @@ public class IOTab extends Fragment implements LocationListener {
             latitude = (TextView) v.findViewById(R.id.textview_latitude);
             longitude = (TextView) v.findViewById(R.id.textview_longitude);
             display = (Button) v.findViewById(R.id.btnDisplay);
-
+            bus.setStatus("In-transit");
             latitude.setText(latiText);
             longitude.setText(longiText);
             display.setText(status);
@@ -112,6 +112,7 @@ public class IOTab extends Fragment implements LocationListener {
             isClicked = false;
             display.setText(status);
             display.setClickable(isClicked);
+            bus.setStatus(status);
         }
     }
 

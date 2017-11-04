@@ -11,6 +11,9 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class SOSTab extends Fragment {
     private static final String TAG = "@string/sos_tag";
     private ImageButton roadAccident, emerStop, engineFail;
@@ -36,6 +39,7 @@ public class SOSTab extends Fragment {
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
                 roadAccClick();
+                sendBus();
             }
         });
 
@@ -44,6 +48,7 @@ public class SOSTab extends Fragment {
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
                 emerStopClick();
+                sendBus();
             }
         });
 
@@ -52,6 +57,7 @@ public class SOSTab extends Fragment {
             public void onClick(View v) {
                 v.startAnimation(animAlpha);
                 engineFailCLick();
+                sendBus();
             }
         });
 
@@ -68,6 +74,11 @@ public class SOSTab extends Fragment {
 
     public void engineFailCLick() {
         bus.setStatus("Engine Failure");
+    }
+
+    public void sendBus(){
+        DatabaseReference pushRef = FirebaseDatabase.getInstance().getReference().child("Bus").child(LoginActivity.getBusNumber());
+        pushRef.setValue(bus);
     }
 
 }

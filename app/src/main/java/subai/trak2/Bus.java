@@ -24,7 +24,7 @@ public class Bus {
         busCompany = "Ceres";
         route = "Bato";
         accommodation = "Aircon";
-        status = "In-transit";
+        status = " ";
     }
 
     //lat, lng, busNumber, route, accommodation, busCompany
