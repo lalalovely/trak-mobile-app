@@ -16,28 +16,27 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.61"
+        app:layout_constraintVertical_bias="0.874"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="1.0" />
+        app:layout_constraintHorizontal_bias="0.082" />
 
     <TextView
         android:id="@+id/busCompany"
         android:layout_width="wrap_content"
         android:layout_height="25dp"
-        android:layout_marginStart="13dp"
-        android:layout_marginTop="25dp"
-        android:text="Bus Company:"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:text="Bus Company:"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.120000005"
+        app:layout_constraintVertical_bias="0.129"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.0" />
+        tools:layout_constraintTop_creator="1" />
 
     <TextView
         android:id="@+id/status"
@@ -49,10 +48,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.57"
+        app:layout_constraintVertical_bias="0.788"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.05" />
+        app:layout_constraintHorizontal_bias="0.047" />
 
     <TextView
         android:id="@+id/accommodation"
@@ -64,10 +63,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.44"
+        app:layout_constraintVertical_bias="0.583"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.063" />
+        app:layout_constraintHorizontal_bias="0.057" />
 
     <TextView
         android:id="@+id/busNumber"
@@ -75,13 +74,13 @@
         android:layout_height="25dp"
         android:text="Bus Number:"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26999998"
+        app:layout_constraintVertical_bias="0.3"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.057" />
+        tools:layout_constraintTop_creator="1" />
 
     <TextView
         android:id="@+id/route"
@@ -92,25 +91,25 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.05" />
+        app:layout_constraintHorizontal_bias="0.046"
+        app:layout_constraintVertical_bias="0.466" />
 
     <TextView
         android:id="@+id/bus_company_txt"
-        android:text="name of bus company"
-        android:background="@drawable/det_text"
         android:layout_width="200dp"
         android:layout_height="25dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginTop="104dp"
+        android:background="@drawable/det_text"
+        android:text="name of bus company"
+        app:layout_constraintHorizontal_bias="0.086"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.9"
-        android:layout_marginTop="87dp"
-        android:layout_marginLeft="0dp" />
+        tools:layout_constraintTop_creator="1" />
 
     <TextView
         android:id="@+id/accommodation_txt"
@@ -122,10 +121,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.51"
+        app:layout_constraintVertical_bias="0.699"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.9" />
+        app:layout_constraintHorizontal_bias="0.086" />
 
     <TextView
         android:id="@+id/route_txt"
@@ -137,10 +136,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.9" />
+        app:layout_constraintHorizontal_bias="0.086"
+        app:layout_constraintVertical_bias="0.527" />
 
     <TextView
         android:id="@+id/bus_number_txt"
@@ -154,9 +153,17 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.26999998"
+        app:layout_constraintVertical_bias="0.367"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        app:layout_constraintHorizontal_bias="0.9" />
+        app:layout_constraintHorizontal_bias="0.086" />
+
+    <TextView
+        android:id="@+id/bus_details"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bus Details"
+        tools:layout_editor_absoluteX="162dp"
+        tools:layout_editor_absoluteY="34dp" />
 
 </android.support.constraint.ConstraintLayout>

@@ -9,10 +9,11 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 public class SOSTab extends Fragment {
     private static final String TAG = "@string/sos_tag";
-    private Button roadAccident, emerStop, engineFail;
+    private ImageButton roadAccident, emerStop, engineFail;
     private Bus bus;
 
     public void setBus(Bus bus){
@@ -26,11 +27,9 @@ public class SOSTab extends Fragment {
 
         final Animation animAlpha = AnimationUtils.loadAnimation(getContext(), R.anim.anim_alpha);
 
-        //AnimationUtils(this, R.anim.anim_alpha);
-
-        this.roadAccident = (Button) v.findViewById(R.id.roadAcc);
-        this.emerStop = (Button) v.findViewById(R.id.emerStop);
-        this.engineFail = (Button) v.findViewById(R.id.engFail);
+        this.roadAccident = (ImageButton) v.findViewById(R.id.roadAcc);
+        this.emerStop = (ImageButton) v.findViewById(R.id.emerStop);
+        this.engineFail = (ImageButton) v.findViewById(R.id.engFail);
 
         roadAccident.setOnClickListener(new View.OnClickListener() {
             @Override
