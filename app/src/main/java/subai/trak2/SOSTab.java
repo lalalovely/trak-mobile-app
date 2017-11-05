@@ -104,11 +104,11 @@ public class SOSTab extends Fragment {
             final String title = getArguments().getString("title");
             int icon = 0;
             if (title.equals("Emergency Stop")) {
-                icon = R.drawable.emergency_stop_icon;
+                icon = R.drawable.icon_emergency;
             } else if (title.equals("Engine Failure")) {
-                icon = R.drawable.engine_failure;
+                icon = R.drawable.icon_eng_fail;
             } else if (title.equals("Road Accident")) {
-                icon = R.drawable.road_accident_icon;
+                icon = R.drawable.icon_accident;
             } else {
             }
 
