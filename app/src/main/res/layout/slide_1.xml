@@ -9,8 +9,8 @@
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:src="@drawable/welcome_to_trak_lbl"
+        android:layout_height="90dp"
+        android:src="@drawable/welcome_txt"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         app:layout_constraintLeft_toLeftOf="parent"

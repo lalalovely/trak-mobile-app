@@ -12,13 +12,13 @@ public class DetailsTab extends Fragment {
     private static final String TAG = "@string/det_tag";
     private Bus bus;
 
-    private TextView txtCompany, txtNumber, txtRoute, txtAcc, txtStatus;
+    private static TextView txtCompany, txtNumber, txtRoute, txtAcc, txtStatus;
 
 
     public void setBus(Bus bus){
         this.bus = bus;
     }
-    public void setStatus(String status){
+    public static void setStatus(String status){
         txtStatus.setText(status);  
     }
     @Nullable

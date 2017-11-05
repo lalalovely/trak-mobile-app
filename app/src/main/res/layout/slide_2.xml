@@ -37,7 +37,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:text="Make sure to on the WIFI and LOCATION of your device."
+        android:text="Make sure to turn on WIFI and LOCATION."
         android:textSize="20sp"
         android:textAlignment="center"
         android:layout_gravity="center"
