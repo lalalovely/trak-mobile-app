@@ -81,6 +81,7 @@ public class SOSTab extends Fragment {
     public static void sendBus(){
         DatabaseReference pushRef = FirebaseDatabase.getInstance().getReference().child("Bus").child(LoginActivity.getBusNumber());
         pushRef.setValue(bus);
+        DetailsTab.setStatus(bus.getStatus());
     }
 
     void showMyDialog(String title) {
