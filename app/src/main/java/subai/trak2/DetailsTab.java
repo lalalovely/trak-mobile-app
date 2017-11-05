@@ -18,7 +18,9 @@ public class DetailsTab extends Fragment {
     public void setBus(Bus bus){
         this.bus = bus;
     }
-
+    public void setStatus(String status){
+        txtStatus.setText(status);  
+    }
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
