@@ -22,11 +22,13 @@
             android:layout_height="30dp"
             android:background="?attr/colorPrimary"
             app:layout_scrollFlags="scroll|enterAlways"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:popupTheme="@style/ThemeOverlay.MyTheme">
+            <!--app:popupTheme="@style/AppTheme.PopupOverlay">-->
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:src="@drawable/trak_appbar"/>
 
         </android.support.v7.widget.Toolbar>

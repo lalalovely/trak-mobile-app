@@ -11,11 +11,11 @@
     <color name="bgColor">#f9f9f9</color>
     <color name="mainColor">#9fc03c</color>
     <color name="titleColor">#21b9c4</color>
+    <color name="iconColor">#21A7B0</color>
 
-    <!-- Screens background -->
-    <color name="bg_screen1">#b12515</color>
-    <color name="bg_screen2">#FFBB00</color>
-    <color name="bg_screen3">#74a443</color>
+
+    <color name="warning_red">#ff0000</color>
+    <color name="okay_green">#9fc03c</color>
 
     <!-- dots active colors -->
     <color name="dot_active">#000000</color>

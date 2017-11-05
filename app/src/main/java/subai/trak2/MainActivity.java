@@ -7,6 +7,9 @@ import android.support.v7.widget.Toolbar;
 import android.support.v4.view.ViewPager;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -66,26 +69,6 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.unselected_io);
         tabLayout.getTabAt(1).setIcon(R.drawable.unselected_sos);
         tabLayout.getTabAt(2).setIcon(R.drawable.unselected_details);
-//        tabLayout.getTabAt(0).setText("I/O");
-//        tabLayout.getTabAt(1).setText("SOS");
-//        tabLayout.getTabAt(2).setText("DETAILS");
-
-
-//        try {
-//            View view1 = getLayoutInflater().inflate(R.layout.customtab, null);
-//            view1.findViewById(R.id.icon).setBackgroundResource(R.drawable.io_icon);
-//            tabLayout.getTabAt(0).setCustomView(view1);
-//
-//            View view2 = getLayoutInflater().inflate(R.layout.customtab, null);
-//            view2.findViewById(R.id.icon).setBackgroundResource(R.drawable.sos_icon);
-//            tabLayout.getTabAt(1).setCustomView(view2);
-//
-//            View view3 = getLayoutInflater().inflate(R.layout.customtab, null);
-//            view3.findViewById(R.id.icon).setBackgroundResource(R.drawable.details_icon);
-//            tabLayout.getTabAt(2).setCustomView(view3);
-//        } catch (NullPointerException e) {
-//            e.printStackTrace();
-//        }
         mViewPager.addOnPageChangeListener(new
                 TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -136,6 +119,25 @@ public class MainActivity extends AppCompatActivity {
                }
            });
     }
+
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        MenuInflater inflater = getMenuInflater();
+//        inflater.inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle item selection
+//        switch (item.getItemId()) {
+//            case R.id.log_out:
+//                //insert log-out functionality
+//                return true;
+//            default:
+//                return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());

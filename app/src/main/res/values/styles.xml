@@ -30,4 +30,17 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="MyTheme" parent="android:style/Theme.Holo.Light">
+        <item name="android:actionOverflowButtonStyle">@style/ThemeOverlay.MyTheme</item>
+    </style>
+
+    <!--ThemeOverlay.AppCompat.Light-->
+    <style name="ThemeOverlay.MyTheme" parent="android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@color/iconColor</item>
+        <item name="android:textColorSecondary">@color/titleColor</item>
+        <item name="android:actionOverflowButtonStyle">@color/titleColor</item>
+        <item name="android:colorBackground">@color/titleColor</item>
+        <item name="android:textColor">@color/fontColor</item>
+    </style>
+
 </resources>

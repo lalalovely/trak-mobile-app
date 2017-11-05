@@ -51,6 +51,8 @@ public class IntroActivity extends AppCompatActivity {
 
         layouts = new int[]{
                 R.layout.slide_1,
+                R.layout.slide_3,
+                R.layout.slide_4,
                 R.layout.slide_2,};
 
         // adding bottom dots

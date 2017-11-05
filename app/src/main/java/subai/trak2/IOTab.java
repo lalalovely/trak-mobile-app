@@ -1,6 +1,7 @@
 package subai.trak2;
 
 import android.Manifest;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
@@ -43,6 +44,9 @@ public class IOTab extends Fragment implements LocationListener {
     private Button display, update, send;
     private Location mLocation;
     private boolean updating = false;
+    private int red = R.color.warning_red;
+    private int green = R.color.okay_green;
+    private int color = 0;
     private DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
     ; //root database
 
@@ -51,7 +55,7 @@ public class IOTab extends Fragment implements LocationListener {
 
     private String latiText = "";
     private String longiText = "";
-    private String status = "START";
+    private String status = "";
 
     private String latiToDisplay = "";
     private String longiToDisplay = "";
@@ -71,26 +75,32 @@ public class IOTab extends Fragment implements LocationListener {
         latitude = (TextView) v.findViewById(R.id.textview_latitude);
         longitude = (TextView) v.findViewById(R.id.textview_longitude);
         display = (Button) v.findViewById(R.id.btnDisplay);
-        display.setText(status);
-        //update = (Button) v.findViewById(R.id.btnUpdate);
-        //send = (Button) v.findViewById(R.id.btnSend);
 
         if (savedInstanceState == null) {
         } else {
-            latiText = savedInstanceState.getString("latitude");
-            longiText = savedInstanceState.getString("longitude");
+            latiToDisplay = savedInstanceState.getString("latitude");
+            longiToDisplay = savedInstanceState.getString("longitude");
             status = savedInstanceState.getString("stat");
-            isClicked = savedInstanceState.getBoolean("clickable");
+            color = savedInstanceState.getInt("textColor");
+            //isClicked = savedInstanceState.getBoolean("clickable");
 
             latitude = (TextView) v.findViewById(R.id.textview_latitude);
             longitude = (TextView) v.findViewById(R.id.textview_longitude);
             display = (Button) v.findViewById(R.id.btnDisplay);
             bus.setStatus("In-transit");
-            latitude.setText(latiText);
-            longitude.setText(longiText);
-            display.setText(status);
+            latitude.setText(latiToDisplay);
+            longitude.setText(longiToDisplay);
+            //display.setText(status);
             bus.setStatus(status);
-            display.setClickable(isClicked);
+            //display.setClickable(isClicked);
+            if (color == red) {
+                latitude.setTextColor(getResources().getColor(R.color.warning_red));
+                longitude.setTextColor(getResources().getColor(R.color.warning_red));
+            } else if (color == green) {
+                latitude.setTextColor(getResources().getColor(R.color.okay_green));
+                longitude.setTextColor(getResources().getColor(R.color.okay_green));
+            } else {
+            }
         }
 
         //don't know if it works
@@ -115,11 +125,11 @@ public class IOTab extends Fragment implements LocationListener {
             startFusedLocation();
             registerRequestUpdate(this);
             status = "In-transit";
-            isClicked = false;
-            display.setText(status);
+            //isClicked = false;
+            //display.setText(status);
             bus.setStatus(status);
-            display.setClickable(isClicked);
-            bus.setStatus(status);
+            //display.setClickable(isClicked);
+            //if location is not turned on
         }
     }
 
@@ -151,6 +161,7 @@ public class IOTab extends Fragment implements LocationListener {
         outState.putString("longitude", longiToDisplay); //change lang longiText
         outState.putString("stat", status);
         outState.putBoolean("clickable", isClicked);
+        outState.putInt("textColor", color);
     }
 
     @Override
@@ -311,14 +322,20 @@ public class IOTab extends Fragment implements LocationListener {
         mLocation = location;
         //add function here that would alert the user to turn on location
         if (location == null) {
-            alertView("Turn on Location");
+            showMyDialog("Turn on Location");
 
-            latiText = "Location not found";
-            longiText = "Longitude not found";
+            latiText = "Turn on Location";
+            longiText = "Turn on Location";
 
             latiToDisplay = latiText;
             longiToDisplay = longiText;
+            latitude.setText(latiToDisplay);
+            longitude.setText(longiToDisplay);
+            color = red;
+            latitude.setTextColor(getResources().getColor(R.color.warning_red));
+            longitude.setTextColor(getResources().getColor(R.color.warning_red));
         } else {
+            color = green;
             setFusedLatitude(location.getLatitude());
             setFusedLongitude(location.getLongitude());
             Toast.makeText(getActivity().getApplicationContext(), "NEW LOCATION RECEIVED", Toast.LENGTH_LONG).show();
@@ -329,26 +346,22 @@ public class IOTab extends Fragment implements LocationListener {
 
             latiToDisplay = LocationConverter.getLatitudeAsDMS(location, 4);
             longiToDisplay = LocationConverter.getLongitudeAsDMS(location, 4);
+
+            latitude.setText(latiToDisplay);
+            longitude.setText(longiToDisplay);
+            latitude.setTextColor(getResources().getColor(R.color.okay_green));
+            longitude.setTextColor(getResources().getColor(R.color.okay_green));
             sendLocation();
         }
 //        latitude.setText("" + getFusedLatitude());
 //        longitude.setText("" + getFusedLongitude());
 //        latitude.setText(latiText);
 //        longitude.setText(longiText);
-        latitude.setText(latiToDisplay);
-        longitude.setText(longiToDisplay);
     }
 
-    private void alertView(String message) {
-        AlertDialog.Builder dialog = new AlertDialog.Builder(getActivity().getApplicationContext());
-
-        dialog.setTitle("Location not found")
-                .setIcon(R.drawable.sos_icon)
-                .setMessage(message)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialoginterface, int i) {
-                    }
-                }).show();
+    void showMyDialog(String title) {
+        DialogFragment newFragment = SOSTab.AlertDialogFragment.newInstance(title);
+        newFragment.show(getActivity().getFragmentManager(), "dialog");
     }
 
     public void setFusedLatitude(double lat) { fusedLatitude = lat; }

@@ -16,16 +16,12 @@
     <!--</LinearLayout>-->
 
     <LinearLayout
-
         android:layout_width="wrap_content"
-        android:layout_height="341dp"
-        android:layout_marginLeft="0dp"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/io_background"
+        android:layout_height="wrap_content"
+        android:background="@drawable/another_background_for_io"
         android:gravity="center"
         android:orientation="vertical"
         android:weightSum="1">
-
 
         <TextClock
             android:id="@+id/textClock"
@@ -34,7 +30,7 @@
             android:layout_marginBottom="20dp"
             android:layout_marginTop="0dp"
             android:layout_weight="0.04"
-            android:textColor="#f9f9f9"
+            android:textColor="@color/fontColor"
             android:textSize="30sp" />
 
         <TextView
@@ -45,7 +41,6 @@
             android:layout_marginLeft="70dp"
             android:layout_marginTop="0dp"
             android:text="Latitude"
-            android:textColor="#303030"
             android:textSize="18sp" />
 
         <TextView
@@ -55,7 +50,6 @@
             android:layout_gravity="left"
             android:layout_marginBottom="20dp"
             android:layout_marginLeft="70dp"
-            android:textColor="#303030"
             android:textSize="23dp" />
 
         <TextView
@@ -65,7 +59,6 @@
             android:layout_gravity="left"
             android:layout_marginLeft="70dp"
             android:text="Longitude"
-            android:textColor="#303030"
             android:textSize="18sp" />
 
         <TextView
@@ -74,9 +67,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_marginLeft="70dp"
-            android:textColor="#303030"
             android:textSize="23dp" />
-        />
+
 
     </LinearLayout>
 
@@ -87,11 +79,13 @@
 
     <Button
         android:id="@+id/btnDisplay"
-        android:layout_width="120dp"
-        android:layout_height="52dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:background="@drawable/start_button_bg"
         android:scaleType="fitXY"
-        android:text="START"
+        android:text="GO"
+        android:clickable="true"
+        android:foreground="?attr/selectableItemBackground"
         android:layout_gravity="center"
         android:textSize="18sp"
         android:textStyle="bold" />
