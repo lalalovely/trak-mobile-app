@@ -1,6 +1,10 @@
 package subai.trak2;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -56,7 +60,8 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (busNumber.getText().toString().isEmpty()){
-                    Toast.makeText(getApplicationContext(), "PLEASE INPUT BUS NUMBER", Toast.LENGTH_LONG).show();
+                    showMyDialog("PLEASE INPUT BUS NUMBER.");
+                    //Toast.makeText(getApplicationContext(), "PLEASE INPUT BUS NUMBER", Toast.LENGTH_LONG).show();
                 } else {
                     ref.child("Bus_Accounts").child(busNumber.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -87,16 +92,25 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
         login.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                if (!selectedRoute.equals("Select Route")){
+                //changed
+                if (busNumber.getText().toString().isEmpty() && selectedRoute.equals("Select Route")){
+                    showMyDialog("PLEASE INPUT BUS NUMBER AND SELECT ROUTE.");
+                } else if (!selectedRoute.equals("Select Route")){
                     sendMessage();
                 } else {
-                    Toast.makeText(getApplicationContext(), "PLEASE SELECT YOUR ROUTE", Toast.LENGTH_LONG).show();
+                    showMyDialog("PLEASE SELECT YOUR ROUTE.");
+                    //Toast.makeText(getApplicationContext(), "PLEASE SELECT YOUR ROUTE", Toast.LENGTH_LONG).show();
                 }
             }
 
         });
 
 
+    }
+
+    void showMyDialog(String title) {
+        DialogFragment newFragment = AlertDialogFragment.newInstance(title);
+        newFragment.show(getFragmentManager(), "dialog");
     }
 
     public void sendMessage() {
@@ -113,7 +127,8 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                 if(!busNum.isEmpty()){
                     if (!dataSnapshot.hasChild(busNum)) {
                         busNumber.setText("");
-                        Toast.makeText(getApplicationContext(), "BUS DOES NOT EXIST", Toast.LENGTH_LONG).show();
+                        showMyDialog("BUS DOES NOT EXIST.");
+                        //Toast.makeText(getApplicationContext(), "BUS DOES NOT EXIST", Toast.LENGTH_LONG).show();
                     } else {
                         setRouteOption();
                     }

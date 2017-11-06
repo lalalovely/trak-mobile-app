@@ -5,18 +5,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="top"
     android:orientation="vertical"
     android:weightSum="1">
 
-    <!--<LinearLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="10dp">-->
-
-    <!--</LinearLayout>-->
-
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/another_background_for_io"
         android:gravity="center"
@@ -69,12 +62,11 @@
             android:layout_marginLeft="70dp"
             android:textSize="23dp" />
 
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="7dp">
+        android:layout_height="5dp">
     </LinearLayout>
 
     <Button
@@ -87,7 +79,7 @@
         android:clickable="true"
         android:foreground="?attr/selectableItemBackground"
         android:layout_gravity="center"
-        android:textSize="18sp"
+        android:textSize="16sp"
         android:textStyle="bold" />
 
 </LinearLayout>

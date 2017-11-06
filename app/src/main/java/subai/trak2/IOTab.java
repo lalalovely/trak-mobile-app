@@ -360,7 +360,7 @@ public class IOTab extends Fragment implements LocationListener {
     }
 
     void showMyDialog(String title) {
-        DialogFragment newFragment = SOSTab.AlertDialogFragment.newInstance(title);
+        DialogFragment newFragment = SOSTab.AlertDialogFrag.newInstance(title);
         newFragment.show(getActivity().getFragmentManager(), "dialog");
     }
 

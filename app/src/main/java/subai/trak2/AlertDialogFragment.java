@@ -6,12 +6,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-/**
- * Created by lovely grace on 11/5/2017.
- */
-
 public class AlertDialogFragment extends DialogFragment {
-
 
     public static AlertDialogFragment newInstance(String title) {
         AlertDialogFragment frag = new AlertDialogFragment();
@@ -26,7 +21,6 @@ public class AlertDialogFragment extends DialogFragment {
         String title = getArguments().getString("title");
 
         return new AlertDialog.Builder(getActivity())
-                .setIcon(R.drawable.sos_icon)
                 .setTitle(title)
                 .setPositiveButton("OKAY",
                         new DialogInterface.OnClickListener() {

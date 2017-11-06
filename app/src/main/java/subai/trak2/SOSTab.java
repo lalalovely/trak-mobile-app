@@ -85,14 +85,14 @@ public class SOSTab extends Fragment {
     }
 
     void showMyDialog(String title) {
-        DialogFragment newFragment = AlertDialogFragment.newInstance(title);
+        DialogFragment newFragment = AlertDialogFrag.newInstance(title);
         newFragment.show(getActivity().getFragmentManager(), "dialog");
     }
 
-    public static class AlertDialogFragment extends DialogFragment {
+    public static class AlertDialogFrag extends DialogFragment {
 
-        public static AlertDialogFragment newInstance(String title) {
-            AlertDialogFragment frag = new AlertDialogFragment();
+        public static AlertDialogFrag newInstance(String title) {
+            AlertDialogFrag frag = new AlertDialogFrag();
             Bundle args = new Bundle();
             args.putString("title", title);
             frag.setArguments(args);
@@ -123,7 +123,7 @@ public class SOSTab extends Fragment {
                                 }
                             }
                     )
-                    .setNegativeButton("CANCEL",
+                    .setNegativeButton("NO",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
 
