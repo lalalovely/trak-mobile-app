@@ -122,14 +122,16 @@ public class IOTab extends Fragment implements LocationListener {
 
     public void onClickStart() {
         if (checkPlayServices()) {
-            startFusedLocation();
-            registerRequestUpdate(this);
-            status = "In-transit";
-            //isClicked = false;
-            //display.setText(status);
-            bus.setStatus(status);
-            //display.setClickable(isClicked);
-            //if location is not turned on
+            if (!isLocationEnabled(getActivity())){
+                    DialogFragment newFragment = AlertDialogFragment.newInstance("Please Turn On  Location");
+                    newFragment.show(getActivity().getFragmentManager(), "dialog");
+            } else {
+                startFusedLocation();
+                registerRequestUpdate(this);
+                status = "In-transit";
+                bus.setStatus(status);
+            }
+
         }
     }
 

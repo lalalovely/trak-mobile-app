@@ -133,6 +133,4 @@ public class SOSTab extends Fragment {
                     .create();
         }
     }
-
-
 }
