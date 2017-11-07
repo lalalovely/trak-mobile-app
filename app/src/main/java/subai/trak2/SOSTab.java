@@ -50,8 +50,6 @@ public class SOSTab extends Fragment {
             this.engineFail = (ImageButton) v.findViewById(R.id.engFail);
 
             stat = savedInstanceState.getString("status");
-            DetailsTab.bus.setStatus(stat);
-            DetailsTab.setStatus(stat);
             bus.setStatus(stat);
             sendBus();
         }
@@ -144,8 +142,6 @@ public class SOSTab extends Fragment {
                                     SOSTab.stat = title;
                                     SOSTab.bus.setStatus(SOSTab.stat);
                                     SOSTab.sendBus();
-                                    DetailsTab.bus.setStatus(SOSTab.stat);
-                                    DetailsTab.setStatus(SOSTab.stat);
                                     Toast.makeText(getActivity().getApplicationContext(), title, Toast.LENGTH_LONG).show();
                                 }
                             }

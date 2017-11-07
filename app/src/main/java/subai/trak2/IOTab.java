@@ -97,14 +97,6 @@ public class IOTab extends Fragment implements LocationListener {
             if (ctr >= 1) {
                 onClickStart();
             }
-            //display.setText(status);
-            if (ctrClicks == 1) {
-                status = "In-transit";
-            } else {
-                status = bus.getStatus();
-            }
-            bus.setStatus(status);
-            //display.setClickable(isClicked);
             if (color == red) {
                 latitude.setTextColor(getResources().getColor(R.color.warning_red));
                 longitude.setTextColor(getResources().getColor(R.color.warning_red));
