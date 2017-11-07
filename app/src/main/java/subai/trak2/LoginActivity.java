@@ -92,20 +92,16 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
         login.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                //changed
-                if (busNumber.getText().toString().isEmpty() && selectedRoute.equals("Select Route")){
-                    showMyDialog("PLEASE INPUT BUS NUMBER AND SELECT ROUTE.");
-                } else if (!selectedRoute.equals("Select Route")){
-                    sendMessage();
-                } else {
-                    showMyDialog("PLEASE SELECT YOUR ROUTE.");
-                    //Toast.makeText(getApplicationContext(), "PLEASE SELECT YOUR ROUTE", Toast.LENGTH_LONG).show();
-                }
+            if (busNumber.getText().toString().isEmpty() && selectedRoute.equals("Select Route")){
+                showMyDialog("PLEASE INPUT BUS NUMBER AND SELECT ROUTE.");
+            } else if (!selectedRoute.equals("Select Route")){
+                sendMessage();
+            } else {
+                showMyDialog("PLEASE SELECT YOUR ROUTE.");
+            }
             }
 
         });
-
-
     }
 
     void showMyDialog(String title) {
@@ -116,6 +112,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     public void sendMessage() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void checkBusNumber(){
