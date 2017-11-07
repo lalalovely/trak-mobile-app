@@ -45,8 +45,6 @@ public class DetailsTab extends Fragment {
         } else {
             stat = savedInstanceState.getString("status");
             txtStatus = (TextView) v.findViewById(R.id.status_txt);
-            setStatus(stat);
-            bus.setStatus(stat);
             stat = bus.getStatus();
             txtStatus.setText(stat);
         }

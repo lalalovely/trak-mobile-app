@@ -45,13 +45,7 @@ public class SOSTab extends Fragment {
 
         if (savedInstanceState == null) {
         } else {
-            this.roadAccident = (ImageButton) v.findViewById(R.id.roadAcc);
-            this.emerStop = (ImageButton) v.findViewById(R.id.emerStop);
-            this.engineFail = (ImageButton) v.findViewById(R.id.engFail);
-
             stat = savedInstanceState.getString("status");
-            bus.setStatus(stat);
-            sendBus();
         }
 
         roadAccident.setOnClickListener(new View.OnClickListener() {
