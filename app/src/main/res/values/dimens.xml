@@ -6,7 +6,7 @@
     <dimen name="appbar_padding_top">8dp</dimen>
 
     <!--For intro activity-->
-    <dimen name="dots_height">30dp</dimen>
+    <dimen name="dots_height">40dp</dimen>
     <dimen name="dots_bottom_margin">20dp</dimen>
     <dimen name="img_width">120dp</dimen>
     <dimen name="img_height">120dp</dimen>

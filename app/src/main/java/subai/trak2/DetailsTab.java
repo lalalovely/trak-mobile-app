@@ -10,13 +10,14 @@ import android.widget.TextView;
 
 public class DetailsTab extends Fragment {
     private static final String TAG = "@string/det_tag";
-    private Bus bus;
+    private String stat = "";
+    public static Bus bus;
 
     private static TextView txtCompany, txtNumber, txtRoute, txtAcc, txtStatus;
 
 
-    public void setBus(Bus bus){
-        this.bus = bus;
+    public static void setBus(Bus b){
+        bus = b;
     }
     public static void setStatus(String status){
         txtStatus.setText(status);  
@@ -32,12 +33,30 @@ public class DetailsTab extends Fragment {
         txtAcc = (TextView) v.findViewById(R.id.accommodation_txt);
         txtStatus = (TextView) v.findViewById(R.id.status_txt);
 
-        txtStatus.setText(bus.getStatus());
+        stat = bus.getStatus();
+
+        txtStatus.setText(stat);
         txtCompany.setText(bus.getBusCompany());
         txtRoute.setText(bus.getRoute());
         txtAcc.setText(bus.getAccommodation());
         txtNumber.setText(LoginActivity.getBusNumber());
 
+        if (savedInstanceState == null) {
+        } else {
+            stat = savedInstanceState.getString("status");
+            txtStatus = (TextView) v.findViewById(R.id.status_txt);
+            setStatus(stat);
+            bus.setStatus(stat);
+            stat = bus.getStatus();
+            txtStatus.setText(stat);
+        }
+
         return v;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("status", stat);
     }
 }

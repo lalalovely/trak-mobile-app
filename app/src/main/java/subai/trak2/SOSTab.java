@@ -15,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,6 +24,7 @@ public class SOSTab extends Fragment {
     private static final String TAG = "@string/sos_tag";
     private ImageButton roadAccident, emerStop, engineFail;
     private static Bus bus;
+    private static String stat = "";
 
     public void setBus(Bus bus){
         this.bus = bus;
@@ -38,6 +40,21 @@ public class SOSTab extends Fragment {
         this.roadAccident = (ImageButton) v.findViewById(R.id.roadAcc);
         this.emerStop = (ImageButton) v.findViewById(R.id.emerStop);
         this.engineFail = (ImageButton) v.findViewById(R.id.engFail);
+
+        stat = bus.getStatus();
+
+        if (savedInstanceState == null) {
+        } else {
+            this.roadAccident = (ImageButton) v.findViewById(R.id.roadAcc);
+            this.emerStop = (ImageButton) v.findViewById(R.id.emerStop);
+            this.engineFail = (ImageButton) v.findViewById(R.id.engFail);
+
+            stat = savedInstanceState.getString("status");
+            DetailsTab.bus.setStatus(stat);
+            DetailsTab.setStatus(stat);
+            bus.setStatus(stat);
+            sendBus();
+        }
 
         roadAccident.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -89,6 +106,12 @@ public class SOSTab extends Fragment {
         newFragment.show(getActivity().getFragmentManager(), "dialog");
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("status", stat);
+    }
+
     public static class AlertDialogFrag extends DialogFragment {
 
         public static AlertDialogFrag newInstance(String title) {
@@ -118,8 +141,12 @@ public class SOSTab extends Fragment {
                     .setPositiveButton("YES",
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
-                                    SOSTab.bus.setStatus(title);
+                                    SOSTab.stat = title;
+                                    SOSTab.bus.setStatus(SOSTab.stat);
                                     SOSTab.sendBus();
+                                    DetailsTab.bus.setStatus(SOSTab.stat);
+                                    DetailsTab.setStatus(SOSTab.stat);
+                                    Toast.makeText(getActivity().getApplicationContext(), title, Toast.LENGTH_LONG).show();
                                 }
                             }
                     )

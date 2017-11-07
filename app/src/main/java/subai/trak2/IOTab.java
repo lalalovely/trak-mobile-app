@@ -47,6 +47,8 @@ public class IOTab extends Fragment implements LocationListener {
     private int red = R.color.warning_red;
     private int green = R.color.okay_green;
     private int color = 0;
+    private int ctrClicks = 0;
+    public static int ctr = 0;
     private DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
     ; //root database
 
@@ -60,7 +62,7 @@ public class IOTab extends Fragment implements LocationListener {
     private String latiToDisplay = "";
     private String longiToDisplay = "";
 
-    private boolean isClicked;
+    private boolean isClicked = false;
 
     private Bus bus;
 
@@ -82,15 +84,25 @@ public class IOTab extends Fragment implements LocationListener {
             longiToDisplay = savedInstanceState.getString("longitude");
             status = savedInstanceState.getString("stat");
             color = savedInstanceState.getInt("textColor");
-            //isClicked = savedInstanceState.getBoolean("clickable");
+            ctrClicks = savedInstanceState.getInt("counter");
+            isClicked = savedInstanceState.getBoolean("clicked");
 
             latitude = (TextView) v.findViewById(R.id.textview_latitude);
             longitude = (TextView) v.findViewById(R.id.textview_longitude);
             display = (Button) v.findViewById(R.id.btnDisplay);
-            bus.setStatus("In-transit");
+            //bus.setStatus("In-transit");
             latitude.setText(latiToDisplay);
             longitude.setText(longiToDisplay);
+
+            if (ctr >= 1) {
+                onClickStart();
+            }
             //display.setText(status);
+            if (ctrClicks == 1) {
+                status = "In-transit";
+            } else {
+                status = bus.getStatus();
+            }
             bus.setStatus(status);
             //display.setClickable(isClicked);
             if (color == red) {
@@ -103,16 +115,10 @@ public class IOTab extends Fragment implements LocationListener {
             }
         }
 
-        //don't know if it works
-        if (bus.getStatus().equals("Engine Failure") || bus.getStatus().equals("Emergency Stop") ||
-                bus.getStatus().equals("Road Accident")) {
-            stopRequestUpdate();
-            latiToDisplay = bus.getStatus();
-        }
-
         display.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ctr++;
                 onClickStart();
             }
         });
@@ -126,10 +132,16 @@ public class IOTab extends Fragment implements LocationListener {
                     DialogFragment newFragment = AlertDialogFragment.newInstance("Please Turn On  Location");
                     newFragment.show(getActivity().getFragmentManager(), "dialog");
             } else {
+                ctrClicks++;
+                if (ctrClicks == 1) {
+                    status = "In-transit";
+                } else {
+                    status = bus.getStatus();
+                }
+                bus.setStatus(status);
+                Toast.makeText(getActivity().getApplicationContext(), "TRAK", Toast.LENGTH_LONG).show();
                 startFusedLocation();
                 registerRequestUpdate(this);
-                status = "In-transit";
-                bus.setStatus(status);
             }
 
         }
@@ -162,8 +174,9 @@ public class IOTab extends Fragment implements LocationListener {
         outState.putString("latitude", latiToDisplay); //change lang diri latiText
         outState.putString("longitude", longiToDisplay); //change lang longiText
         outState.putString("stat", status);
-        outState.putBoolean("clickable", isClicked);
+        outState.putBoolean("clicked", isClicked);
         outState.putInt("textColor", color);
+        outState.putInt("counter", ctrClicks);
     }
 
     @Override
@@ -248,7 +261,7 @@ public class IOTab extends Fragment implements LocationListener {
     public void registerRequestUpdate(final LocationListener listener) {
         mLocationRequest = LocationRequest.create();
         mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        mLocationRequest.setInterval(5 * 1000); // every 3 seconds //1000
+        mLocationRequest.setInterval(20 * 1000); // every 3 seconds //1000
 
         new Handler().postDelayed(new Runnable() {
             @Override
@@ -340,7 +353,7 @@ public class IOTab extends Fragment implements LocationListener {
             color = green;
             setFusedLatitude(location.getLatitude());
             setFusedLongitude(location.getLongitude());
-            Toast.makeText(getActivity().getApplicationContext(), "NEW LOCATION RECEIVED", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getApplicationContext(), "LOCATION UPDATED", Toast.LENGTH_LONG).show();
             String lati = String.valueOf(getFusedLatitude());
             String longi = String.valueOf(getFusedLongitude());
             latiText = lati;
