@@ -42,29 +42,12 @@ public class MainActivity extends AppCompatActivity {
 
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-//        getSupportActionBar().setLogo(R.drawable.trak_appbar);
-//        getSupportActionBar().setDisplayUseLogoEnabled(true);
-        //getSupportActionBar().setTitle("TRAK");
-        //getSupportActionBar().setIcon(R.drawable.trak_appbar);
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionPageAdapter);
         setupViewPager(mViewPager);
 
         tabLayout = (TabLayout) findViewById(R.id.tabs);
-
-//        final TabLayout.Tab io = tabLayout.newTab();
-//        final TabLayout.Tab sos = tabLayout.newTab();
-//        final TabLayout.Tab deet = tabLayout.newTab();
-//
-//        io.setIcon(R.drawable.io_icon);
-//        sos.setIcon(R.drawable.sos_icon);
-//        deet.setIcon(R.drawable.details_icon);
-//
-//        tabLayout.addTab(io, 0);
-//        tabLayout.addTab(sos, 1);
-//        tabLayout.addTab(deet, 2);
 
         tabLayout.setupWithViewPager(mViewPager);
 
@@ -127,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
 
         ioTab = new IOTab();
         sosTab = new SOSTab();
-        detailsTab = new DetailsTab();
         bus = new Bus();
 
         // set accomodation
