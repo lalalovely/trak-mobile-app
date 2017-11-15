@@ -15,7 +15,7 @@ public class Bus {
     }
 
     public Coordinates position, destination;
-    private String  busCompany, route, accommodation, status;
+    private String  busCompany, route, accommodation;
 
     Bus(){
         //dummy values
@@ -24,14 +24,10 @@ public class Bus {
         busCompany = "Ceres";
         route = "Bato";
         accommodation = "Aircon";
-        status = " ";
+
     }
 
     //lat, lng, busNumber, route, accommodation, busCompany
-
-    public void setStatus(String st) {
-        status = st;
-    }
 
     public void setPosition(String lat, String lng) {position = new Coordinates(lat,lng);}
 
@@ -51,6 +47,6 @@ public class Bus {
 
     public String getAccommodation() { return accommodation; }
 
-    public String getStatus() { return status; }
+
 }
 

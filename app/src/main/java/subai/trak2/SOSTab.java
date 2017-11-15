@@ -41,7 +41,7 @@ public class SOSTab extends Fragment {
         this.emerStop = (ImageButton) v.findViewById(R.id.emerStop);
         this.engineFail = (ImageButton) v.findViewById(R.id.engFail);
 
-        stat = bus.getStatus();
+//        stat = bus.getStatus();
 
         if (savedInstanceState == null) {
         } else {
@@ -90,7 +90,7 @@ public class SOSTab extends Fragment {
     public static void sendBus(){
         DatabaseReference pushRef = FirebaseDatabase.getInstance().getReference().child("Bus").child(LoginActivity.getBusNumber());
         pushRef.setValue(bus);
-        DetailsTab.setStatus(bus.getStatus());
+//        DetailsTab.setStatus(bus.getStatus());
     }
 
     void showMyDialog(String title) {
@@ -134,7 +134,7 @@ public class SOSTab extends Fragment {
                             new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int whichButton) {
                                     SOSTab.stat = title;
-                                    SOSTab.bus.setStatus(SOSTab.stat);
+//                                    SOSTab.bus.setStatus(SOSTab.stat);
                                     SOSTab.sendBus();
                                     Toast.makeText(getActivity().getApplicationContext(), title, Toast.LENGTH_LONG).show();
                                 }
