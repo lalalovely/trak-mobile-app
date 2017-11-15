@@ -42,5 +42,8 @@
         <activity android:name=".HelpActivity"
             android:label="Help"
             android:parentActivityName=".MainActivity"></activity>
+        <service android:name=".SendService"
+                 android:exported="false">
+        </service>
     </application>
 </manifest>

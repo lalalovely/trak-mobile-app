@@ -128,9 +128,9 @@ public class IOTab extends Fragment implements LocationListener {
                 if (ctrClicks == 1) {
                     status = "In-transit";
                 } else {
-                    status = bus.getStatus();
+//                    status = bus.getStatus();
                 }
-                bus.setStatus(status);
+//                bus.setStatus(status);
                 Toast.makeText(getActivity().getApplicationContext(), "TRAK", Toast.LENGTH_LONG).show();
                 startFusedLocation();
                 registerRequestUpdate(this);
