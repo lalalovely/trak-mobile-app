@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
 
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
-        getSupportActionBar().setTitle("LOCATION");
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionPageAdapter);
@@ -53,62 +52,61 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_location_selected);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_chat);
-        mViewPager.addOnPageChangeListener(new
-                TabLayout.TabLayoutOnPageChangeListener(tabLayout));
-
-
-        tabLayout.setOnTabSelectedListener(new
-           TabLayout.OnTabSelectedListener()
-           {
-               @Override
-               public void onTabSelected(TabLayout.Tab tab) {
-                   int s = tab.getPosition();
-                   switch (s) {
-                       case 0:
-                           getSupportActionBar().setTitle("LOCATION");
-                           tab.setIcon(R.drawable.ic_location_selected);
-                           break;
-                       case 1:
-                           getSupportActionBar().setTitle("MESSAGING");
-                           tab.setIcon(R.drawable.ic_chat_selected);
-                           break;
-                       default:
-
-                   }
-                   //mViewPager.setCurrentItem(tab.getPosition());
-               }
-
-               @Override
-               public void onTabUnselected(TabLayout.Tab tab) {
-                   int s = tab.getPosition();
-                   switch (s) {
-                       case 0:
-                           tab.setIcon(R.drawable.ic_location);
-                           break;
-                       case 1:
-                           tab.setIcon(R.drawable.ic_chat);
-                           break;
-                       default:
-                   }
-               }
-
-               @Override
-               public void onTabReselected(TabLayout.Tab tab) {
-                   int s = tab.getPosition();
-                   switch (s) {
-                       case 0:
-                           tab.setIcon(R.drawable.ic_location_selected);
-                           break;
-                       case 1:
-                           tab.setIcon(R.drawable.ic_chat_selected);
-                           break;
-                       default:
-
-                   }
-               }
-           });
+//        tabLayout.getTabAt(0).setIcon(R.drawable.ic_location_selected);
+//        tabLayout.getTabAt(1).setIcon(R.drawable.ic_chat);
+//        mViewPager.addOnPageChangeListener(new
+//                TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+//
+//
+//        tabLayout.setOnTabSelectedListener(new
+//           TabLayout.OnTabSelectedListener() {
+//               @Override
+//               public void onTabSelected(TabLayout.Tab tab) {
+//                   int s = tab.getPosition();
+//                   switch (s) {
+//                       case 0:
+////                           getSupportActionBar().setTitle("LOCATION");
+////                           tab.setIcon(R.drawable.ic_location_selected);
+//                           break;
+//                       case 1:
+////                           getSupportActionBar().setTitle("MESSAGING");
+////                           tab.setIcon(R.drawable.ic_chat_selected);
+//                           break;
+//                       default:
+//
+//                   }
+//                   //mViewPager.setCurrentItem(tab.getPosition());
+//               }
+//
+//               @Override
+//               public void onTabUnselected(TabLayout.Tab tab) {
+//                   int s = tab.getPosition();
+//                   switch (s) {
+//                       case 0:
+//                           tab.setIcon(R.drawable.ic_location);
+//                           break;
+//                       case 1:
+//                           tab.setIcon(R.drawable.ic_chat);
+//                           break;
+//                       default:
+//                   }
+//               }
+//
+//               @Override
+//               public void onTabReselected(TabLayout.Tab tab) {
+//                   int s = tab.getPosition();
+//                   switch (s) {
+//                       case 0:
+//                           //tab.setIcon(R.drawable.ic_location_selected);
+//                           break;
+//                       case 1:
+//                           //tab.setIcon(R.drawable.ic_chat_selected);
+//                           break;
+//                       default:
+//
+//                   }
+//               }
+//           });
     }
 
     private void setupViewPager(ViewPager viewPager) {

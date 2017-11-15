@@ -70,7 +70,7 @@ public class LocationTab extends Fragment implements LocationListener {
 
         start = (Button) v.findViewById(R.id.start_button);
         //display = (TextView) v.findViewById(R.id.text_display);
-        spinner = (Spinner) v.findViewById(R.id.routeList);
+        //spinner = (Spinner) v.findViewById(R.id.routeList);
 
         if (savedInstanceState == null) {
         } else {

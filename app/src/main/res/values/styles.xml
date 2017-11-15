@@ -17,7 +17,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/white</item>
         <item name="actionMenuTextColor">@color/abc_primary_text_material_light</item>
-        <item name="android:textColorSecondary">@color/titleColor</item>
+        <item name="android:textColorSecondary">@color/white</item>
     </style>
 
     <style name="DetailsActivityTheme" parent="Theme.AppCompat.NoActionBar">
