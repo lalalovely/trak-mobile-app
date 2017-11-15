@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
         mSectionPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
+        mToolBar.setTitle("Trak");
         spinner = (Spinner) findViewById(R.id.route_list);
 
         ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(this,
