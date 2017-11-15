@@ -54,60 +54,73 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         busNumber = (EditText) findViewById(R.id.busNumText);
         login = (Button) findViewById(R.id.btnLogin);
 
-        routeSpinner = (Spinner) findViewById(R.id.routeList);
-
-        routeSpinner.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                if (busNumber.getText().toString().isEmpty()){
-                    showMyDialog("PLEASE INPUT BUS NUMBER.");
-                    //Toast.makeText(getApplicationContext(), "PLEASE INPUT BUS NUMBER", Toast.LENGTH_LONG).show();
-                } else {
-                    ref.child("Bus_Accounts").child(busNumber.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Iterable<DataSnapshot> d = dataSnapshot.getChildren();
-                            for (DataSnapshot data: d){
-                                if (data.getKey().equals("busCompany")){
-                                    setBusCompany(data.getValue().toString());
-                                }
-                            }
-                        }
-                         @Override
-                        public void onCancelled(DatabaseError databaseError) {}
-                    });
-                    checkBusNumber();
-                }
-                return false;
-            }
-        });
-        String[] r = {"Select Route"};
-        ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, r);
-
-        routeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        routeSpinner.setAdapter(routeAdapter);
-        routeSpinner.setOnItemSelectedListener(this);
+//        routeSpinner = (Spinner) findViewById(R.id.routeList);
+//
+//        routeSpinner.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View v, MotionEvent event) {
+//                if (busNumber.getText().toString().isEmpty()){
+//                    showMyDialog("PLEASE INPUT BUS NUMBER.");
+//                    //Toast.makeText(getApplicationContext(), "PLEASE INPUT BUS NUMBER", Toast.LENGTH_LONG).show();
+//                } else {
+//                    ref.child("Bus_Accounts").child(busNumber.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(DataSnapshot dataSnapshot) {
+//                            Iterable<DataSnapshot> d = dataSnapshot.getChildren();
+//                            for (DataSnapshot data: d){
+//                                if (data.getKey().equals("busCompany")){
+//                                    setBusCompany(data.getValue().toString());
+//                                }
+//                            }
+//                        }
+//                         @Override
+//                        public void onCancelled(DatabaseError databaseError) {}
+//                    });
+//                    checkBusNumber();
+//                }
+//                return false;
+//            }
+//        });
+//        String[] r = {"Select Route"};
+//        ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(this,
+//                android.R.layout.simple_spinner_item, r);
+//
+//        routeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+//
+//        routeSpinner.setAdapter(routeAdapter);
+//        routeSpinner.setOnItemSelectedListener(this);
 
         login.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-            if (busNumber.getText().toString().isEmpty() && selectedRoute.equals("Select Route")){
-                showMyDialog("PLEASE INPUT BUS NUMBER AND SELECT ROUTE.");
-            } else if (!selectedRoute.equals("Select Route")){
-                sendMessage();
+            checkBusNumber();
+            if (busNumber.getText().toString().isEmpty()){
+                //showMyDialog("PLEASE INPUT BUS NUMBER.");
+                Toast.makeText(getApplicationContext(), "PLEASE INPUT BUS NUMBER", Toast.LENGTH_LONG).show();
             } else {
-                showMyDialog("PLEASE SELECT YOUR ROUTE.");
+                ref.child("Bus_Accounts").child(busNumber.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        Iterable<DataSnapshot> d = dataSnapshot.getChildren();
+                        for (DataSnapshot data: d){
+                            if (data.getKey().equals("busCompany")){
+                                setBusCompany(data.getValue().toString());
+                            }
+                        }
+                    }
+                     @Override
+                    public void onCancelled(DatabaseError databaseError) {}
+                });
+                sendMessage();
             }
             }
 
         });
     }
 
-    void showMyDialog(String title) {
-        DialogFragment newFragment = AlertDialogFragment.newInstance(title);
-        newFragment.show(getFragmentManager(), "dialog");
-    }
+//    void showMyDialog(String title) {
+//        DialogFragment newFragment = AlertDialogFragment.newInstance(title);
+//        newFragment.show(getFragmentManager(), "dialog");
+//    }
 
     public void sendMessage() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
@@ -124,10 +137,9 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                 if(!busNum.isEmpty()){
                     if (!dataSnapshot.hasChild(busNum)) {
                         busNumber.setText("");
-                        showMyDialog("BUS DOES NOT EXIST.");
                         //Toast.makeText(getApplicationContext(), "BUS DOES NOT EXIST", Toast.LENGTH_LONG).show();
+                        //showMyDialog("BUS DOES NOT EXIST.");
                     } else {
-                        setRouteOption();
                     }
                 }
             }

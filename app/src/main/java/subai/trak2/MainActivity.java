@@ -1,5 +1,8 @@
 package subai.trak2;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -25,10 +28,9 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private Toolbar mToolBar;
 
-    private IOTab ioTab;
-    private SOSTab sosTab;
     private Bus bus;
-    private DetailsTab detailsTab;
+    private LocationTab locationTab;
+    private MessagingTab messagingTab;
 
     public int counter = 0;
 
@@ -42,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolBar);
+        getSupportActionBar().setTitle("LOCATION");
 
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionPageAdapter);
@@ -50,10 +53,8 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         tabLayout.setupWithViewPager(mViewPager);
-
-        tabLayout.getTabAt(0).setIcon(R.drawable.unselected_io);
-        tabLayout.getTabAt(1).setIcon(R.drawable.unselected_sos);
-        tabLayout.getTabAt(2).setIcon(R.drawable.unselected_details);
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_location_selected);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_chat);
         mViewPager.addOnPageChangeListener(new
                 TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
@@ -66,13 +67,12 @@ public class MainActivity extends AppCompatActivity {
                    int s = tab.getPosition();
                    switch (s) {
                        case 0:
-                           tab.setIcon(R.drawable.selected_io);
+                           getSupportActionBar().setTitle("LOCATION");
+                           tab.setIcon(R.drawable.ic_location_selected);
                            break;
                        case 1:
-                           tab.setIcon(R.drawable.selected_sos);
-                           break;
-                       case 2:
-                           tab.setIcon(R.drawable.selected_details);
+                           getSupportActionBar().setTitle("MESSAGING");
+                           tab.setIcon(R.drawable.ic_chat_selected);
                            break;
                        default:
 
@@ -85,22 +85,28 @@ public class MainActivity extends AppCompatActivity {
                    int s = tab.getPosition();
                    switch (s) {
                        case 0:
-                           tab.setIcon(R.drawable.unselected_io);
+                           tab.setIcon(R.drawable.ic_location);
                            break;
                        case 1:
-                           tab.setIcon(R.drawable.unselected_sos);
-                           break;
-                       case 2:
-                           tab.setIcon(R.drawable.unselected_details);
+                           tab.setIcon(R.drawable.ic_chat);
                            break;
                        default:
-
                    }
                }
 
                @Override
                public void onTabReselected(TabLayout.Tab tab) {
+                   int s = tab.getPosition();
+                   switch (s) {
+                       case 0:
+                           tab.setIcon(R.drawable.ic_location_selected);
+                           break;
+                       case 1:
+                           tab.setIcon(R.drawable.ic_chat_selected);
+                           break;
+                       default:
 
+                   }
                }
            });
     }
@@ -108,8 +114,8 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-        ioTab = new IOTab();
-        sosTab = new SOSTab();
+        locationTab = new LocationTab();
+        messagingTab = new MessagingTab();
         bus = new Bus();
 
         // set accomodation
@@ -131,17 +137,42 @@ public class MainActivity extends AppCompatActivity {
             public void onCancelled(DatabaseError databaseError) {}
         });
 
-        bus.setRoute(LoginActivity.getRoute());
+       // bus.setRoute(LoginActivity.getRoute());
 
-        ioTab.setBus(bus);
-        sosTab.setBus(bus);
-        detailsTab.setBus(bus);
+       //set bus for each tab here
         //make a details tab
+        locationTab.setBus(bus);
 
-        adapter.addFragment(ioTab, "I/O");
-        adapter.addFragment(sosTab, "SOS");
-        adapter.addFragment(detailsTab, "DETAILS");
+        adapter.addFragment(locationTab, "Location");
+        adapter.addFragment(messagingTab, "Messaging");
         viewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.activity_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.details_btn) {
+            Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        } else if (id == R.id.help_btn) {
+            Intent intent = new Intent(MainActivity.this, HelpActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        } else if (id == R.id.logout) {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            return true;
+        } else {}
+        return super.onOptionsItemSelected(item);
     }
 
 }
