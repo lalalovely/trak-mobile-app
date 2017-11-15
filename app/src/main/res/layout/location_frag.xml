@@ -18,7 +18,7 @@
         android:background="@drawable/start_button_background"
         android:textAlignment="center"
         android:textAllCaps="true"
-        android:textSize="50sp"
+        android:textSize="40sp"
         android:layout_alignParentBottom="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/alcantara"
+        android:title="Aloguinsan">
+    </item>
+
+    <item android:id="@+id/alcoy"
+        android:title="Alcoy">
+    </item>
+
+    <item android:id="@+id/aloguinsan"
+        android:title="Aloguinsan">
+    </item>
+
+    <item android:id="@+id/argao"
+        android:title="Argao">
+    </item>
+
+    <item android:id="@+id/badian"
+        android:title="Badian">
+    </item>
+
+    <item android:id="@+id/boljoon"
+        android:title="Boljoon">
+    </item>
+
+    <item android:id="@+id/carcar"
+        android:title="Carcar">
+    </item>
+
+    <item android:id="@+id/dalaguete"
+        android:title="Dalaquete">
+    </item>
+
+    <item android:id="@+id/Dumanjug"
+        android:title="Dumanjug">
+    </item>
+
+    <item android:id="@+id/santander"
+        android:title="Santander">
+    </item>
+
+    <item android:id="@+id/sibonga"
+        android:title="Sibonga">
+    </item>
+
+</menu>

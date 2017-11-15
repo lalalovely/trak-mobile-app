@@ -31,6 +31,15 @@
             app:theme="@style/GalaxyZooThemeToolbarDarkOverflow"
             app:popupTheme="@style/AppTheme.PopupOverlay">
 
+            <Spinner
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/route_list"
+                android:spinnerMode="dropdown"
+                android:hint="Select Route"
+                android:layout_marginLeft="400dp">
+            </Spinner>
+
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout

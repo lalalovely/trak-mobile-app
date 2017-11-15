@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -43,52 +45,27 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     private static Spinner routeSpinner;
     private static String selectedRoute = "";
     private String busCompany;
+    private String bus_number;
+
+    UserSessionManager sessionManager;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+//        requestWindowFeature(Window.FEATURE_NO_TITLE);
+//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_login);
+
+        sessionManager = new UserSessionManager(this);
 
         busNumber = (EditText) findViewById(R.id.busNumText);
         login = (Button) findViewById(R.id.btnLogin);
 
-//        routeSpinner = (Spinner) findViewById(R.id.routeList);
-//
-//        routeSpinner.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View v, MotionEvent event) {
-//                if (busNumber.getText().toString().isEmpty()){
-//                    showMyDialog("PLEASE INPUT BUS NUMBER.");
-//                    //Toast.makeText(getApplicationContext(), "PLEASE INPUT BUS NUMBER", Toast.LENGTH_LONG).show();
-//                } else {
-//                    ref.child("Bus_Accounts").child(busNumber.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-//                        @Override
-//                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                            Iterable<DataSnapshot> d = dataSnapshot.getChildren();
-//                            for (DataSnapshot data: d){
-//                                if (data.getKey().equals("busCompany")){
-//                                    setBusCompany(data.getValue().toString());
-//                                }
-//                            }
-//                        }
-//                         @Override
-//                        public void onCancelled(DatabaseError databaseError) {}
-//                    });
-//                    checkBusNumber();
-//                }
-//                return false;
-//            }
-//        });
-//        String[] r = {"Select Route"};
-//        ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(this,
-//                android.R.layout.simple_spinner_item, r);
-//
-//        routeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//
-//        routeSpinner.setAdapter(routeAdapter);
-//        routeSpinner.setOnItemSelectedListener(this);
+        if (sessionManager.isUserLoggedIn()) {
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            finish();
+        }
 
         login.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
@@ -107,9 +84,10 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                             }
                         }
                     }
-                     @Override
+                    @Override
                     public void onCancelled(DatabaseError databaseError) {}
                 });
+                sessionManager.setLoggedIn(true);
                 sendMessage();
             }
             }
@@ -117,7 +95,27 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         });
     }
 
-//    void showMyDialog(String title) {
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    //    void showMyDialog(String title) {
 //        DialogFragment newFragment = AlertDialogFragment.newInstance(title);
 //        newFragment.show(getFragmentManager(), "dialog");
 //    }
@@ -133,13 +131,14 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         busRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                String busNum = busNumber.getText().toString();
-                if(!busNum.isEmpty()){
-                    if (!dataSnapshot.hasChild(busNum)) {
+                bus_number = busNumber.getText().toString();
+                if(!bus_number.isEmpty()){
+                    if (!dataSnapshot.hasChild(bus_number)) {
                         busNumber.setText("");
                         //Toast.makeText(getApplicationContext(), "BUS DOES NOT EXIST", Toast.LENGTH_LONG).show();
                         //showMyDialog("BUS DOES NOT EXIST.");
                     } else {
+                        sessionManager.setBusNumber(bus_number);
                     }
                 }
             }
