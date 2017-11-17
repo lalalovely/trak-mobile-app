@@ -3,6 +3,8 @@ package subai.trak2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
@@ -17,6 +19,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -41,6 +44,9 @@ public class MainActivity extends AppCompatActivity {
     private Spinner spinner;
 
     UserSessionManager sessionManager;
+    int bg;
+    String strTxt;
+    boolean click;
 
     public int counter = 0;
 
@@ -58,10 +64,11 @@ public class MainActivity extends AppCompatActivity {
         mSectionPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         mToolBar.setTitle("Trak");
+
         spinner = (Spinner) findViewById(R.id.route_list);
 
         ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.routes));
+                R.layout.custom_spinner_item, getResources().getStringArray(R.array.routes));
 
         routeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(routeAdapter);
@@ -69,7 +76,9 @@ public class MainActivity extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                //spinner.getSelectedItem().toString() (set this to bus route
+                String r = spinner.getSelectedItem().toString();
+                bus.setRoute(r);
+                sessionManager.setRoute(r);
             }
 
             @Override
@@ -78,21 +87,27 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        if (!sessionManager.hasStarted()) {
+            bg = R.drawable.start_button_background;
+            strTxt = "START";
+            click = true;
+        } else if (sessionManager.hasStarted()) {
+            bg = R.drawable.started_btn_background;
+            strTxt = "TRAK";
+            click = false;
+        }
+
         setSupportActionBar(mToolBar);
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionPageAdapter);
         setupViewPager(mViewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
-
-//        Toast.makeText(getApplicationContext(),
-//                "User Login Status: " + sessionManager.isUserLoggedIn(),
-//                Toast.LENGTH_LONG).show();
-
     }
 
     public void logout() {
         sessionManager.setLoggedIn(false);
+        sessionManager.setHasStarted(false);
         finish();
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
@@ -100,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-        locationTab = new LocationTab();
+        locationTab = LocationTab.newInstance(bg, strTxt, click);
         messagingTab = new MessagingTab();
         bus = new Bus();
 

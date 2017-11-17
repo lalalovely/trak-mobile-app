@@ -13,6 +13,8 @@ public class UserSessionManager {
     private final static String MYPREFERENCES = "MyPrefs";
     private static final String IS_USER_LOGGEDIN = "IsUserLoggedIn";
     public static final String KEY_BUS_NUM = "bus_number";
+    public static final String KEY_ROUTE = "bus_route";
+    public static final String KEY_STARTED = "hasStarted";
 
     public UserSessionManager(Context cont) {
         this.context = cont;
@@ -26,8 +28,22 @@ public class UserSessionManager {
         editor.commit();
     }
 
+    public void setHasStarted(boolean hasStarted) {
+        editor.putBoolean(KEY_STARTED, hasStarted);
+        editor.commit();
+    }
+
+    public boolean hasStarted() {
+        return prefs.getBoolean(KEY_STARTED, false);
+    }
+
     public void setLoggedIn(boolean loggedIn) {
         editor.putBoolean(IS_USER_LOGGEDIN, loggedIn);
+        editor.commit();
+    }
+
+    public void setRoute(String r) {
+        editor.putString(KEY_ROUTE, r);
         editor.commit();
     }
 
@@ -42,6 +58,10 @@ public class UserSessionManager {
 
     public String getBusNum() {
         return prefs.getString(KEY_BUS_NUM, null);
+    }
+
+    public String getRoute() {
+        return prefs.getString(KEY_ROUTE, null);
     }
 
     public boolean checkLogin(){
