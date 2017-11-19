@@ -103,11 +103,63 @@
       },
       "oauth_client": [
         {
+          "client_id": "556472889887-v946j6sqj4jvdfdrbi9obp9j0nk1ojuo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "subai.trak2",
+            "certificate_hash": "7ee866852acb4ff4fcff6333d4f05cbd2a58a5db"
+          }
+        },
+        {
           "client_id": "556472889887-50joa0rb900h8fujtn55jr6hne22j545.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "subai.trak2",
             "certificate_hash": "18f1071f5d8c8e98409d0fc366787caf1c227d71"
+          }
+        },
+        {
+          "client_id": "556472889887-vnp51dkquen5l3f3mm84je9ebkr8ak53.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxw9fmEMZTbAaybZHnHt2eF_yCrBiLGq4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556472889887-vnp51dkquen5l3f3mm84je9ebkr8ak53.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556472889887:android:00fd7daa766aa370",
+        "android_client_info": {
+          "package_name": "subai.trak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556472889887-s7qn1umq9d66muv4orv5t937o6ablgik.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "subai.trak",
+            "certificate_hash": "50800a28709424b1d7eb31f54db08710e575d703"
           }
         },
         {

@@ -1,31 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/message_tab"
     android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <!--<Button-->
-    <!--android:id="@+id/engFail"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="160dp"-->
-    <!--android:layout_alignParentTop="true"-->
-    <!--android:layout_centerHorizontal="true"-->
-    <!--android:layout_marginRight="8dp"-->
-    <!--android:layout_marginTop="68dp"-->
-    <!--android:background="@drawable/login_btn_background"-->
-    <!--android:text="Engine Failure"-->
-    <!--android:textColor="@color/white"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintHorizontal_bias="1.0"-->
-    <!--app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--app:layout_constraintRight_toRightOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="parent"-->
-    <!--app:layout_constraintVertical_bias="0.398"-->
-    <!--tools:layout_constraintLeft_creator="1"-->
-    <!--tools:layout_constraintTop_creator="1"-->
-    <!--android:layout_marginEnd="8dp" />-->
+    android:layout_height="match_parent"
+    >
 
     <ImageButton
         android:id="@+id/emerStop"
@@ -43,44 +28,6 @@
         app:layout_constraintVertical_bias="0.0"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1" />
-
-    <!--<Button-->
-    <!--android:id="@+id/emerStop"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="160dp"-->
-    <!--android:layout_alignStart="@+id/engFail"-->
-    <!--android:layout_below="@+id/engFail"-->
-    <!--android:layout_marginTop="23dp"-->
-    <!--android:background="@drawable/login_btn_background"-->
-    <!--android:text="Emergency Stop"-->
-    <!--android:textColor="@color/white"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintHorizontal_bias="0.0"-->
-    <!--app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--app:layout_constraintRight_toRightOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="parent"-->
-    <!--app:layout_constraintVertical_bias="0.0"-->
-    <!--tools:layout_constraintLeft_creator="1"-->
-    <!--tools:layout_constraintTop_creator="1" />-->
-
-    <!--<Button-->
-    <!--android:id="@+id/roadAcc"-->
-    <!--android:layout_width="0dp"-->
-    <!--android:layout_height="160dp"-->
-    <!--android:layout_alignStart="@+id/emerStop"-->
-    <!--android:layout_below="@+id/emerStop"-->
-    <!--android:layout_marginTop="38dp"-->
-    <!--android:background="@drawable/login_btn_background"-->
-    <!--android:text="Road Accident"-->
-    <!--android:textColor="@color/white"-->
-    <!--app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--app:layout_constraintLeft_toLeftOf="parent"-->
-    <!--app:layout_constraintRight_toRightOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="parent"-->
-    <!--app:layout_constraintVertical_bias="0.926"-->
-    <!--tools:layout_constraintLeft_creator="1"-->
-    <!--tools:layout_constraintTop_creator="1"-->
-    <!--app:layout_constraintHorizontal_bias="0.0" />-->
 
     <ImageButton
         android:id="@+id/engFail"
@@ -116,4 +63,47 @@
         tools:layout_constraintTop_creator="1"
         app:layout_constraintHorizontal_bias="0.0" />
 
-</android.support.constraint.ConstraintLayout>
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:clickable="true"-->
+        <!--android:src="@drawable/ic_sends"-->
+        <!--android:id="@+id/sendButton"-->
+        <!--android:tint="@android:color/white"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--app:fabSize="mini"-->
+    <!--/>-->
+
+    <!--<android.support.design.widget.TextInputLayout-->
+        <!--android:id="@+id/input_text"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_toLeftOf="@+id/sendButton"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_alignParentStart="true" >-->
+        <!---->
+        <!--<EditText-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:hint="Message "-->
+            <!--android:id="@+id/input"-->
+            <!--/>-->
+
+     <!--</android.support.design.widget.TextInputLayout>-->
+
+    <!--<ListView-->
+        <!--android:id="@+id/list_of_messages"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_above="@+id/sendButton"-->
+        <!--android:layout_alignParentStart="true"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:divider="@android:color/transparent"-->
+        <!--android:dividerHeight="16dp">-->
+    <!--</ListView>-->
+
+
+
+
+</RelativeLayout>
