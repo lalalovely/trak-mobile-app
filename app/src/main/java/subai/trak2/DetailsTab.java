@@ -33,7 +33,7 @@ public class DetailsTab extends Fragment {
         txtAcc = (TextView) v.findViewById(R.id.accommodation_txt);
         txtStatus = (TextView) v.findViewById(R.id.status_txt);
 
-        stat = bus.getStatus();
+//        stat = bus.getStatus();
 
         txtStatus.setText(stat);
         txtCompany.setText(bus.getBusCompany());
@@ -45,7 +45,7 @@ public class DetailsTab extends Fragment {
         } else {
             stat = savedInstanceState.getString("status");
             txtStatus = (TextView) v.findViewById(R.id.status_txt);
-            stat = bus.getStatus();
+//            stat = bus.getStatus();
             txtStatus.setText(stat);
         }
 

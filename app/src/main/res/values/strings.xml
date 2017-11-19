@@ -16,9 +16,6 @@
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <string name="title_activity_intro">IntroActivity</string>
 
 
@@ -35,4 +32,16 @@
     <string name="routePrompt">Select Route</string>
     <string name="title_activity_details">DetailsActivity</string>
     <string name="title_activity_location_tab">LocationTab</string>
+    
+    <string-array name="routes">
+        <item>Route</item>
+        <item>Alcantara</item>
+        <item>Alcoy</item>
+        <item>Aloguinsan</item>
+        <item>Badian</item>
+        <item>Boljoon</item>
+        <item>Carcar</item>
+        <item>Dalaguete</item>
+        <item>Dumanjug</item>
+    </string-array>
 </resources>

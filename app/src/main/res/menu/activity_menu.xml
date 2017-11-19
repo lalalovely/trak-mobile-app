@@ -7,11 +7,16 @@
     </item>
 
     <item android:id="@+id/help_btn"
-        android:title="About">
+        android:title="Help">
     </item>
 
     <item android:id="@+id/logout"
         android:title="Log-out">
     </item>
+
+    <!--<item android:id="@+id/select_route"-->
+        <!--android:title="Select Route"-->
+        <!--app:showAsAction="ifRoom">-->
+    <!--</item>-->
 
 </menu>

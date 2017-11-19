@@ -24,18 +24,32 @@
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:background="?attr/colorPrimary"
-            app:titleTextColor="@color/titleColor"
+            app:titleTextColor="@color/white"
             app:theme="@style/GalaxyZooThemeToolbarDarkOverflow"
             app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/route_list"
+                android:spinnerMode="dropdown"
+                android:hint="Select Route"
+                android:layout_gravity="end"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            </Spinner>
 
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
+            android:textAlignment="center"
+            app:tabSelectedTextColor="@color/buttonColor"
+            app:tabTextColor="@color/dot_inactive"
+            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="40dp" />
+            android:layout_height="48dp" />
 
     </android.support.design.widget.AppBarLayout>
 

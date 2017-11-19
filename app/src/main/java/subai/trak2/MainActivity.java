@@ -3,8 +3,11 @@ package subai.trak2;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.location.Location;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.Toolbar;
 
 import android.support.v4.view.ViewPager;
@@ -13,6 +16,12 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,6 +41,13 @@ public class MainActivity extends AppCompatActivity {
     private LocationTab locationTab;
     private MessagingTab messagingTab;
 
+    private Spinner spinner;
+
+    UserSessionManager sessionManager;
+    int bg;
+    String strTxt;
+    boolean click;
+
     public int counter = 0;
 
     @Override
@@ -39,82 +55,67 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "onCreate: Starting...");
+        sessionManager = new UserSessionManager(this);
+
+        if (!sessionManager.isUserLoggedIn()) {
+            logout();
+        }
 
         mSectionPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
-
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(mToolBar);
-        getSupportActionBar().setTitle("LOCATION");
+        mToolBar.setTitle("Trak");
 
+        spinner = (Spinner) findViewById(R.id.route_list);
+
+        ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(this,
+                R.layout.custom_spinner_item, getResources().getStringArray(R.array.routes));
+
+        routeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(routeAdapter);
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String r = spinner.getSelectedItem().toString();
+                bus.setRoute(r);
+                sessionManager.setRoute(r);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        if (!sessionManager.hasStarted()) {
+            bg = R.drawable.start_button_background;
+            strTxt = "START";
+            click = true;
+        } else if (sessionManager.hasStarted()) {
+            bg = R.drawable.started_btn_background;
+            strTxt = "TRAK";
+            click = false;
+        }
+
+        setSupportActionBar(mToolBar);
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionPageAdapter);
         setupViewPager(mViewPager);
-
         tabLayout = (TabLayout) findViewById(R.id.tabs);
-
         tabLayout.setupWithViewPager(mViewPager);
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_location_selected);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_chat);
-        mViewPager.addOnPageChangeListener(new
-                TabLayout.TabLayoutOnPageChangeListener(tabLayout));
+    }
 
-
-        tabLayout.setOnTabSelectedListener(new
-           TabLayout.OnTabSelectedListener()
-           {
-               @Override
-               public void onTabSelected(TabLayout.Tab tab) {
-                   int s = tab.getPosition();
-                   switch (s) {
-                       case 0:
-                           getSupportActionBar().setTitle("LOCATION");
-                           tab.setIcon(R.drawable.ic_location_selected);
-                           break;
-                       case 1:
-                           getSupportActionBar().setTitle("MESSAGING");
-                           tab.setIcon(R.drawable.ic_chat_selected);
-                           break;
-                       default:
-
-                   }
-                   //mViewPager.setCurrentItem(tab.getPosition());
-               }
-
-               @Override
-               public void onTabUnselected(TabLayout.Tab tab) {
-                   int s = tab.getPosition();
-                   switch (s) {
-                       case 0:
-                           tab.setIcon(R.drawable.ic_location);
-                           break;
-                       case 1:
-                           tab.setIcon(R.drawable.ic_chat);
-                           break;
-                       default:
-                   }
-               }
-
-               @Override
-               public void onTabReselected(TabLayout.Tab tab) {
-                   int s = tab.getPosition();
-                   switch (s) {
-                       case 0:
-                           tab.setIcon(R.drawable.ic_location_selected);
-                           break;
-                       case 1:
-                           tab.setIcon(R.drawable.ic_chat_selected);
-                           break;
-                       default:
-
-                   }
-               }
-           });
+    public void logout() {
+        sessionManager.setLoggedIn(false);
+        sessionManager.setHasStarted(false);
+        finish();
+        startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-        locationTab = new LocationTab();
+        locationTab = LocationTab.newInstance(bg, strTxt, click);
         messagingTab = new MessagingTab();
         bus = new Bus();
 
@@ -168,8 +169,7 @@ public class MainActivity extends AppCompatActivity {
             finish();
             return true;
         } else if (id == R.id.logout) {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
+            logout();
             return true;
         } else {}
         return super.onOptionsItemSelected(item);
