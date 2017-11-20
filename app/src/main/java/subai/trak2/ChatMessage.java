@@ -23,12 +23,12 @@ public class ChatMessage {
         messageTime = new Date().getTime();
     }
 
-
     public ChatMessage(String messageText, String messageUser) {
         this.messageText = messageText;
         this.messageUser = messageUser;
         messageTime = new Date().getTime();
     }
+
 
     public ChatMessage(String messageText){
         this.messageText = messageText;

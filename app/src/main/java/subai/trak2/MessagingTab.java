@@ -16,10 +16,15 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 
 public class MessagingTab extends Fragment {
@@ -57,7 +62,7 @@ public class MessagingTab extends Fragment {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 if(firebaseAuth.getCurrentUser() == null){
-                    //startActivity( new Intent())
+                    //startActivity( new Intent(MessagingTab.this.LoginA))
                 }
             }
         };
@@ -65,13 +70,31 @@ public class MessagingTab extends Fragment {
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mCurrentUser = mAuth.getCurrentUser();
-                mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Messages");
+                mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Bus_Accounts").child(mCurrentUser.getUid());
                 final String messageValue = editMessage.getText().toString().trim();
 
                 if (!TextUtils.isEmpty(messageValue)) {
                     chat.setMessageText(messageValue);
+
                     final DatabaseReference newPost = mRef.push();
-                    newPost.child("content").setValue(messageValue);
+                    mDatabaseUsers.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            newPost.child("content").setValue(messageValue);
+                            newPost.child("username").setValue(dataSnapshot.child("Name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+                    messageList.scrollToPosition(messageList.getAdapter().getItemCount());
                 }
             }
         });
@@ -92,6 +115,8 @@ public class MessagingTab extends Fragment {
                 protected void populateViewHolder(MessageViewHolder viewHolder, ChatMessage model, int position) {
                     model.setChat(chat);
                     viewHolder.setContent(model.getMessageText());
+                    viewHolder.setContent(model.getMessageUser());
+
                 }
             };
             messageList.setAdapter(FBRA);
@@ -108,6 +133,12 @@ public class MessagingTab extends Fragment {
             TextView message_content = (TextView) mView.findViewById(R.id.message_text);
             message_content.setText(content);
         }
+
+        public void setUserName(String username){
+            TextView userName_content = (TextView) mView.findViewById(R.id.message_user);
+            userName_content.setText(username);
+        }
+
     }
  }
 
