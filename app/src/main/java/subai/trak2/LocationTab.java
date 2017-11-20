@@ -67,10 +67,11 @@ public class LocationTab extends Fragment {// implements LocationListener {
     private Bus bus;
 
     private Spinner spinner;
-
     UserSessionManager sessionManager;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor edit;
+
+
 
     String text;
     int bg;
@@ -96,12 +97,14 @@ public class LocationTab extends Fragment {// implements LocationListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
         v = inflater.inflate(R.layout.location_frag, container, false);
 
         start = (Button) v.findViewById(R.id.start_button);
         stop = (Button) v.findViewById(R.id.stop_button);
 
         sessionManager = new UserSessionManager(getActivity().getApplicationContext());
+
 
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getActivity().getApplicationContext());
         edit = sharedPreferences.edit();
