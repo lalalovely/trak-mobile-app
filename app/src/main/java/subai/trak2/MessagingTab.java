@@ -1,6 +1,8 @@
 package subai.trak2;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +16,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -26,6 +30,10 @@ public class MessagingTab extends Fragment {
     private RecyclerView messageList;
     private FloatingActionButton send;
     private ChatMessage chat;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
+    private FirebaseUser mCurrentUser;
+    private DatabaseReference mDatabaseUsers;
 
 
     @Override
@@ -43,9 +51,23 @@ public class MessagingTab extends Fragment {
         linearLayoutManager.setStackFromEnd(true);
         messageList.setLayoutManager(linearLayoutManager);
 
+        mAuth = FirebaseAuth.getInstance();
+
+        mAuthListener = new FirebaseAuth.AuthStateListener(){
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(firebaseAuth.getCurrentUser() == null){
+                    //startActivity( new Intent())
+                }
+            }
+        };
+
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                mCurrentUser = mAuth.getCurrentUser();
+                mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Messages");
                 final String messageValue = editMessage.getText().toString().trim();
+
                 if (!TextUtils.isEmpty(messageValue)) {
                     chat.setMessageText(messageValue);
                     final DatabaseReference newPost = mRef.push();
@@ -56,7 +78,6 @@ public class MessagingTab extends Fragment {
 
         return v;
     }
-
 
     @Override
     public void onStart() {
@@ -77,7 +98,6 @@ public class MessagingTab extends Fragment {
         }
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
-
         View mView;
         public MessageViewHolder(View itemView) {
             super(itemView);
