@@ -1,6 +1,5 @@
 package subai.trak2;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -11,7 +10,6 @@ import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -35,7 +33,6 @@ public class MessagingTab extends Fragment {
     private RecyclerView messageList;
     private FloatingActionButton send;
     private ChatMessage chat;
-    private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mCurrentUser;
     private DatabaseReference mDatabaseUsers;
@@ -56,20 +53,9 @@ public class MessagingTab extends Fragment {
         linearLayoutManager.setStackFromEnd(true);
         messageList.setLayoutManager(linearLayoutManager);
 
-        mAuth = FirebaseAuth.getInstance();
-
-        mAuthListener = new FirebaseAuth.AuthStateListener(){
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() == null){
-                    //startActivity( new Intent(MessagingTab.this.LoginA))
-                }
-            }
-        };
 
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mCurrentUser = mAuth.getCurrentUser();
                 mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Bus_Accounts").child(mCurrentUser.getUid());
                 final String messageValue = editMessage.getText().toString().trim();
 
@@ -107,7 +93,7 @@ public class MessagingTab extends Fragment {
         super.onStart();
         FirebaseRecyclerAdapter<ChatMessage, MessageViewHolder> FBRA = new FirebaseRecyclerAdapter<ChatMessage, MessageViewHolder>(
                 ChatMessage.class,
-                R.layout.list_item,
+                R.layout.sendUser,
                 MessageViewHolder.class,
                 mRef
         ) {

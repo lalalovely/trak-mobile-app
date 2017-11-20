@@ -52,7 +52,7 @@
         android:id="@+id/linearLayout"
         >
         <EditText
-            android:layout_width="340dp"
+            android:layout_width="312dp"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:background="@drawable/chat_txt_bg"
@@ -64,7 +64,7 @@
             />
 
         <android.support.design.widget.FloatingActionButton
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
             android:src="@drawable/ic_sends"
@@ -72,7 +72,7 @@
             android:tint="@android:color/white"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            app:fabSize="mini"
+            app:fabSize="normal"
         />
 
 
