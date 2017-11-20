@@ -26,6 +26,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Date;
+
 
 public class MessagingTab extends Fragment {
 
@@ -35,10 +37,10 @@ public class MessagingTab extends Fragment {
     private RecyclerView messageList;
     private FloatingActionButton send;
     private ChatMessage chat;
-    private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseUser mCurrentUser;
     private DatabaseReference mDatabaseUsers;
+    UserSessionManager sessionManager;
 
 
     @Override
@@ -49,6 +51,7 @@ public class MessagingTab extends Fragment {
         messageList = (RecyclerView) v.findViewById(R.id.chat_view);
         send = (FloatingActionButton) v.findViewById(R.id.sendButton);
         chat = new ChatMessage();
+        sessionManager = new UserSessionManager(getActivity().getApplicationContext());
 
         //setting the message list
         messageList.setHasFixedSize(true);
@@ -56,45 +59,41 @@ public class MessagingTab extends Fragment {
         linearLayoutManager.setStackFromEnd(true);
         messageList.setLayoutManager(linearLayoutManager);
 
-        mAuth = FirebaseAuth.getInstance();
 
-        mAuthListener = new FirebaseAuth.AuthStateListener(){
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                if(firebaseAuth.getCurrentUser() == null){
-                    //startActivity( new Intent(MessagingTab.this.LoginA))
-                }
-            }
-        };
 
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mCurrentUser = mAuth.getCurrentUser();
-                mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Bus_Accounts").child(mCurrentUser.getUid());
+//                mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Bus_Accounts").child(mCurrentUser.getUid());
+
                 final String messageValue = editMessage.getText().toString().trim();
 
                 if (!TextUtils.isEmpty(messageValue)) {
                     chat.setMessageText(messageValue);
-
-                    final DatabaseReference newPost = mRef.push();
-                    mDatabaseUsers.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            newPost.child("content").setValue(messageValue);
-                            newPost.child("username").setValue(dataSnapshot.child("Name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                    messageList.scrollToPosition(messageList.getAdapter().getItemCount());
+                    String t = String.valueOf(new Date().getTime());
+                    DatabaseReference pushRef = FirebaseDatabase.getInstance().getReference().child("Bus_Messages").child(sessionManager.getBusNum()).child(t);
+                    Message m = new Message(messageValue);
+                    pushRef.setValue(m);
+//                    final DatabaseReference newPost = mRef.push();
+//                    mDatabaseUsers.addValueEventListener(new ValueEventListener() {
+//
+//                        @Override
+//                        public void onDataChange(DataSnapshot dataSnapshot) {
+//                            newPost.child("content").setValue(messageValue);
+//                            newPost.child("username").setValue(dataSnapshot.child("Name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//
+//                                }
+//                            });
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(DatabaseError databaseError) {
+//
+//                        }
+//                    });
+//                    messageList.scrollToPosition(messageList.getAdapter().getItemCount());
                 }
             }
         });
