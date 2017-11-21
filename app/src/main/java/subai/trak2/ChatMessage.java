@@ -4,8 +4,6 @@ package subai.trak2;
  * Created by - on 15/11/2017.
  */
 
-import android.support.v7.app.AppCompatActivity;
-
 import java.util.Date;
 
 /**
@@ -13,13 +11,13 @@ import java.util.Date;
  */
 
 public class ChatMessage {
-    private String messageText;
+    private String content;
     private String messageUser;
     private long messageTime;
     private boolean isSend;
 
     public ChatMessage(){
-        messageText = "default";
+        content = "default";
         messageUser = "default_user";
         messageTime = new Date().getTime();
         isSend = false;
@@ -33,33 +31,33 @@ public class ChatMessage {
         isSend = send;
     }
 
-    public ChatMessage(String messageText, String messageUser, boolean isSend) {
-        this.messageText = messageText;
+    public ChatMessage(String content, String messageUser, boolean isSend) {
+        this.content = content;
         this.messageUser = messageUser;
         this.isSend = isSend;
         messageTime = new Date().getTime();
     }
 
-    public ChatMessage(String messageText){
-        this.messageText = messageText;
+    public ChatMessage(String content){
+        this.content = content;
         this.messageUser = "Michael";
         isSend = true;
         messageTime = new Date().getTime();
     }
 
     public void setChat(ChatMessage chat){
-        this.messageText = chat.messageText;
+        this.content = chat.content;
         this.messageUser = chat.messageUser;
         this.messageTime = chat.messageTime;
         this.isSend = chat.isSend;
     }
 
-    public String getMessageText() {
-        return messageText;
+    public String getContent() {
+        return content;
     }
 
-    public void setMessageText(String messageText) {
-        this.messageText = messageText;
+    public void setContent(String messageText) {
+        this.content = messageText;
     }
 
     public String getMessageUser() {

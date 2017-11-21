@@ -8,7 +8,6 @@ public class AdminMessage {
     private String response;
     private String msg;
 
-
     public AdminMessage(){
 
     }

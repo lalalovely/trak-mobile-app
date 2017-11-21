@@ -13,7 +13,6 @@
         android:padding="5dp"
         android:layout_marginLeft = "5dp"
         android:layout_marginRight="5dp"
-        android:text="default"
         android:textStyle="normal|bold" />
 
     <TextView
@@ -21,11 +20,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/message_text"
-        android:layout_margin="10dp"
+        android:layout_margin="5dp"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="5dp"
         android:text="6:20 AM"
-        android:textStyle="normal|bold" />
+        android:textStyle="normal|bold"
+        />
 
     <com.github.library.bubbleview.BubbleTextView
         android:id="@+id/message_text"
