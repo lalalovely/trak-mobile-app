@@ -69,27 +69,9 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
         login.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
+            Toast.makeText(getApplicationContext(), "CHECKING FOR VALIDITY", Toast.LENGTH_SHORT).show();
             checkBusNumber();
-            if (busNumber.getText().toString().isEmpty()){
-                //showMyDialog("PLEASE INPUT BUS NUMBER.");
-                Toast.makeText(getApplicationContext(), "PLEASE INPUT BUS NUMBER", Toast.LENGTH_LONG).show();
-            } else {
-                ref.child("Bus_Accounts").child(busNumber.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        Iterable<DataSnapshot> d = dataSnapshot.getChildren();
-                        for (DataSnapshot data: d){
-                            if (data.getKey().equals("busCompany")){
-                                setBusCompany(data.getValue().toString());
-                            }
-                        }
-                    }
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {}
-                });
-                sessionManager.setLoggedIn(true);
-                sendMessage();
-            }
+
             }
 
         });
@@ -115,11 +97,6 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         super.onPause();
     }
 
-    //    void showMyDialog(String title) {
-//        DialogFragment newFragment = AlertDialogFragment.newInstance(title);
-//        newFragment.show(getFragmentManager(), "dialog");
-//    }
-
     public void sendMessage() {
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
@@ -128,58 +105,50 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
     public void checkBusNumber(){
         DatabaseReference busRef = ref.child("Bus_Accounts");
-        busRef.addValueEventListener(new ValueEventListener() {
+        busRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                bus_number = busNumber.getText().toString();
-                if(!bus_number.isEmpty()){
-                    if (!dataSnapshot.hasChild(bus_number)) {
+                String bNum= busNumber.getText().toString();
+                if(!bNum.isEmpty()){
+                    if (!dataSnapshot.hasChild(bNum)) {
                         busNumber.setText("");
-                        //Toast.makeText(getApplicationContext(), "BUS DOES NOT EXIST", Toast.LENGTH_LONG).show();
-                        //showMyDialog("BUS DOES NOT EXIST.");
+                        Toast.makeText(getApplicationContext(), "BUS DOES NOT EXIST", Toast.LENGTH_LONG).show();
                     } else {
-                        sessionManager.setBusNumber(bus_number);
+                        valid();
+                    }
+                } else {
+                    Toast.makeText(getApplicationContext(), "PLEASE INPUT BUS NUMBER", Toast.LENGTH_LONG).show();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void valid(){
+
+        ref.child("Bus_Accounts").child(busNumber.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> d = dataSnapshot.getChildren();
+                for (DataSnapshot data: d){
+                    if (data.getKey().equals("busCompany")){
+                        setBusCompany(data.getValue().toString());
                     }
                 }
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         });
+        sessionManager.setLoggedIn(true);
+        sessionManager.setBusNumber(busNumber.getText().toString());
+        sendMessage();
+
     }
 
-    public void setRouteOption(){
-        DatabaseReference route = ref.child("Route").child(busCompany);
-        route.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> routes = dataSnapshot.getChildren();
-                ArrayList<String> x = new ArrayList<String>();
-                x.add("Select Route");
-                for (DataSnapshot d: routes){
-                    Log.d("ROUTES----", d.getKey());
-                    x.add(d.getKey());
-                }
-
-                setRoute(x);
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-    public void setRoute(ArrayList<String> x){
-        Log.d("VALUESS", x.get(0));
-        String[] val = x.toArray(new String[0]);
-        ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, val);
-        routeSpinner.setAdapter(routeAdapter);
-    }
-
-    public void setBusCompany(String company){
+       public void setBusCompany(String company){
         busCompany = company;
     }
 
@@ -187,9 +156,7 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
         return busNumber.getText().toString();
     }
 
-    public static String getRoute(){
-        return selectedRoute;
-    }
+
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

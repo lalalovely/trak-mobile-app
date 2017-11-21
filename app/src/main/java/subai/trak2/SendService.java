@@ -2,11 +2,13 @@ package subai.trak2;
 
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -25,12 +27,14 @@ public class SendService extends Service implements LocationListener  {
     private LocationRequest mLocationRequest;
     private Location mLocation;
     private DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
-
+    private String busNumber = "1";
+    UserSessionManager sessionManager;
     @Override
     public void onCreate() {
         super.onCreate();
+         sessionManager = new UserSessionManager(this);
+        busNumber =  sessionManager.getBusNum();
     }
-
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         startFusedLocation();
@@ -59,8 +63,7 @@ public class SendService extends Service implements LocationListener  {
         if(!(latVal.equals("") || longVal.equals("") || latVal.equals("Latitude not found") || longVal.equals("Longitude not found"))) {
             String lat = String.valueOf(getFusedLatitude());
             String lng = String.valueOf(getFusedLongitude());
-            //final String busNumber = LoginActivity.getBusNumber();
-            DatabaseReference pushRef = mRoot.child("Bus").child("1");
+            DatabaseReference pushRef = mRoot.child("Bus").child(busNumber);
             Bus bus = new Bus();
             bus.setPosition(lat,lng);
             pushRef.setValue(bus);
