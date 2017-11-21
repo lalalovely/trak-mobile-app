@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.github.library.bubbleview.BubbleTextView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -53,7 +54,6 @@ public class MessagingTab extends Fragment {
         linearLayoutManager.setStackFromEnd(true);
         messageList.setLayoutManager(linearLayoutManager);
 
-
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Bus_Accounts").child(mCurrentUser.getUid());
@@ -77,14 +77,12 @@ public class MessagingTab extends Fragment {
 
                         @Override
                         public void onCancelled(DatabaseError databaseError) {
-
                         }
                     });
                     messageList.scrollToPosition(messageList.getAdapter().getItemCount());
                 }
             }
         });
-
         return v;
     }
 
@@ -93,20 +91,36 @@ public class MessagingTab extends Fragment {
         super.onStart();
         FirebaseRecyclerAdapter<ChatMessage, MessageViewHolder> FBRA = new FirebaseRecyclerAdapter<ChatMessage, MessageViewHolder>(
                 ChatMessage.class,
-                R.layout.sendUser,
+                R.layout.send_user,
                 MessageViewHolder.class,
                 mRef
         ) {
-                @Override
-                protected void populateViewHolder(MessageViewHolder viewHolder, ChatMessage model, int position) {
-                    model.setChat(chat);
-                    viewHolder.setContent(model.getMessageText());
-                    viewHolder.setContent(model.getMessageUser());
+            @Override
+            protected void populateViewHolder(MessageViewHolder viewHolder, ChatMessage model, int position) {
+                model.setChat(chat);
+                viewHolder.setContent(model.getMessageText());
+                viewHolder.setContent(model.getMessageUser());
 
-                }
-            };
-            messageList.setAdapter(FBRA);
-        }
+            }
+        };
+        messageList.setAdapter(FBRA);
+        /*
+        FirebaseRecyclerAdapter<ChatMessage, MessageViewHolder> FBRA2 = new FirebaseRecyclerAdapter<ChatMessage, MessageViewHolder>(
+                ChatMessage.class,
+                R.layout.receive_user,
+                MessageViewHolder.class,
+                mRef
+        ) {
+
+            @Override
+            protected void populateViewHolder(MessageViewHolder viewHolder, ChatMessage model, int position) {
+                model.setChat(chat);
+                viewHolder.setContent(model.getMessageText());
+                viewHolder.setContent(model.getMessageUser());
+            }
+        };
+        messageList.setAdapter(FBRA2);*/
+    }
 
     public static class MessageViewHolder extends RecyclerView.ViewHolder {
         View mView;
@@ -116,7 +130,9 @@ public class MessagingTab extends Fragment {
         }
 
         public void setContent(String content){
-            TextView message_content = (TextView) mView.findViewById(R.id.message_text);
+            BubbleTextView message_content = (BubbleTextView) mView.findViewById(R.id.message_text);
+            //BubbleTextView message_content_admin = (BubbleTextView) mView.findViewById(R.id.message_text2);
+            //message_content_admin.setText(content);
             message_content.setText(content);
         }
 

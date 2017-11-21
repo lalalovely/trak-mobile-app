@@ -6,15 +6,15 @@
     android:layout_height="100dp"
     >
 
-    <TextView
-        android:id="@+id/message_user"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:layout_marginLeft = "5dp"
-        android:layout_marginRight="5dp"
-        android:text="default"
-        android:textStyle="normal|bold" />
+    <!--<TextView-->
+        <!--android:id="@+id/message_user"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:padding="5dp"-->
+        <!--android:layout_marginLeft = "5dp"-->
+        <!--android:layout_marginRight="5dp"-->
+        <!--android:text="default"-->
+        <!--android:textStyle="normal|bold" />-->
 
     <TextView
         android:id="@+id/message_time"
@@ -31,12 +31,10 @@
         android:padding="10dp"
         android:textColor="#FFF"
         android:layout_alignParentLeft="true"
-
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/message_user"
-
         app:arrowWidth="8dp"
         app:angle="8dp"
         app:arrowHeight="10dp"
@@ -44,7 +42,6 @@
         app:arrowLocation="left"
         app:arrowCenter="true"
         app:bubbleColor="#EB5356"
-
         />
 
     <!--android:layout_marginRight="5dp"-->

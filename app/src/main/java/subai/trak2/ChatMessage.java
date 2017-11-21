@@ -16,23 +16,34 @@ public class ChatMessage {
     private String messageText;
     private String messageUser;
     private long messageTime;
+    private boolean isSend;
 
     public ChatMessage(){
         messageText = "default";
         messageUser = "default_user";
         messageTime = new Date().getTime();
+        isSend = false;
     }
 
-    public ChatMessage(String messageText, String messageUser) {
+    public boolean isSend() {
+        return isSend;
+    }
+
+    public void setSend(boolean send) {
+        isSend = send;
+    }
+
+    public ChatMessage(String messageText, String messageUser, boolean isSend) {
         this.messageText = messageText;
         this.messageUser = messageUser;
+        this.isSend = isSend;
         messageTime = new Date().getTime();
     }
 
-
     public ChatMessage(String messageText){
         this.messageText = messageText;
-        this.messageUser = "bruhh";
+        this.messageUser = "Michael";
+        isSend = true;
         messageTime = new Date().getTime();
     }
 
@@ -40,6 +51,7 @@ public class ChatMessage {
         this.messageText = chat.messageText;
         this.messageUser = chat.messageUser;
         this.messageTime = chat.messageTime;
+        this.isSend = chat.isSend;
     }
 
     public String getMessageText() {
