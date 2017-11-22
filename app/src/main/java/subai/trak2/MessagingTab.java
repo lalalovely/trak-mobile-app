@@ -55,7 +55,6 @@ public class MessagingTab extends Fragment {
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 //                mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Bus_Accounts").child(mCurrentUser.getUid());
-
                 final String messageValue = editMessage.getText().toString().trim();
                 if (!TextUtils.isEmpty(messageValue)) {
                     //chat.setContent(messageValue);
@@ -99,11 +98,21 @@ public class MessagingTab extends Fragment {
                 MessageViewHolder.class,
                 mRef
         ) {
+                private final int ITEM_ADMIN = 0;
+                private final int ITEM_USER = 1;
+
                 @Override
                 protected void populateViewHolder(MessageViewHolder viewHolder, ChatMessage model, int position) {
                     viewHolder.setContent(model.getContent());
                 }
+
+
+
+
             };
+
+
+
             messageList.setAdapter(FBRA);
         }
 
@@ -117,13 +126,8 @@ public class MessagingTab extends Fragment {
         public void setContent(String content){
             BubbleTextView message_content = (BubbleTextView) mView.findViewById(R.id.message_text);
             message_content.setText(content);
-            //System.out.println("Hi naa diri ang sayup diay");
         }
-
-        /*public void setUserName(String username){
-            TextView userName_content = (TextView) mView.findViewById(R.id.message_user);
-            //userName_content.setText(username);
-        }*/
     }
+
  }
 
