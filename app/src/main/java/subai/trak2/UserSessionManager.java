@@ -16,7 +16,11 @@ public class UserSessionManager {
     public static final String KEY_BUS_NUM = "bus_number";
     public static final String KEY_ROUTE = "bus_route";
     public static final String KEY_STARTED = "hasStarted";
-
+    public static final String KEY_SPINNER_SELECT = "selectedSpinner";
+    public static final String POSITION = "spinnerPosition";
+    public static final String SPINNERSTATE = "spinnerState";
+    public static final String BUS_COMPANY = "busCompany";
+    public static final String ACCOMODATION= "busAccommodation";
     public UserSessionManager(Context cont) {
         this.context = cont;
         prefs = context.getSharedPreferences(MYPREFERENCES, Context.MODE_PRIVATE);
@@ -27,6 +31,42 @@ public class UserSessionManager {
         editor.putBoolean(IS_USER_LOGGEDIN, true);
         editor.putString(KEY_BUS_NUM, bus_num);
         editor.commit();
+    }
+
+    public void setPosition(int pos) {
+        editor.putInt(POSITION, pos);
+        editor.commit();
+    }
+
+    public int getPosition() {
+       return prefs.getInt(POSITION, 0);
+    }
+
+    public void setStop(boolean stop) {
+        editor.putBoolean("stopped", stop);
+        editor.commit();
+    }
+
+    public boolean getStop() {
+        return prefs.getBoolean("stopped", false);
+    }
+
+    public void setSpinnerState(boolean state) {
+        editor.putBoolean(SPINNERSTATE, state);
+        editor.commit();
+    }
+
+    public boolean getSpinnerState() {
+        return prefs.getBoolean(SPINNERSTATE, false);
+    }
+
+    public void setHasSpinnerSelected(boolean hasSelected) {
+        editor.putBoolean(KEY_SPINNER_SELECT, hasSelected);
+        editor.commit();
+    }
+
+    public boolean hasSpinnerSelected() {
+        return prefs.getBoolean(KEY_SPINNER_SELECT, false);
     }
 
     public void setHasStarted(boolean hasStarted) {
@@ -51,6 +91,24 @@ public class UserSessionManager {
     public void setBusNumber(String busNum) {
         editor.putString(KEY_BUS_NUM, busNum);
         editor.commit();
+    }
+
+    public void setBusCompany(String bus_Comp){
+        editor.putString(BUS_COMPANY, bus_Comp);
+        editor.commit();
+    }
+
+    public String getBusCompany(){
+        return prefs.getString(BUS_COMPANY, null);
+    }
+
+    public void setAccomodation(String accomodation){
+        editor.putString(ACCOMODATION, accomodation);
+        editor.commit();
+    }
+
+    public String getAccomodation(){
+        return prefs.getString(ACCOMODATION, null);
     }
 
     public boolean isUserLoggedIn(){

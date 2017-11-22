@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="subai.trak2.HelpActivity">
@@ -11,16 +12,63 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="?attr/colorPrimary"
-        app:layout_scrollFlags="scroll|enterAlways"
-        app:title="Help"
         app:navigationIcon="@drawable/ic_arrow_back"
-        app:titleTextColor="@color/titleColor"
-        app:theme="@style/GalaxyZooThemeToolbarDarkOverflow"
         app:popupTheme="@style/AppTheme.PopupOverlay"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="8dp">
+        app:theme="@style/GalaxyZooThemeToolbarDarkOverflow"
+        app:title="Help"
+        app:titleTextColor="@color/white"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="-2dp">
 
     </android.support.v7.widget.Toolbar>
 
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="--Log-in with the bus number."
+        android:layout_marginTop="50dp"
+        android:textColor="@color/fontColor"
+        android:layout_gravity="left"
+        android:textSize="20sp" />
 
-</android.support.design.widget.CoordinatorLayout>
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="--Turn on WIFI and Location."
+        android:layout_marginTop="20dp"
+        android:textColor="@color/fontColor"
+        android:layout_gravity="left"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="--Select Route in the choices above the Start and Stop button."
+        android:layout_marginTop="20dp"
+        android:textColor="@color/fontColor"
+        android:layout_gravity="left"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="--Click Start button to start tracking."
+        android:layout_marginTop="20dp"
+        android:textColor="@color/fontColor"
+        android:layout_gravity="left"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="--Click Stop button to stop tracking."
+        android:layout_marginTop="20dp"
+        android:textColor="@color/fontColor"
+        android:layout_gravity="left"
+        android:textSize="20sp" />
+</LinearLayout>

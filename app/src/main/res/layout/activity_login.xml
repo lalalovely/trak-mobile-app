@@ -31,6 +31,8 @@
         android:layout_height="45dp"
         android:ems="10"
         android:hint="Enter bus number"
+        android:maxLines="1"
+        android:inputType="text"
         android:gravity="center"
         android:background="@drawable/edit_text_background"
         android:layout_below="@+id/logo"

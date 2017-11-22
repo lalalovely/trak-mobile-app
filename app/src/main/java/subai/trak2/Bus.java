@@ -21,10 +21,9 @@ public class Bus {
         //dummy values
         destination = new Coordinates(String.valueOf(10.298237), String.valueOf(123.893133));
         position = new Coordinates("", "");
-        busCompany = "Ceres";
-        route = "Bato";
-        accommodation = "Aircon";
-
+        busCompany = "";
+        route = "";
+        accommodation = "";
     }
 
     //lat, lng, busNumber, route, accommodation, busCompany

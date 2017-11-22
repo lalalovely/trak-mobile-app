@@ -40,15 +40,12 @@ public class MainActivity extends AppCompatActivity {
     private Bus bus;
     private LocationTab locationTab;
     private MessagingTab messagingTab;
-
-    private Spinner spinner;
-
     UserSessionManager sessionManager;
     int bg;
     String strTxt;
-    boolean click;
-
-    public int counter = 0;
+    int p;
+    int sbg;
+    boolean ss;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,37 +62,32 @@ public class MainActivity extends AppCompatActivity {
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         mToolBar.setTitle("Trak");
 
-        spinner = (Spinner) findViewById(R.id.route_list);
-
-        ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(this,
-                R.layout.custom_spinner_item, getResources().getStringArray(R.array.routes));
-
-        routeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(routeAdapter);
-
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String r = spinner.getSelectedItem().toString();
-                bus.setRoute(r);
-                sessionManager.setRoute(r);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
         if (!sessionManager.hasStarted()) {
-            bg = R.drawable.start_button_background;
+            bg = R.drawable.circle_back;
             strTxt = "START";
-            click = true;
+
+            p = sessionManager.getPosition();
+            sbg = R.drawable.spinner_selected_item_bg;
+            ss = false;
         } else if (sessionManager.hasStarted()) {
-            bg = R.drawable.started_btn_background;
-            strTxt = "TRAK";
-            click = false;
+            bg = R.drawable.stop_btn_bg;
+            strTxt = "STOP";
+
+            p = sessionManager.getPosition();
+            sbg = R.drawable.spinner_bg;
+            ss = true;
         }
+
+        //uncomment this part if sayop
+//        if (!sessionManager.getSpinnerState()) {
+//            p = sessionManager.getPosition();
+//            sbg = R.drawable.spinner_selected_item_bg;
+//            ss = false;
+//        } else {
+//            p = sessionManager.getPosition();
+//            sbg = R.drawable.spinner_bg;
+//            ss = true;
+//        }
 
         setSupportActionBar(mToolBar);
         mViewPager = (ViewPager) findViewById(R.id.container);
@@ -106,16 +98,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout() {
+        //sessionManager.setPosition(0);
+        sessionManager.setSpinnerState(true);
         sessionManager.setLoggedIn(false);
         sessionManager.setHasStarted(false);
         finish();
+
+        Intent intent = new Intent(this, SendService.class);
+        this.stopService(intent);
+        //Toast.makeText(this.getApplicationContext(), "Sending Stopped", Toast.LENGTH_LONG).show();
+
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
     }
 
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-        locationTab = LocationTab.newInstance(bg, strTxt, click);
+        locationTab = LocationTab.newInstance(bg, strTxt, p, ss, sbg);
         messagingTab = new MessagingTab();
         bus = new Bus();
 
@@ -158,12 +157,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.details_btn) {
-            Intent intent = new Intent(MainActivity.this, DetailsActivity.class);
-            startActivity(intent);
-            finish();
-            return true;
-        } else if (id == R.id.help_btn) {
+        if (id == R.id.help_btn) {
             Intent intent = new Intent(MainActivity.this, HelpActivity.class);
             startActivity(intent);
             finish();

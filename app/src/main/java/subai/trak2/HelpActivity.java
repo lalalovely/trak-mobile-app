@@ -12,22 +12,34 @@ public class HelpActivity extends AppCompatActivity {
     private Bus bus;
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        this.finish();
+        //super.onBackPressed();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar_d);
+        setSupportActionBar(toolbar);
 
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back); // your drawable
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(HelpActivity.this, MainActivity.class);
-                startActivity(intent);
+                onBackPressed();
+                //Intent intent = new Intent(this, MainActivity.class);
+                //startActivity(intent);
                 //finish();
             }
         });
     }
+
+
 
     public void setBus(Bus b){
         bus = b;
