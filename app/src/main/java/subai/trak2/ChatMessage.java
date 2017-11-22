@@ -4,8 +4,6 @@ package subai.trak2;
  * Created by - on 15/11/2017.
  */
 
-import android.support.v7.app.AppCompatActivity;
-
 import java.util.Date;
 
 /**
@@ -13,56 +11,27 @@ import java.util.Date;
  */
 
 public class ChatMessage {
-    private String messageText;
-    private String messageUser;
-    private long messageTime;
+    private String content;
 
     public ChatMessage(){
-        messageText = "default";
-        messageUser = "default_user";
-        messageTime = new Date().getTime();
-    }
-
-    public ChatMessage(String messageText, String messageUser) {
-        this.messageText = messageText;
-        this.messageUser = messageUser;
-        messageTime = new Date().getTime();
+        content = "default";
     }
 
 
-    public ChatMessage(String messageText){
-        this.messageText = messageText;
-        this.messageUser = "bruhh";
-        messageTime = new Date().getTime();
+    public ChatMessage(String content){
+        this.content = content;
     }
 
     public void setChat(ChatMessage chat){
-        this.messageText = chat.messageText;
-        this.messageUser = chat.messageUser;
-        this.messageTime = chat.messageTime;
+        this.content = chat.content;
     }
 
-    public String getMessageText() {
-        return messageText;
+    public String getContent() {
+        return content;
     }
 
-    public void setMessageText(String messageText) {
-        this.messageText = messageText;
+    public void setContent(String messageText) {
+        this.content = messageText;
     }
 
-    public String getMessageUser() {
-        return messageUser;
-    }
-
-    public void setMessageUser(String messageUser) {
-        this.messageUser = messageUser;
-    }
-
-    public long getMessageTime() {
-        return messageTime;
-    }
-
-    public void setMessageTime(long messageTime) {
-        this.messageTime = messageTime;
-    }
 }
