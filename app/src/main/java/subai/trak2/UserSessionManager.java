@@ -20,11 +20,32 @@ public class UserSessionManager {
     public static final String POSITION = "spinnerPosition";
     public static final String SPINNERSTATE = "spinnerState";
     public static final String BUS_COMPANY = "busCompany";
-    public static final String ACCOMODATION= "busAccommodation";
+    public static final String ACCOMODATION = "busAccommodation";
+    public static final String LASTTRIP = "lasttrip";
+    public static final String STOPPED = "stop";
+
     public UserSessionManager(Context cont) {
         this.context = cont;
         prefs = context.getSharedPreferences(MYPREFERENCES, Context.MODE_PRIVATE);
         editor = prefs.edit();
+    }
+
+    public void setIsLastTrip(boolean lastTrip) {
+        editor.putBoolean(LASTTRIP, lastTrip);
+        editor.commit();
+    }
+
+    public boolean getIsLastTrip() {
+        return prefs.getBoolean(LASTTRIP, false);
+    }
+
+    public void setIsStop(boolean stop) {
+        editor.putBoolean(STOPPED, stop);
+        editor.commit();
+    }
+
+    public boolean getIsStop() {
+        return prefs.getBoolean(STOPPED, false);
     }
 
     public void createUserLoginSession(String bus_num){
