@@ -45,7 +45,7 @@ public class LocationTab extends Fragment {// implements LocationListener {
 
     private LocationRequest mLocationRequest;
     private TextView latitude, longitude;
-    public Button start, stop;
+    public static Button start, stop;
     private Location mLocation;
     private boolean updating = false;
     private int color = 0;
@@ -68,19 +68,20 @@ public class LocationTab extends Fragment {// implements LocationListener {
 
     private Bus bus;
 
-    private Spinner spinner;
-    UserSessionManager sessionManager;
+    static Spinner spinner;
+    static UserSessionManager sessionManager;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor edit;
 
-    String text;
-    int bg;
-    boolean spinnerState;
-    int position;
-    int spinner_bg;
+    static String text;
+    static int bg;
+    static boolean spinnerState;
+    static int position;
+    static int spinner_bg;
+    static boolean stopped;
 
-    boolean state;
-    int spinColor;
+    static boolean state;
+    static int spinColor;
 
     public View v;
 
@@ -88,7 +89,7 @@ public class LocationTab extends Fragment {// implements LocationListener {
         this.bus = bus;
     }
 
-    public static LocationTab newInstance(int b, String t, int pos, boolean state, int sbg) {
+    public static LocationTab newInstance(int b, String t, int pos, boolean state, int sbg, boolean stop) {
         Bundle bundle = new Bundle();
         bundle.putString("start_btn_txt", t);
         bundle.putInt("start_btn_bg", b);
@@ -96,6 +97,7 @@ public class LocationTab extends Fragment {// implements LocationListener {
         bundle.putBoolean("spinner_state", state);
         bundle.putInt("spinner_pos", pos);
         bundle.putInt("spinner_bg", sbg);
+        bundle.putBoolean("stop", stop);
 
         LocationTab fragment = new LocationTab();
         fragment.setArguments(bundle);
@@ -160,6 +162,7 @@ public class LocationTab extends Fragment {// implements LocationListener {
         position = getArguments().getInt("spinner_pos");
         spinnerState = getArguments().getBoolean("spinner_state");
         spinner_bg = getArguments().getInt("spinner_bg");
+        stopped = getArguments().getBoolean("stop");
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -200,9 +203,13 @@ public class LocationTab extends Fragment {// implements LocationListener {
             @Override
             public void onClick(View v) {
                 if (start.getText().equals("START")) {
+                    LastTripDialog lastTrip = LastTripDialog.newInstance("Is this your last trip?", 1);
+                    lastTrip.show(getActivity().getFragmentManager(), "lastTrip_dialog");
                     forStart();
                 } else if (start.getText().equals("STOP")) {
-                    forStop();
+                    LastTripDialog stopping = LastTripDialog.newInstance("Are you sure you want to stop?", 0);
+                    stopping.show(getActivity().getFragmentManager(), "stop_dialog");
+                    //forStop();
                 }
             }
         });
@@ -276,10 +283,10 @@ public class LocationTab extends Fragment {// implements LocationListener {
 
     }
 
-    public void forStop() {
-        sessionManager.setHasStarted(false);
+    public static void forStop() {
+       // sessionManager.setHasStarted(false);
         //spinner.setSelection(sessionManager.getPosition());
-        sessionManager.setSpinnerState(true);
+        //sessionManager.setSpinnerState(true);
 
         //uncomment this part
 //        if (sessionManager.getSpinnerState() == true) {
@@ -297,6 +304,8 @@ public class LocationTab extends Fragment {// implements LocationListener {
 //        if (sessionManager.getSpinnerState() == true) {
 //            spinnerEnable();
 //        }
+
+        /*
         if (!sessionManager.hasStarted()){
 
             state = true;
@@ -304,7 +313,7 @@ public class LocationTab extends Fragment {// implements LocationListener {
             text = "START";
             bg = R.drawable.circle_back;
 
-            start.setBackground(getResources().getDrawable(bg));
+            //start.setBackground(getResources().getDrawable(bg));
             start.setText(text);
 
             spinColor = R.drawable.spinner_bg;
@@ -313,17 +322,22 @@ public class LocationTab extends Fragment {// implements LocationListener {
             position = sessionManager.getPosition();
             spinner_bg = R.drawable.spinner_bg;
             sessionManager.setSpinnerState(true);
-            spinnerSetState(spinnerState, spinner_bg, position);
+            //spinnerSetState(spinnerState, spinner_bg, position);
         } else {
             spinnerState = false;
             position = sessionManager.getPosition();
             spinner_bg = R.drawable.spinner_selected_item_bg;
             sessionManager.setSpinnerState(false);
-            spinnerSetState(spinnerState, spinner_bg, position);
+            //spinnerSetState(spinnerState, spinner_bg, position);
         }
-        Intent intent = new Intent(getActivity(), SendService.class);
-        getActivity().stopService(intent);
-        Toast.makeText(getActivity().getApplicationContext(), "Sending Stopped", Toast.LENGTH_LONG).show();
+
+        if (!sessionManager.hasStarted()) {
+            Intent intent = new Intent(getActivity(), SendService.class);
+            getActivity().stopService(intent);
+            Toast.makeText(getActivity().getApplicationContext(), "Sending Stopped", Toast.LENGTH_LONG).show();
+        } else {
+        }
+        */
     }
 
     public void setToStart() {

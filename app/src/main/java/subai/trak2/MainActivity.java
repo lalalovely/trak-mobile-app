@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
     int p;
     int sbg;
     boolean ss;
+    boolean abtStop = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
             p = sessionManager.getPosition();
             sbg = R.drawable.spinner_selected_item_bg;
             ss = false;
+            abtStop = true;
         } else if (sessionManager.hasStarted()) {
             bg = R.drawable.stop_btn_bg;
             strTxt = "STOP";
@@ -82,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
             p = sessionManager.getPosition();
             sbg = R.drawable.spinner_bg;
             ss = true;
+            abtStop = false;
         }
 
         //uncomment this part if sayop
@@ -120,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
     private void setupViewPager(ViewPager viewPager) {
         SectionsPageAdapter adapter = new SectionsPageAdapter(getSupportFragmentManager());
 
-        locationTab = LocationTab.newInstance(bg, strTxt, p, ss, sbg);
+        locationTab = LocationTab.newInstance(bg, strTxt, p, ss, sbg, abtStop);
         messagingTab = new MessagingTab();
         detailsActivity = new DetailsActivity();
         bus = new Bus();

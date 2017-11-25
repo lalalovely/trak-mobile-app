@@ -19,14 +19,13 @@ public class Bus {
 
     Bus(){
         //dummy values
-        destination = new Coordinates(String.valueOf(10.295794), String.valueOf(123.894716));
+
+        destination = new Coordinates(String.valueOf(10.344632), String.valueOf(123.912566));
         position = new Coordinates("", "");
         busCompany = "";
         route = "";
         accommodation = "";
     }
-
-    //lat, lng, busNumber, route, accommodation, busCompany
 
     public void setPosition(String lat, String lng) {position = new Coordinates(lat,lng);}
 
