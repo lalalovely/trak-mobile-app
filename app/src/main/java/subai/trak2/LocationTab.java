@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Build;
@@ -51,7 +52,8 @@ public class LocationTab extends Fragment {// implements LocationListener {
     private int ctrClicks = 0;
     public static int ctr = 0;
     public static boolean send = true;
-    private String route;
+    private String route = "";
+    boolean spinnerSelected;
     private DatabaseReference mRoot = FirebaseDatabase.getInstance().getReference();
     ; //root database
 
@@ -71,11 +73,14 @@ public class LocationTab extends Fragment {// implements LocationListener {
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor edit;
 
-
-
     String text;
     int bg;
-    boolean cl;
+    boolean spinnerState;
+    int position;
+    int spinner_bg;
+
+    boolean state;
+    int spinColor;
 
     public View v;
 
@@ -83,11 +88,14 @@ public class LocationTab extends Fragment {// implements LocationListener {
         this.bus = bus;
     }
 
-    public static LocationTab newInstance(int b, String t, boolean c) {
+    public static LocationTab newInstance(int b, String t, int pos, boolean state, int sbg) {
         Bundle bundle = new Bundle();
         bundle.putString("start_btn_txt", t);
         bundle.putInt("start_btn_bg", b);
-        bundle.putBoolean("start_btn_click", c);
+
+        bundle.putBoolean("spinner_state", state);
+        bundle.putInt("spinner_pos", pos);
+        bundle.putInt("spinner_bg", sbg);
 
         LocationTab fragment = new LocationTab();
         fragment.setArguments(bundle);
@@ -101,7 +109,7 @@ public class LocationTab extends Fragment {// implements LocationListener {
         v = inflater.inflate(R.layout.location_frag, container, false);
 
         start = (Button) v.findViewById(R.id.start_button);
-        stop = (Button) v.findViewById(R.id.stop_button);
+        //stop = (Button) v.findViewById(R.id.stop_button);
 
         sessionManager = new UserSessionManager(getActivity().getApplicationContext());
 
@@ -117,67 +125,205 @@ public class LocationTab extends Fragment {// implements LocationListener {
             isClicked = savedInstanceState.getBoolean("clicked");
         }
 
+        spinner = (Spinner) v.findViewById(R.id.route_list);
+        //sessionManager.setHasSpinnerSelected(false);
+
+        ArrayAdapter<String> routeAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(),
+                R.layout.custom_spinner_item, getResources().getStringArray(R.array.routes)){
+            @Override
+            public boolean isEnabled(int position){
+                if(position == 0) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+            @Override
+            public View getDropDownView(int position, View convertView, ViewGroup parent) {
+                View view = super.getDropDownView(position, convertView, parent);
+                TextView tv = (TextView) view;
+                if(position == 0){
+                    tv.setTextColor(Color.GRAY);
+                }
+                else {
+                    tv.setTextColor(Color.BLACK);
+                }
+                return view;
+            }
+        };
+        //android.R.layout.simple_spinner_dropdown_item
+        routeAdapter.setDropDownViewResource(R.layout.spinner_item);
+        spinner.setAdapter(routeAdapter);
+
         text = getArguments().getString("start_btn_txt");
         bg = getArguments().getInt("start_btn_bg");
-        cl = getArguments().getBoolean("start_btn_click");
+        position = getArguments().getInt("spinner_pos");
+        spinnerState = getArguments().getBoolean("spinner_state");
+        spinner_bg = getArguments().getInt("spinner_bg");
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String r = spinner.getSelectedItem().toString();
+                sessionManager.setRoute(r);
+                if (spinner.getSelectedItemPosition() <= 0 || position <= 0) {
+                    spinnerSelected = false;
+                    //spinnerState = false;
+                    sessionManager.setHasSpinnerSelected(spinnerSelected);
+                    position = spinner.getSelectedItemPosition();
+                    sessionManager.setPosition(position);
+                } else {
+                    //sessionManager.setPosition(spinner.getSelectedItemPosition());
+                    spinnerSelected = true;
+                    //spinnerState = true;
+                    position = spinner.getSelectedItemPosition();
+                    sessionManager.setHasSpinnerSelected(spinnerSelected);
+                    sessionManager.setPosition(position);
+                }
+
+                if (position == 0) {
+                    ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.warning_red));
+                } else {
+                    ((TextView) parent.getChildAt(0)).setTextColor(getResources().getColor(R.color.fontColor));
+                }
+                bus.setRoute(r);
+                //sessionManager.setHasSpinnerSelected(true);
+                sessionManager.setRoute(r);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!isLocationEnabled(getActivity())){
-                    DialogFragment newFragment = AlertDialogFragment.newInstance("Please turn on Location.");
-                    newFragment.show(getActivity().getFragmentManager(), "dialog");
-                } else {
-//                    if (bus.getRoute().equals("Route")) {
-//                        DialogFragment newFragment = AlertDialogFragment.newInstance("Please select Route.");
-//                        newFragment.show(getActivity().getFragmentManager(), "dialog");
-//                    } else {
-                        sessionManager.setHasStarted(true);
-                        if (sessionManager.hasStarted()){
-                            text = "TRAK";
-                            bg = R.drawable.started_btn_background;
-                            cl = false;
-
-                            start.setBackground(getResources().getDrawable(bg));
-                            start.setText(text);
-                            start.setClickable(cl);
-                        } else {
-                            start.setBackground(getResources().getDrawable(bg));
-                            start.setText(text);
-                            start.setClickable(cl);
-                        }
-                    //}
-                        Intent intent = new Intent(getActivity(), SendService.class);
-                        getActivity().startService(intent);
-                    //}
+                if (start.getText().equals("START")) {
+                    forStart();
+                } else if (start.getText().equals("STOP")) {
+                    forStop();
                 }
             }
         });
-
-        stop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sessionManager.setHasStarted(false);
-                if (!sessionManager.hasStarted()){
-                    text = "START";
-                    bg = R.drawable.start_button_background;
-                    cl = true;
-
-                    start.setBackground(getResources().getDrawable(bg));
-                    start.setText(text);
-                    start.setClickable(cl);
-                }
-                Intent intent = new Intent(getActivity(), SendService.class);
-                getActivity().stopService(intent);
-                Toast.makeText(getActivity().getApplicationContext(), "Sending Stopped", Toast.LENGTH_LONG).show();
-            }
-        });
-
         start.setBackground(getResources().getDrawable(bg));
         start.setText(text);
-        start.setClickable(cl);
-
         return v;
+    }
+
+    public void spinnerSetState(boolean state, int bg, int pos) {
+        spinner.setEnabled(state);
+        spinner.setClickable(state);
+        spinner.setSelection(pos, false);
+        spinner.setBackground(getResources().getDrawable(bg));
+    }
+
+    public void forStart() {
+        //spinnerSelected == false
+        if (spinnerSelected == false) {
+            DialogFragment newFrag = AlertDialogFragment.newInstance("Please select Route.");
+            newFrag.show(getActivity().getFragmentManager(), "dialog");
+//            spinnerState = true;
+//            position = 0;
+//            spinner_bg = R.drawable.spinner_bg;
+//            //sessionManager.setSpinnerState(true);
+//            spinnerSetState(spinnerState, spinner_bg, position);
+        } else {
+            if (!isLocationEnabled(getActivity())){
+                DialogFragment newFragment = AlertDialogFragment.newInstance("Please turn on Location.");
+                newFragment.show(getActivity().getFragmentManager(), "dialog");
+            } else {
+                sessionManager.setHasStarted(true); //---uncomment this if di na mu-work
+                sessionManager.setSpinnerState(false);
+
+                //uncomment this part
+//                if (!sessionManager.getSpinnerState()) {
+//                    //spinnerDisable();
+//                    spinnerState = false;
+//                    position = sessionManager.getPosition();
+//                    spinner_bg = R.drawable.spinner_selected_item_bg;
+//                    spinnerSetState(spinnerState, spinner_bg, position);
+//                    //spinnerSetState(false, R.drawable.spinner_selected_item_bg, sessionManager.getPosition());
+//                } else {
+//                    spinnerSetState(spinnerState, spinner_bg, position);
+//                }
+
+                if (sessionManager.hasStarted()){
+                    state = false;
+
+                    text = "STOP";
+                    bg = R.drawable.stop_btn_bg;
+                    start.setBackground(getResources().getDrawable(bg));
+                    start.setText(text);
+
+                    spinColor = R.drawable.spinner_selected_item_bg;
+
+                    spinnerState = false;
+                    position = sessionManager.getPosition();
+                    spinner_bg = R.drawable.spinner_selected_item_bg;
+                    spinnerSetState(spinnerState, spinner_bg, position);
+                } else {
+                    start.setBackground(getResources().getDrawable(bg));
+                    start.setText(text);
+                    spinnerState = true;
+
+                    spinnerSetState(spinnerState, spinner_bg, position);
+                }
+                Intent intent = new Intent(getActivity(), SendService.class);
+                getActivity().startService(intent);
+            }
+        }
+
+    }
+
+    public void forStop() {
+        sessionManager.setHasStarted(false);
+        //spinner.setSelection(sessionManager.getPosition());
+        sessionManager.setSpinnerState(true);
+
+        //uncomment this part
+//        if (sessionManager.getSpinnerState() == true) {
+//            spinnerState = true;
+//            position = sessionManager.getPosition();
+//            spinner_bg = R.drawable.spinner_bg;
+//            sessionManager.setSpinnerState(true);
+//            spinnerSetState(spinnerState, spinner_bg, position);
+//            //spinnerSetState(true, R.drawable.spinner_bg, sessionManager.getPosition());
+//        } else {
+//            spinnerSetState(spinnerState, spinner_bg, position);
+//        }
+
+
+//        if (sessionManager.getSpinnerState() == true) {
+//            spinnerEnable();
+//        }
+        if (!sessionManager.hasStarted()){
+
+            state = true;
+
+            text = "START";
+            bg = R.drawable.circle_back;
+
+            start.setBackground(getResources().getDrawable(bg));
+            start.setText(text);
+
+            spinColor = R.drawable.spinner_bg;
+
+            spinnerState = true;
+            position = sessionManager.getPosition();
+            spinner_bg = R.drawable.spinner_bg;
+            sessionManager.setSpinnerState(true);
+            spinnerSetState(spinnerState, spinner_bg, position);
+        } else {
+            spinnerState = false;
+            position = sessionManager.getPosition();
+            spinner_bg = R.drawable.spinner_selected_item_bg;
+            sessionManager.setSpinnerState(false);
+            spinnerSetState(spinnerState, spinner_bg, position);
+        }
+        Intent intent = new Intent(getActivity(), SendService.class);
+        getActivity().stopService(intent);
+        Toast.makeText(getActivity().getApplicationContext(), "Sending Stopped", Toast.LENGTH_LONG).show();
     }
 
     public void setToStart() {
@@ -185,34 +331,6 @@ public class LocationTab extends Fragment {// implements LocationListener {
         start.setText("START");
         start.setClickable(true);
     }
-
-//    public void onClickStart() {
-//        if (checkPlayServices()) {
-//            if (!isLocationEnabled(getActivity())){
-//                DialogFragment newFragment = AlertDialogFragment.newInstance("Please Turn On  Location");
-//                newFragment.show(getActivity().getFragmentManager(), "dialog");
-//            } else {
-//                isClicked = true;
-//                ctrClicks++;
-//                //display.setText("Location is being tracked");
-//                DialogFragment lastTrip = LastTripDialog.newInstance("Is it your last trip?");
-//                lastTrip.show(getActivity().getFragmentManager(), "dialog");
-//                //display.setText("");
-//                if (ctrClicks == 1) {
-//                    status = "In-transit";
-//                } else {
-////                    status = bus.getStatus();
-//                }
-////                bus.setStatus(status);
-//                Toast.makeText(getActivity().getApplicationContext(), "TRAK", Toast.LENGTH_LONG).show();
-//                startFusedLocation();
-//                start.setText("Trak");
-//                start.setClickable(false);
-//                registerRequestUpdate(this);
-//            }
-//
-//        }
-//    }
 
     public boolean isLocationEnabled(Context context) {
         int locationMode = 0;
@@ -241,6 +359,41 @@ public class LocationTab extends Fragment {// implements LocationListener {
         outState.putString("stat", status);
         outState.putBoolean("clicked", isClicked);
         outState.putInt("counter", ctrClicks);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        Spinner spinner = (Spinner) v.findViewById(R.id.route_list);
+        //sessionManager.setPosition(spinner.getSelectedItemPosition());
+        sessionManager.prefs.edit().putInt("spin_position", spinner.getSelectedItemPosition()).apply();
+        sessionManager.prefs.edit().putBoolean("spin_state", sessionManager.hasStarted()).apply();
+        //sessionManager.prefs.edit().putInt("spin_color", spinColor).apply();
+        //sessionManager.prefs.edit().putInt("spin_state", spinner.getSelectedItemPosition()).apply();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Spinner spinner = (Spinner) v.findViewById(R.id.route_list);
+        int in = sessionManager.prefs.getInt("spin_position", 0);
+        //int in = sessionManager.getPosition();
+        boolean s = sessionManager.prefs.getBoolean("spin_state", false);
+        //int b = sessionManager.prefs.getInt("spin_color", 0);
+        spinner.setSelection(in);
+        spinner.setEnabled(!s);
+        spinner.setClickable(!s);
+
+        if (s == false) {
+            spinner.setBackground(getResources().getDrawable(R.drawable.spinner_bg));
+        } else {
+            spinner.setBackground(getResources().getDrawable(R.drawable.spinner_selected_item_bg));
+        }
+
+        //String str = spinner.getItemAtPosition(in).toString();
+        sessionManager.setRoute(spinner.getItemAtPosition(in).toString());
     }
 
     @Override

@@ -65,6 +65,9 @@ public class SendService extends Service implements LocationListener  {
             String lng = String.valueOf(getFusedLongitude());
             DatabaseReference pushRef = mRoot.child("Bus").child(busNumber);
             Bus bus = new Bus();
+            bus.setAccommodation(sessionManager.getAccomodation());
+            bus.setBusCompany(sessionManager.getBusCompany());
+            bus.setRoute(sessionManager.getRoute());
             bus.setPosition(lat,lng);
             pushRef.setValue(bus);
             Toast.makeText(getApplicationContext(), "DATA SENT", Toast.LENGTH_LONG).show();

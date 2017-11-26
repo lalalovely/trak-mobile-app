@@ -36,16 +36,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-
-public class LoginActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
+public class LoginActivity extends AppCompatActivity{
     private static EditText busNumber;
-    private static EditText route;
     private Button login;
     private static DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-    private static Spinner routeSpinner;
-    private static String selectedRoute = "";
-    private String busCompany;
-    private String bus_number;
+
 
     UserSessionManager sessionManager;
 
@@ -112,13 +107,18 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                 if(!bNum.isEmpty()){
                     if (!dataSnapshot.hasChild(bNum)) {
                         busNumber.setText("");
-                        Toast.makeText(getApplicationContext(), "BUS DOES NOT EXIST", Toast.LENGTH_LONG).show();
+                        DialogFragment newFragment = AlertDialogFragment.newInstance("Please input a valid bus number.");
+                        newFragment.show(getFragmentManager(), "dialog");
+                        //Toast.makeText(getApplicationContext(), "BUS DOES NOT EXIST", Toast.LENGTH_LONG).show();
                     } else {
                         valid();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(), "PLEASE INPUT BUS NUMBER", Toast.LENGTH_LONG).show();
+                    DialogFragment newFragment = AlertDialogFragment.newInstance("Please input bus number.");
+                    newFragment.show(getFragmentManager(), "dialog");
+                    //Toast.makeText(getApplicationContext(), "PLEASE INPUT BUS NUMBER", Toast.LENGTH_LONG).show();
                 }
+
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
@@ -137,6 +137,9 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
                     if (data.getKey().equals("busCompany")){
                         setBusCompany(data.getValue().toString());
                     }
+                    if (data.getKey().equals("accommodation")){
+                        setAccommodation(data.getValue().toString());
+                    }
                 }
             }
             @Override
@@ -148,8 +151,11 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
 
     }
 
-       public void setBusCompany(String company){
-        busCompany = company;
+    public void setBusCompany(String company){
+        sessionManager.setBusCompany(company);
+    }
+    public void setAccommodation(String acc) {
+        sessionManager.setAccomodation(acc);
     }
 
     public static String getBusNumber(){
@@ -157,16 +163,6 @@ public class LoginActivity extends AppCompatActivity implements AdapterView.OnIt
     }
 
 
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        selectedRoute = parent.getItemAtPosition(position).toString();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
 }
 
 

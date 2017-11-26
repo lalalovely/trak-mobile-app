@@ -34,7 +34,7 @@
     <string name="title_activity_location_tab">LocationTab</string>
     
     <string-array name="routes">
-        <item>Route</item>
+        <item>PLEASE SELECT ROUTE</item>
         <item>Alcantara</item>
         <item>Alcoy</item>
         <item>Aloguinsan</item>
@@ -43,5 +43,7 @@
         <item>Carcar</item>
         <item>Dalaguete</item>
         <item>Dumanjug</item>
+        <item>Moalboal</item>
+        <item>Naga</item>
     </string-array>
 </resources>

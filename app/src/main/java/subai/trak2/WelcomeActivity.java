@@ -15,9 +15,13 @@ public class WelcomeActivity extends AppCompatActivity {
     private TextView tv;
     private ImageView iv;
 
+    UserSessionManager sessionManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        sessionManager = new UserSessionManager(this);
 
 //        requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -31,11 +35,17 @@ public class WelcomeActivity extends AppCompatActivity {
         tv.setAnimation(myanim);
         iv.setAnimation(myanim);
 
-        final Intent intent = new Intent(this, LoginActivity.class);
+        final Intent intent;
+        if (sessionManager.isUserLoggedIn()) {
+            intent = new Intent(this, LoginActivity.class);
+        } else {
+            intent = new Intent(this, IntroActivity.class);
+        }
+
         Thread timer = new Thread() {
             public void run() {
                 try {
-                    sleep(2000);
+                    sleep(1500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {

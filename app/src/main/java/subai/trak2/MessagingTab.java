@@ -20,6 +20,8 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 
@@ -42,11 +44,9 @@ public class MessagingTab extends Fragment {
         editMessage = (EditText) v.findViewById(R.id.edit_txt_msg);
         messageList = (RecyclerView) v.findViewById(R.id.chat_view);
         send = (FloatingActionButton) v.findViewById(R.id.sendButton);
-        //chat = new ChatMessage();
         sessionManager = new UserSessionManager(getActivity().getApplicationContext());
 
-        mRef = FirebaseDatabase.getInstance().getReference().child("Bus_Messages").child(sessionManager.getBusNum());
-        //setting the message list
+        mRef = FirebaseDatabase.getInstance().getReference();
         messageList.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this.getContext());
         linearLayoutManager.setStackFromEnd(true);
@@ -54,36 +54,15 @@ public class MessagingTab extends Fragment {
 
         send.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-//                mDatabaseUsers = FirebaseDatabase.getInstance().getReference().child("Bus_Accounts").child(mCurrentUser.getUid());
+
                 final String messageValue = editMessage.getText().toString().trim();
                 if (!TextUtils.isEmpty(messageValue)) {
-                    //chat.setContent(messageValue);
                     String t = String.valueOf(new Date().getTime());
-                    //DatabaseReference pushRef = FirebaseDatabase.getInstance().getReference().child("Bus_Messages").child(sessionManager.getBusNum())/*.child(t)*/;
-                    Message m = new Message(messageValue);
-                    mRef.getRef().child(t).setValue(m);
+                    DatabaseReference push = mRef.child("Bus_Messages").child(sessionManager.getBusNum());
+                    push.getRef().child(t).child("content").setValue(messageValue);
                     messageList.scrollToPosition(messageList.getAdapter().getItemCount());
-                    //messageList.scroll
-//                    mDatabaseUsers.addValueEventListener(new ValueEventListener() {
-//
-//                        @Override
-//                        public void onDataChange(DataSnapshot dataSnapshot) {
-//                            newPost.child("content").setValue(messageValue);
-//                            newPost.child("username").setValue(dataSnapshot.child("Name").getValue()).addOnCompleteListener(new OnCompleteListener<Void>() {
-//                                @Override
-//                                public void onComplete(@NonNull Task<Void> task) {
-//
-//                                }
-//                            });
-//
-//                        }
-//
-//                        @Override
-//                        public void onCancelled(DatabaseError databaseError) {
-//
-//                        }
-//                    });
                 }
+                editMessage.setText("");
             }
         });
         return v;
@@ -94,25 +73,16 @@ public class MessagingTab extends Fragment {
         super.onStart();
         FirebaseRecyclerAdapter<ChatMessage, MessageViewHolder> FBRA = new FirebaseRecyclerAdapter<ChatMessage, MessageViewHolder>(
                 ChatMessage.class,
-                R.layout.send_user,
+                R.layout.receive_user,
                 MessageViewHolder.class,
-                mRef
+                mRef.child("Admin_Messages").child(sessionManager.getBusNum())
         ) {
-                private final int ITEM_ADMIN = 0;
-                private final int ITEM_USER = 1;
-
                 @Override
                 protected void populateViewHolder(MessageViewHolder viewHolder, ChatMessage model, int position) {
                     viewHolder.setContent(model.getContent());
+                    viewHolder.setTime();
                 }
-
-
-
-
             };
-
-
-
             messageList.setAdapter(FBRA);
         }
 
@@ -127,7 +97,15 @@ public class MessagingTab extends Fragment {
             BubbleTextView message_content = (BubbleTextView) mView.findViewById(R.id.message_text);
             message_content.setText(content);
         }
+        public void setTime(){
+            TextView time = (TextView) mView.findViewById(R.id.message_time);
+            long x = System.currentTimeMillis();
+            Calendar cal1 = Calendar.getInstance();
+            cal1.setTimeInMillis(x);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+            String t = dateFormat.format(cal1.getTime());
+            time.setText(t);
+        }
     }
-
  }
 
