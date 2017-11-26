@@ -7,4 +7,17 @@
         <item>Naga</item>
         <item>Oslob</item>
     </string-array>
+
+    <string-array name="road_accident">
+        <item>Crashed into a tree</item>
+        <item>Crashed into a barrier</item>
+        <item>Crashed with another vehicle</item>
+        <item>Hit a person</item>
+    </string-array>
+
+    <string-array name="eng_fail">
+        <item>There are problems with the engine</item>
+        <item>Problems with the tires</item>
+        <item>maluoy mo</item>
+    </string-array>
 </resources>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:background="@color/bg"
     android:layout_width="match_parent"
@@ -37,42 +38,106 @@
     <!--</ListView>-->
 
 
+    <!--&lt;!&ndash;<android.support.v7.widget.Toolbar&ndash;&gt;-->
+        <!--&lt;!&ndash;android:id="@+id/toolbar_mes"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_width="match_parent"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:layout_height="50dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;android:background="?attr/colorPrimary"&ndash;&gt;-->
+        <!--&lt;!&ndash;app:layout_scrollFlags="scroll|enterAlways"&ndash;&gt;-->
+        <!--&lt;!&ndash;app:theme="@style/GalaxyZooThemeToolbarDarkOverflow"&ndash;&gt;-->
+        <!--&lt;!&ndash;app:titleTextColor="@color/titleColor"&ndash;&gt;-->
+        <!--&lt;!&ndash;tools:layout_editor_absoluteX="8dp"&ndash;&gt;-->
+        <!--&lt;!&ndash;tools:layout_editor_absoluteY="0dp" >&ndash;&gt;-->
+
+    <!--</android.support.v7.widget.Toolbar>-->
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/chat_view"
-        android:layout_height="match_parent"
         android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@+id/linearLayout"
-        />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true" />
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:id="@+id/linearLayout"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true">
-        <EditText
-            android:layout_width="304dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:background="@drawable/chat_txt_bg"
-            android:id="@+id/edit_txt_msg"
-            android:hint="Type a message"
-            android:imeOptions="actionSend"
-            android:inputType="text"
-            android:padding="15dp"
-            />
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:clickable="true"
-            android:src="@drawable/ic_sends"
-            android:tint="@android:color/white"
-            app:fabSize="mini" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_ins"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlways"
+            app:theme="@style/GalaxyZooThemeToolbarDarkOverflow"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="0dp">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/road_acc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="-3dp"
+                android:layout_marginTop="5dp"
+                android:scaleType="fitXY"
+                android:clickable="true"
+                android:src="@drawable/icon_accident"
+                app:fabSize="mini"
+                app:backgroundTint="@color/dirty_white"
+                />
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/engFail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="5dp"
+                android:layout_marginLeft="20dp"
+                android:scaleType="fitXY"
+                android:clickable="true"
+                android:src="@drawable/icon_eng_fail"
+                app:fabSize="mini"
+                app:backgroundTint="@color/dirty_white"
+                />
+
+            <EditText
+                android:id="@+id/edit_txt_msg"
+                android:layout_width="230dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/chat_txt_bg"
+                android:hint="Type a message"
+                android:imeOptions="actionSend"
+                android:inputType="text"
+                android:padding="15dp"
+                android:textColor="@color/dot_active" />
+
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/sendButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:clickable="true"
+                    android:src="@drawable/ic_sends"
+                    android:tint="@android:color/white"
+                    app:fabSize="mini"
+                    app:backgroundTint="@color/buttonColor"
+                    />
+
+        </android.support.v7.widget.Toolbar>
 
 
     </LinearLayout>
