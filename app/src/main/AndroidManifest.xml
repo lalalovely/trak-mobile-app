@@ -24,7 +24,9 @@
             android:label="@string/title_activity_login"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".IntroActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -36,12 +38,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".DetailsActivity"
-            android:label="Details"
-            android:parentActivityName=".MainActivity"/>
-        <activity android:name=".HelpActivity"
+        <activity
+            android:name=".HelpActivity"
             android:label="Help"
-            android:parentActivityName=".MainActivity"></activity>
+            android:parentActivityName=".MainActivity"/>
         <service android:name=".SendService"
                  android:exported="false">
         </service>
