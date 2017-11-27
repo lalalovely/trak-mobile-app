@@ -5,9 +5,12 @@ package subai.trak2;
  */
 
 public class Message {
-    public String mContent;
-    Message(String mContent){
-        this.mContent = mContent;
+    public String content,time, type;
+
+    Message(String content, String time, String type){
+        this.content = content;
+        this.time = time;
+        this.type = type;
     }
 
 }
