@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity{
         login = (Button) findViewById(R.id.btnLogin);
 
         if (sessionManager.isUserLoggedIn()) {
+            sessionManager.setPosition(sessionManager.getPosition());
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }

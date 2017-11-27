@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="wrap_content"
+        android:layout_width="362dp"
         android:layout_height="90dp"
         android:src="@drawable/turn_on_txt"
         android:layout_alignParentTop="true"
@@ -18,26 +18,25 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="35dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        android:layout_marginTop="-4dp" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_width="353dp"
+        android:layout_height="330dp"
         android:src="@drawable/slider_2_img"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="130dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        android:layout_marginTop="90dp"
+        app:layout_constraintHorizontal_bias="0.521" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="60dp"
-        android:text="Make sure to turn on WIFI and LOCATION."
+        android:text="Make sure to turn on your WIFI and GPS/Location so you’re ready to go"
         android:textSize="20sp"
         android:textAlignment="center"
         android:layout_gravity="center"
@@ -47,7 +46,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="401dp"
-        app:layout_constraintHorizontal_bias="0.516" />
+        android:layout_marginTop="420dp" />
 
 </android.support.constraint.ConstraintLayout>

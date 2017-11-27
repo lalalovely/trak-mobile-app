@@ -9,8 +9,14 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.app.DialogFragment;
+import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.EventListener;
 
 public class LastTripDialog extends DialogFragment {
@@ -76,6 +82,8 @@ public class LastTripDialog extends DialogFragment {
                                         LocationTab.spinColor = R.drawable.spinner_bg;
 
                                         LocationTab.spinnerState = true;
+
+                                        sessionManager.setPosition(0);
                                         LocationTab.position = sessionManager.getPosition();
                                         LocationTab.spinner_bg = R.drawable.spinner_bg;
                                         sessionManager.setSpinnerState(true);
@@ -103,6 +111,18 @@ public class LastTripDialog extends DialogFragment {
                                         LocationTab.spinner.setBackground(getResources().getDrawable(LocationTab.spinColor));
                                         //spinnerSetState(spinnerState, spinner_bg, position);
                                     }
+                                }
+                                if (typ == 1) {
+                                    ViewPager view = (ViewPager) getActivity().findViewById(R.id.container);
+                                    view.setCurrentItem(1);
+                                    UserSessionManager sessionManager = new UserSessionManager(getActivity().getApplicationContext());
+                                    DatabaseReference Bus_mRef = FirebaseDatabase.getInstance().getReference().child("Bus_Messages").child(sessionManager.getBusNum());
+                                    long x = System.currentTimeMillis();
+                                    Calendar cal1 = Calendar.getInstance();
+                                    cal1.setTimeInMillis(x);
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                                    String stringTime = dateFormat.format(cal1.getTime());
+                                    Bus_mRef.child(stringTime).child("content").setValue("THIS IS MY LAST TRIP");
                                 }
 
                                 //LocationTab.doPositiveClick(typ);

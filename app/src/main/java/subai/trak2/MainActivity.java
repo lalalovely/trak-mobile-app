@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void logout() {
-        //sessionManager.setPosition(0);
+        sessionManager.setPosition(0);
         sessionManager.setSpinnerState(true);
         sessionManager.setLoggedIn(false);
         sessionManager.setHasStarted(false);

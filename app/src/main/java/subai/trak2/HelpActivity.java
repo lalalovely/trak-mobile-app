@@ -19,36 +19,36 @@ import android.widget.TextView;
 
 public class HelpActivity extends AppCompatActivity {
 
-    private Toolbar toolbar;
-    private Bus bus;
-    private ViewPager viewPager;
-    //private ViewPagerAdapter viewPagerAdapter;
-    private LinearLayout dotsLayout;
-    private TextView[] dots;
-    private int[] layouts;
-    private Button btnSkip, btnNext;
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-        this.finish();
-        //super.onBackPressed();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_help);
-
-        toolbar = (Toolbar) findViewById(R.id.toolbar_d);
-        setSupportActionBar(toolbar);
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-    }
+//    private Toolbar toolbar;
+//    private Bus bus;
+//    private ViewPager viewPager;
+//    //private ViewPagerAdapter viewPagerAdapter;
+//    private LinearLayout dotsLayout;
+//    private TextView[] dots;
+//    private int[] layouts;
+//    private Button btnSkip, btnNext;
+//
+//    @Override
+//    public void onBackPressed() {
+//        Intent intent = new Intent(this, MainActivity.class);
+//        startActivity(intent);
+//        this.finish();
+//        //super.onBackPressed();
+//    }
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_help);
+//
+//        toolbar = (Toolbar) findViewById(R.id.toolbar_d);
+//        setSupportActionBar(toolbar);
+//
+//        toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View view) {
+//                onBackPressed();
+//            }
+//        });
+//    }
 }

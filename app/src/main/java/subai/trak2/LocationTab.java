@@ -203,8 +203,6 @@ public class LocationTab extends Fragment {// implements LocationListener {
             @Override
             public void onClick(View v) {
                 if (start.getText().equals("START")) {
-                    LastTripDialog lastTrip = LastTripDialog.newInstance("Is this your last trip?", 1);
-                    lastTrip.show(getActivity().getFragmentManager(), "lastTrip_dialog");
                     forStart();
                 } else if (start.getText().equals("STOP")) {
                     LastTripDialog stopping = LastTripDialog.newInstance("Are you sure you want to stop?", 0);
@@ -230,34 +228,20 @@ public class LocationTab extends Fragment {// implements LocationListener {
         if (spinnerSelected == false) {
             DialogFragment newFrag = AlertDialogFragment.newInstance("Please select Route.");
             newFrag.show(getActivity().getFragmentManager(), "dialog");
-//            spinnerState = true;
-//            position = 0;
-//            spinner_bg = R.drawable.spinner_bg;
-//            //sessionManager.setSpinnerState(true);
-//            spinnerSetState(spinnerState, spinner_bg, position);
         } else {
             if (!isLocationEnabled(getActivity())){
                 DialogFragment newFragment = AlertDialogFragment.newInstance("Please turn on Location.");
                 newFragment.show(getActivity().getFragmentManager(), "dialog");
             } else {
+
+                //ask if last trip na
+                LastTripDialog lastTrip = LastTripDialog.newInstance("Is this your last trip?", 1);
+                lastTrip.show(getActivity().getFragmentManager(), "lastTrip_dialog");
+
                 sessionManager.setHasStarted(true); //---uncomment this if di na mu-work
                 sessionManager.setSpinnerState(false);
-
-                //uncomment this part
-//                if (!sessionManager.getSpinnerState()) {
-//                    //spinnerDisable();
-//                    spinnerState = false;
-//                    position = sessionManager.getPosition();
-//                    spinner_bg = R.drawable.spinner_selected_item_bg;
-//                    spinnerSetState(spinnerState, spinner_bg, position);
-//                    //spinnerSetState(false, R.drawable.spinner_selected_item_bg, sessionManager.getPosition());
-//                } else {
-//                    spinnerSetState(spinnerState, spinner_bg, position);
-//                }
-
                 if (sessionManager.hasStarted()){
                     state = false;
-
                     text = "STOP";
                     bg = R.drawable.stop_btn_bg;
                     start.setBackground(getResources().getDrawable(bg));
@@ -381,7 +365,9 @@ public class LocationTab extends Fragment {// implements LocationListener {
 
         Spinner spinner = (Spinner) v.findViewById(R.id.route_list);
         //sessionManager.setPosition(spinner.getSelectedItemPosition());
-        sessionManager.prefs.edit().putInt("spin_position", spinner.getSelectedItemPosition()).apply();
+        //sessionManager.prefs.edit().putInt("spin_position", spinner.getSelectedItemPosition()).apply();
+
+        sessionManager.prefs.edit().putInt("spin_position", sessionManager.getPosition()).apply();
         sessionManager.prefs.edit().putBoolean("spin_state", sessionManager.hasStarted()).apply();
         //sessionManager.prefs.edit().putInt("spin_color", spinColor).apply();
         //sessionManager.prefs.edit().putInt("spin_state", spinner.getSelectedItemPosition()).apply();

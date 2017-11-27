@@ -18,26 +18,25 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="35dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        android:layout_marginTop="-11dp"
+        app:layout_constraintHorizontal_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_width="356dp"
+        android:layout_height="320dp"
         android:src="@drawable/slider_1_img"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="130dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        android:layout_marginTop="90dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="The Road Access Kit"
+        android:text="Easy and reliable tracking app for you."
         android:textSize="20sp"
         android:textAlignment="center"
         android:textColor="@color/fontColor"
@@ -46,6 +45,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="398dp" />
+        android:layout_marginTop="421dp"
+        app:layout_constraintHorizontal_bias="0.521" />
 
 </android.support.constraint.ConstraintLayout>

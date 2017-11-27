@@ -18,26 +18,25 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="-2dp"
         app:layout_constraintHorizontal_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_width="358dp"
+        android:layout_height="312dp"
         android:src="@drawable/emergency_alerts"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="130dp"
-        app:layout_constraintHorizontal_bias="0.0" />
+        android:layout_marginTop="90dp" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="60dp"
-        android:text="Sends alerts to SBT admin in case of emergency."
+        android:layout_width="356dp"
+        android:layout_height="89dp"
+        android:text="Enables you to send alerts to CSBT admin in case of emergency through chat"
         android:textSize="20sp"
         android:textAlignment="center"
         android:layout_gravity="center"
@@ -47,7 +46,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintTop_creator="1"
-        android:layout_marginTop="401dp"
-        app:layout_constraintHorizontal_bias="0.516" />
+        android:layout_marginTop="402dp" />
 
 </android.support.constraint.ConstraintLayout>
