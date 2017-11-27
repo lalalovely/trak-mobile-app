@@ -8,7 +8,7 @@
     android:id="@+id/linearLayout"
     android:layout_alignParentStart="true"
     android:layout_alignParentBottom="true"
-    android:gravity="bottom"
+    android:layout_gravity="bottom"
     android:orientation="horizontal">
 
     <android.support.v7.widget.Toolbar
@@ -28,12 +28,11 @@
             android:layout_alignParentBottom="true"
             android:layout_marginLeft="-3dp"
             android:layout_marginTop="5dp"
-            android:scaleType="fitXY"
             android:clickable="true"
+            android:scaleType="fitXY"
             android:src="@drawable/icon_accident"
-            app:fabSize="mini"
             app:backgroundTint="@color/dirty_white"
-            />
+            app:fabSize="mini" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/engFail"
@@ -41,14 +40,13 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
-            android:scaleType="fitXY"
+            android:layout_marginTop="5dp"
             android:clickable="true"
+            android:scaleType="fitXY"
             android:src="@drawable/icon_eng_fail"
-            app:fabSize="mini"
             app:backgroundTint="@color/dirty_white"
-            />
+            app:fabSize="mini" />
 
         <EditText
             android:id="@+id/edit_txt_msg"
@@ -76,9 +74,8 @@
             android:clickable="true"
             android:src="@drawable/ic_sends"
             android:tint="@android:color/white"
-            app:fabSize="mini"
             app:backgroundTint="@color/buttonColor"
-            />
+            app:fabSize="mini" />
 
     </android.support.v7.widget.Toolbar>
 
