@@ -53,8 +53,6 @@ public class MessagingTab extends Fragment {
     private int initialize = 0;
     private FloatingActionButton accident;
     private FloatingActionButton engFail;
-    private static String customMess;
-    private static boolean custom_mess_flag = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -83,7 +81,7 @@ public class MessagingTab extends Fragment {
                     long x = System.currentTimeMillis();
                     Calendar cal1 = Calendar.getInstance();
                     cal1.setTimeInMillis(x);
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd HH:mm:ss");
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd hh:mm:ss a");
                     String t = dateFormat.format(cal1.getTime());
 
 
@@ -98,44 +96,17 @@ public class MessagingTab extends Fragment {
         accident.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //showMyDialog("Road Accident");
                 TwoOptionsDialog opts = TwoOptionsDialog.newInstance("Accident");
                 opts.show(getActivity().getFragmentManager(), "dialog");
-                /*
-                if(custom_mess_flag){
-                    long x = System.currentTimeMillis();
-                    Calendar cal1 = Calendar.getInstance();
-                    cal1.setTimeInMillis(x);
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd HH:mm:ss");
-                    String t = dateFormat.format(cal1.getTime());
-                    DatabaseReference pushRef = Bus_mRef.child(t).child(("content"));
-                    pushRef.setValue(customMess);
-                    customMess = "";
-                    custom_mess_flag = false;
-                }
-                */
+
             }
         });
 
         engFail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //showMyDialog("Bus Failure");
                 TwoOptionsDialog opts2 = TwoOptionsDialog.newInstance("Bus failure");
                 opts2.show(getActivity().getFragmentManager(), "dialog");
-                /*
-                if(custom_mess_flag) {
-                    long x = System.currentTimeMillis();
-                    Calendar cal1 = Calendar.getInstance();
-                    cal1.setTimeInMillis(x);
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd HH:mm:ss");
-                    String t = dateFormat.format(cal1.getTime());
-                    DatabaseReference pushRef = Bus_mRef.child(t).child(("content"));
-                    pushRef.setValue(customMess);
-                    customMess = "";
-                    custom_mess_flag = false;
-                }
-                */
             }
         });
         Bus_mRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -144,7 +115,6 @@ public class MessagingTab extends Fragment {
                 if (bus == 0) {
                     for (DataSnapshot d : dataSnapshot.getChildren()) {
                         String m = d.child("content").getValue().toString();
-//                        addMessageBox(m, 1);
                         messages.add(new Message(m, d.getKey(), "user"));
                     }
                     bus += 1;
@@ -163,7 +133,6 @@ public class MessagingTab extends Fragment {
                 if (admin == 0) {
                     for (DataSnapshot d : dataSnapshot.getChildren()) {
                         String m = d.child("content").getValue().toString();
-//                        addMessageBox(m, 2);
                         messages.add(new Message(m, d.getKey(), "admin"));
                     }
                     admin += 1;
@@ -221,11 +190,6 @@ public class MessagingTab extends Fragment {
         super.onStart();
     }
 
-    public void showMyDialog(String title){
-        DialogFragment newFragment = AlertDialogFrag.newInstance(title);
-        newFragment.show(getActivity().getFragmentManager(), "dialog");
-    }
-
 
     public void arrange(){
         class compare implements Comparator<Message>{
@@ -247,9 +211,7 @@ public class MessagingTab extends Fragment {
                     addMessageBox(m.content, m.time, 2);
                 }
             }
-
         }
-
     }
 
     public String getCurrTime(){
@@ -288,63 +250,4 @@ public class MessagingTab extends Fragment {
         layout.addView(time);
         scrollView.fullScroll(View.FOCUS_DOWN);
     }
-
-    public static class AlertDialogFrag extends DialogFragment {
-        public static AlertDialogFrag newInstance(String title) {
-            AlertDialogFrag frag = new AlertDialogFrag();
-            Bundle args = new Bundle();
-            args.putString("title", title);
-            frag.setArguments(args);
-            return frag;
-        }
-
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-            final String title = getArguments().getString("title");
-            final String[] eng_failure = {"There are problems with the engine", "Problems with the tires",
-                    "maluoy mo"};
-            final String[] acc = {"Crashed into a tree", "Crashed into a barrier",
-                    "Crashed with another vehicle", "Hit a person" };
-            int icon = 0;
-            if (title.equals("Bus Failure")) {
-                builder.setTitle(title)
-                        .setItems(eng_failure, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // The 'which' argument contains the index position
-                                // of the selected item
-                                customMess = eng_failure[which];
-                                custom_mess_flag = true;
-                            }
-                        }).setNegativeButton("Back",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-
-                            }
-                        }
-                );
-            } else if (title.equals("Road Accident")) {
-                builder.setTitle(title)
-                        .setItems(acc, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-                                // The 'which' argument contains the index position
-                                // of the selected item
-                                customMess = acc[which];
-                                custom_mess_flag = true;
-                            }
-                        })
-                        .setNegativeButton("Back",
-                                new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int whichButton) {
-
-                                    }
-                                }
-                        );
-            } else {
-
-            }
-            return builder.create();
-        }
-    }
-
 }

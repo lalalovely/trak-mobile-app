@@ -120,9 +120,10 @@ public class LastTripDialog extends DialogFragment {
                                     long x = System.currentTimeMillis();
                                     Calendar cal1 = Calendar.getInstance();
                                     cal1.setTimeInMillis(x);
-                                    SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+                                    SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd hh:mm:ss a");
                                     String stringTime = dateFormat.format(cal1.getTime());
-                                    Bus_mRef.child(stringTime).child("content").setValue("THIS IS MY LAST TRIP");
+                                    String message = "Hello SBT admin! This will be our last trip. Thanks!";
+                                    Bus_mRef.child(stringTime).child("content").setValue(message);
                                 }
 
                                 //LocationTab.doPositiveClick(typ);
