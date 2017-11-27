@@ -8,15 +8,11 @@ import android.os.Bundle;
 
 public class TwoOptionsDialog extends DialogFragment {
 
-    static UserSessionManager sessionManager;
-
-    public static TwoOptionsDialog newInstance(String title, UserSessionManager ses) {
+    public static TwoOptionsDialog newInstance(String title) {
         TwoOptionsDialog frag = new TwoOptionsDialog();
         Bundle args = new Bundle();
         args.putString("title", title);
         frag.setArguments(args);
-
-        sessionManager = ses;
         return frag;
     }
 
@@ -26,24 +22,18 @@ public class TwoOptionsDialog extends DialogFragment {
 
         return new AlertDialog.Builder(getActivity())
                 .setTitle(title)
+                .setMessage("Are you sure?")
                 .setPositiveButton("YES",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                if (title.equals("Are you sure you want to stop?")) {
-                                    //sessionManager.setStop(true);
-                                    sessionManager.setHasStarted(false);
-                                    sessionManager.setSpinnerState(true);
-                                }
+
                             }
                         }
                 )
                 .setNegativeButton("NO",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-                                if (title.equals("Are you sure you want to stop?")) {
-                                    sessionManager.setHasStarted(true);
-                                    sessionManager.setSpinnerState(false);
-                                }
+
                             }
                         }
                 )

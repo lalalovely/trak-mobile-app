@@ -98,7 +98,10 @@ public class MessagingTab extends Fragment {
         accident.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showMyDialog("Road Accident");
+                //showMyDialog("Road Accident");
+                TwoOptionsDialog opts = TwoOptionsDialog.newInstance("Accident");
+                opts.show(getActivity().getFragmentManager(), "dialog");
+                /*
                 if(custom_mess_flag){
                     long x = System.currentTimeMillis();
                     Calendar cal1 = Calendar.getInstance();
@@ -110,13 +113,17 @@ public class MessagingTab extends Fragment {
                     customMess = "";
                     custom_mess_flag = false;
                 }
+                */
             }
         });
 
         engFail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showMyDialog("Bus Failure");
+                //showMyDialog("Bus Failure");
+                TwoOptionsDialog opts2 = TwoOptionsDialog.newInstance("Bus failure");
+                opts2.show(getActivity().getFragmentManager(), "dialog");
+                /*
                 if(custom_mess_flag) {
                     long x = System.currentTimeMillis();
                     Calendar cal1 = Calendar.getInstance();
@@ -128,6 +135,7 @@ public class MessagingTab extends Fragment {
                     customMess = "";
                     custom_mess_flag = false;
                 }
+                */
             }
         });
         Bus_mRef.addListenerForSingleValueEvent(new ValueEventListener() {
