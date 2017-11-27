@@ -100,9 +100,15 @@ public class MessagingTab extends Fragment {
             public void onClick(View v) {
                 showMyDialog("Road Accident");
                 if(custom_mess_flag){
-                    messageArea.setText(customMess);
-                    custom_mess_flag = false;
+                    long x = System.currentTimeMillis();
+                    Calendar cal1 = Calendar.getInstance();
+                    cal1.setTimeInMillis(x);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd HH:mm:ss");
+                    String t = dateFormat.format(cal1.getTime());
+                    DatabaseReference pushRef = Bus_mRef.child(t).child(("content"));
+                    pushRef.setValue(customMess);
                     customMess = "";
+                    custom_mess_flag = false;
                 }
             }
         });
@@ -113,9 +119,15 @@ public class MessagingTab extends Fragment {
                 showMyDialog("Bus Failure");
                 messageArea.setText(customMess);
                 if(custom_mess_flag) {
-                    messageArea.setText(customMess);
-                    custom_mess_flag = false;
+                    long x = System.currentTimeMillis();
+                    Calendar cal1 = Calendar.getInstance();
+                    cal1.setTimeInMillis(x);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd HH:mm:ss");
+                    String t = dateFormat.format(cal1.getTime());
+                    DatabaseReference pushRef = Bus_mRef.child(t).child(("content"));
+                    pushRef.setValue(customMess);
                     customMess = "";
+                    custom_mess_flag = false;
                 }
             }
         });
