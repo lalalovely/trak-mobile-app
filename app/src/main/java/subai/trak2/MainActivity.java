@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private MessagingTab messagingTab;
 //<<<<<<< HEAD
 //=======
-    private DetailsActivity detailsActivity; //details for the bus
+    //private DetailsActivity detailsActivity; //details for the bus
     private Spinner spinner;
 
 //>>>>>>> 73607e5213982b3fa2686cf4cd379a1e04217dce
@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
         locationTab = LocationTab.newInstance(bg, strTxt, p, ss, sbg, abtStop);
         messagingTab = new MessagingTab();
-        detailsActivity = new DetailsActivity();
+        //detailsActivity = new DetailsActivity();
         bus = new Bus();
 
         // set accomodation
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
        //set bus for each tab here
         //make a details tab
         locationTab.setBus(bus);
-        detailsActivity.setBusDetails(bus);
+        //detailsActivity.setBusDetails(bus);
         adapter.addFragment(locationTab, "Location");
         adapter.addFragment(messagingTab, "Messaging");
         viewPager.setAdapter(adapter);

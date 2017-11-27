@@ -13,6 +13,9 @@ android {
 
         multiDexEnabled true
     }
+    aaptOptions {
+        cruncherEnabled = false
+    }
     buildTypes {
         release {
             minifyEnabled false
