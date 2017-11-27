@@ -117,7 +117,6 @@ public class MessagingTab extends Fragment {
             @Override
             public void onClick(View v) {
                 showMyDialog("Bus Failure");
-                messageArea.setText(customMess);
                 if(custom_mess_flag) {
                     long x = System.currentTimeMillis();
                     Calendar cal1 = Calendar.getInstance();
