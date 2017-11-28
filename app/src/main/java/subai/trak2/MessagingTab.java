@@ -34,7 +34,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-
 public class MessagingTab extends Fragment {
 
     private static final String TAG = "@string/messaging_tab";
