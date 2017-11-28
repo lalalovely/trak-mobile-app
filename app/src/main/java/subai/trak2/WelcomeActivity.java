@@ -23,9 +23,6 @@ public class WelcomeActivity extends AppCompatActivity {
 
         sessionManager = new UserSessionManager(this);
 
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
         setContentView(R.layout.activity_welcome);
 
         tv = (TextView) findViewById(R.id.welcomeText);

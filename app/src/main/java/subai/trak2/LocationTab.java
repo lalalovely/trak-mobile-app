@@ -213,6 +213,8 @@ public class LocationTab extends Fragment {// implements LocationListener {
         });
         start.setBackground(getResources().getDrawable(bg));
         start.setText(text);
+        Intent intent = new Intent(getActivity(), NotifService.class);
+        getActivity().startService(intent);
         return v;
     }
 

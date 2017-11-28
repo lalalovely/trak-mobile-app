@@ -45,5 +45,8 @@
         <service android:name=".SendService"
                  android:exported="false">
         </service>
+        <service android:name=".NotifService"
+            android:exported="false">
+        </service>
     </application>
 </manifest>
