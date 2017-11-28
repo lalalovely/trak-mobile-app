@@ -1,12 +1,9 @@
 package subai.trak2;
 
-import android.support.v7.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
+
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.Gravity;
@@ -19,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -153,6 +151,7 @@ public class MessagingTab extends Fragment {
                     String message = dataSnapshot.child("content").getValue().toString();
                     addMessageBox(message, getCurrTime(), 1);
                 }
+
             }
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
@@ -189,7 +188,6 @@ public class MessagingTab extends Fragment {
     public void onStart() {
         super.onStart();
     }
-
 
     public void arrange(){
         class compare implements Comparator<Message>{
