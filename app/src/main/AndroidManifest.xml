@@ -26,7 +26,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan" />
+            />
         <activity
             android:name=".IntroActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -39,8 +39,18 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".Question1Activity"
+            android:label=""
+            android:parentActivityName=".HelpActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Question2Activity"
+            android:label=""
+            android:parentActivityName=".HelpActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
             android:name=".HelpActivity"
-            android:label="Help"
+            android:label=""
             android:parentActivityName=".MainActivity"/>
         <service android:name=".SendService"
                  android:exported="false">

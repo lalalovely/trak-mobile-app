@@ -228,18 +228,20 @@ public class MessagingTab extends Fragment {
         lp1.weight = 1.0f;
         lp2.weight = 1.0f;
         content.setText(message);
-        content.setBackgroundColor(Color.BLUE);
 
         time.setText(t);
         time.setTextColor(Color.BLACK);
         if(type == 1) {
             lp1.gravity = Gravity.RIGHT;
             lp2.gravity = Gravity.RIGHT;
-
+            //content.setBackgroundResource(R.drawable.forsend_chat_bubble);
+            content.setBackgroundColor(Color.BLUE);
         }
         else{
             lp1.gravity = Gravity.LEFT;
             lp2.gravity = Gravity.LEFT;
+            //content.setBackgroundResource(R.drawable.receive_chat_bubble);
+            content.setBackgroundColor(Color.BLUE);
         }
         content.setLayoutParams(lp1);
         time.setLayoutParams(lp2);

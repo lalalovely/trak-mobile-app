@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 public class WelcomeActivity extends AppCompatActivity {
 
-    private TextView tv;
     private ImageView iv;
 
     UserSessionManager sessionManager;
@@ -24,12 +23,9 @@ public class WelcomeActivity extends AppCompatActivity {
         sessionManager = new UserSessionManager(this);
 
         setContentView(R.layout.activity_welcome);
-
-        tv = (TextView) findViewById(R.id.welcomeText);
         iv = (ImageView) findViewById(R.id.welcomeImage);
         Animation myanim = AnimationUtils.loadAnimation(this, R.anim.mytransition);
 
-        tv.setAnimation(myanim);
         iv.setAnimation(myanim);
 
         final Intent intent;

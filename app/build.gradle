@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
     compileSdkVersion 25
     buildToolsVersion "26.0.2"
     defaultConfig {
@@ -12,9 +15,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
-    }
-    aaptOptions {
-        cruncherEnabled = false
     }
     buildTypes {
         release {

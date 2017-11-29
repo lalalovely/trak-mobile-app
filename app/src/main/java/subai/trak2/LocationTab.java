@@ -202,13 +202,20 @@ public class LocationTab extends Fragment {// implements LocationListener {
         start.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (start.getText().equals("START")) {
+                if (bg == R.drawable.start_another) {
                     forStart();
-                } else if (start.getText().equals("STOP")) {
+                } else if (bg == R.drawable.stop_another) {
                     LastTripDialog stopping = LastTripDialog.newInstance("Are you sure you want to stop?", 0);
                     stopping.show(getActivity().getFragmentManager(), "stop_dialog");
-                    //forStop();
                 }
+
+//                if (start.getText().equals("START")) {
+//                    forStart();
+//                } else if (start.getText().equals("STOP")) {
+//                    LastTripDialog stopping = LastTripDialog.newInstance("Are you sure you want to stop?", 0);
+//                    stopping.show(getActivity().getFragmentManager(), "stop_dialog");
+//                    //forStop();
+//                }
             }
         });
         start.setBackground(getResources().getDrawable(bg));
@@ -244,8 +251,8 @@ public class LocationTab extends Fragment {// implements LocationListener {
                 sessionManager.setSpinnerState(false);
                 if (sessionManager.hasStarted()){
                     state = false;
-                    text = "STOP";
-                    bg = R.drawable.stop_btn_bg;
+                    text = "";
+                    bg = R.drawable.stop_another;
                     start.setBackground(getResources().getDrawable(bg));
                     start.setText(text);
 

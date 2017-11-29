@@ -6,49 +6,64 @@
     android:layout_height="match_parent"
     tools:context="subai.trak2.HelpActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_help"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="50dp"
+        android:background="?attr/colorPrimary">
 
-    <LinearLayout
-        android:id="@+id/layoutDots"
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:src="@drawable/trak_word" />
+
+    </android.support.v7.widget.Toolbar>
+
+    <TextView
+        android:layout_below="@+id/toolbar_help"
+        android:id="@+id/text_help"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/dots_height"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="@dimen/dots_bottom_margin"
-        android:gravity="center"
-        android:orientation="horizontal"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:alpha=".5"
-        android:layout_above="@id/layoutDots"
-        android:background="#f6f6f6" />
-
-    <Button
-        android:id="@+id/btn_next"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:background="@null"
-        android:text="@string/next"
-        android:textColor="#adadad"
-        android:onClick="btnNextClick" />
+        android:text="HELP"
+        android:textAlignment="center"
+        android:textStyle="bold"
+        android:textColor="@color/titleColor"
+        android:textSize="35sp"
+        android:background="@drawable/help_bar_tv"
+        />
 
-    <Button
-        android:id="@+id/btn_skip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:background="@null"
-        android:textColor="#adadad"
-        android:text="Back"
-        android:onClick="btnSkipClick" />
+    <ImageButton
+        android:id="@+id/help_1"
+        android:layout_below="@id/text_help"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/help1"/>
+        <!--android:onClick="clickQuestion1"-->
+
+    <ImageButton
+        android:id="@+id/help_2"
+        android:layout_below="@id/help_1"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/help2"/>
+
+    <ImageButton
+        android:id="@+id/help_3"
+        android:layout_below="@id/help_2"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/help3"/>
+
+    <ImageButton
+        android:id="@+id/help_4"
+        android:layout_below="@id/help_3"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/help4"/>
 
 </RelativeLayout>

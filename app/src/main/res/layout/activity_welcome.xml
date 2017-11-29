@@ -15,20 +15,10 @@
 
         <ImageView
             android:id="@+id/welcomeImage"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_width="400dp"
+            android:layout_height="300dp"
             android:layout_gravity="center"
-            android:src="@drawable/logo"/>
-
-        <TextView
-            android:id="@+id/welcomeText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="TRAK"
-            android:textColor="@color/fontColor"
-            android:textSize="50sp"
-            android:textStyle="bold"/>
+            android:src="@drawable/final_logo"/>
 
     </LinearLayout>
 
