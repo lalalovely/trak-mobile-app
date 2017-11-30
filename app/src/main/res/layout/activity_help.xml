@@ -39,7 +39,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/help1"/>
+        android:background="@drawable/question_one"/>
         <!--android:onClick="clickQuestion1"-->
 
     <ImageButton
@@ -47,23 +47,24 @@
         android:layout_below="@id/help_1"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/help2"/>
+        android:layout_marginTop="20dp"
+        android:background="@drawable/question_two"/>
 
     <ImageButton
         android:id="@+id/help_3"
         android:layout_below="@id/help_2"
         android:layout_width="match_parent"
+
         android:layout_height="70dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/help3"/>
+        android:layout_marginTop="20dp"
+        android:background="@drawable/question_three"/>
 
     <ImageButton
         android:id="@+id/help_4"
         android:layout_below="@id/help_3"
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/help4"/>
+        android:layout_marginTop="20dp"
+        android:background="@drawable/question_four"/>
 
 </RelativeLayout>

@@ -154,7 +154,8 @@ public class LocationTab extends Fragment {// implements LocationListener {
             }
         };
         //android.R.layout.simple_spinner_dropdown_item
-        routeAdapter.setDropDownViewResource(R.layout.spinner_item);
+        //R.layout.spinner_item
+        routeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(routeAdapter);
 
         text = getArguments().getString("start_btn_txt");
