@@ -104,7 +104,6 @@ public class MessagingTab extends Fragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if(item.getTitle().equals("Bus Failure")){
-                            Log.d(TAG, " HIII BO");
                             TwoOptionsDialog opts = TwoOptionsDialog.newInstance("Accident");
                             opts.show(getActivity().getFragmentManager(), "dialog");
                         } else if(item.getTitle().equals("Road Accident")){
@@ -121,66 +120,6 @@ public class MessagingTab extends Fragment {
                 menuHelper.show();
             }
         });
-
-        //message dialogs
-        /*accident.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TwoOptionsDialog opts = TwoOptionsDialog.newInstance("Accident");
-                opts.show(getActivity().getFragmentManager(), "dialog");
-
-            }
-        });
-
-        engFail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TwoOptionsDialog opts2 = TwoOptionsDialog.newInstance("Bus failure");
-                opts2.show(getActivity().getFragmentManager(), "dialog");
-            }
-<<<<<<< HEAD
-        });
-=======
-        });*/
-
-        Bus_mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (bus == 0) {
-                    for (DataSnapshot d : dataSnapshot.getChildren()) {
-                        String m = d.child("content").getValue().toString();
-                        messages.add(new Message(m, d.getKey(), "user"));
-                    }
-                    bus += 1;
-                    arrange();
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        Admin_mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (admin == 0) {
-                    for (DataSnapshot d : dataSnapshot.getChildren()) {
-                        String m = d.child("content").getValue().toString();
-                        messages.add(new Message(m, d.getKey(), "admin"));
-                    }
-                    admin += 1;
-                    arrange();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
->>>>>>> a98c341f4c4d4ed2bedc7530777281c2535dcf91
         Bus_mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
