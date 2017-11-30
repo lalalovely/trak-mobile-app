@@ -40,8 +40,9 @@
         app:arrowPosition="14dp"
         app:arrowLocation="right"
         app:arrowCenter="true"
-        app:bubbleColor="#7EC0EE"
+        app:bubbleColor="@color/iconColor"
      />
+    <!--app:bubbleColor="#7EC0EE"-->
 
     <!--android:layout_marginRight="5dp"-->
     <!--android:layout_marginLeft="10dp"-->

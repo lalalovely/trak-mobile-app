@@ -5,36 +5,78 @@
 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/linearLayout"
+    android:id="@+id/constraintLayout"
     android:layout_alignParentStart="true"
     android:layout_alignParentBottom="true"
+
     android:layout_gravity="bottom"
     android:orientation="horizontal">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_ins"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="56dp"
-        android:background="?attr/colorPrimary"
+        android:background="@color/white"
         app:layout_scrollFlags="scroll|enterAlways"
         app:theme="@style/GalaxyZooThemeToolbarDarkOverflow"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="-13dp">
+        tools:layout_editor_absoluteX="8dp">
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/road_acc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginLeft="-3dp"
-            android:layout_marginTop="5dp"
-            android:clickable="true"
-            android:scaleType="fitXY"
-            android:src="@drawable/icon_accident"
-            app:backgroundTint="@color/dirty_white"
-            app:fabSize="mini" />
+    <!--<android.support.v7.widget.Toolbar-->
+    <!--android:id="@+id/toolbar_ins"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:background="?attr/colorPrimary"-->
+    <!--app:layout_scrollFlags="scroll|enterAlways"-->
+    <!--app:theme="@style/GalaxyZooThemeToolbarDarkOverflow"-->
+    <!--tools:layout_editor_absoluteY="8dp"-->
+    <!--tools:layout_editor_absoluteX="8dp">-->
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/road_acc"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_marginLeft="-3dp"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:clickable="true"-->
+    <!--android:scaleType="fitXY"-->
+    <!--android:src="@drawable/icon_accident"-->
+    <!--app:backgroundTint="@color/dirty_white"-->
+    <!--app:fabSize="mini" />-->
+
+    <ImageView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:id="@+id/emer_button"
+        android:src="@drawable/emer_button"
+        android:clickable="true"
+        app:layout_constraintRight_toLeftOf="@+id/edit_txt_msg"
+        tools:layout_constraintTop_creator="1"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="10dp"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+    <!--android:id="@+id/engFail"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_alignParentRight="true"-->
+    <!--android:layout_marginLeft="10dp"-->
+    <!--android:layout_marginTop="5dp"-->
+    <!--android:clickable="true"-->
+    <!--android:scaleType="fitXY"-->
+    <!--android:src="@drawable/icon_eng_fail"-->
+    <!--app:backgroundTint="@color/dirty_white"-->
+    <!--app:fabSize="mini" />-->
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/engFail"
@@ -46,39 +88,47 @@
             android:layout_marginTop="5dp"
             android:clickable="true"
             android:scaleType="fitXY"
-            android:src="@drawable/icon_eng_fail"
+            android:src="@drawable/emergency_icon"
             app:backgroundTint="@color/dirty_white"
             app:fabSize="mini" />
 
-        <EditText
-            android:id="@+id/edit_txt_msg"
-            android:layout_width="200dp"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="3dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/chat_txt_bg"
-            android:hint="Type a message"
-            android:imeOptions="actionSend"
-            android:inputType="text"
-            android:padding="15dp"
-            android:textColor="@color/dot_active" />
+    <EditText
+        android:id="@+id/edit_txt_msg"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/chat_txt_bg"
+        android:hint="Type a message"
+        android:imeOptions="actionSend"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textColor="@color/dot_active"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        android:layout_marginStart="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="60dp"
+        app:layout_constraintRight_toRightOf="parent"
+        tools:layout_constraintLeft_creator="1"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/sendButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:clickable="true"
-            android:src="@drawable/ic_sends"
-            android:tint="@android:color/white"
-            app:backgroundTint="@color/buttonColor"
-            app:fabSize="mini" />
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/sendButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:src="@drawable/ic_sends"
+        android:tint="@android:color/white"
+        app:backgroundTint="#4D6EB5"
+        app:fabSize="mini"
+        tools:layout_constraintRight_creator="1"
+        tools:layout_constraintBottom_creator="1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="9dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="10dp" />
 
-    </android.support.v7.widget.Toolbar>
+    <!--</android.support.v7.widget.Toolbar>-->
+
 
 </android.support.constraint.ConstraintLayout>

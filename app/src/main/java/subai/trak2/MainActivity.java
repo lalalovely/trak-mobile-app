@@ -67,19 +67,19 @@ public class MainActivity extends AppCompatActivity {
 
         mSectionPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBar.setTitle("Trak");
+        mToolBar.setTitle("");
 
         if (!sessionManager.hasStarted()) {
-            bg = R.drawable.circle_back;
-            strTxt = "START";
+            bg = R.drawable.start_another;
+            strTxt = "";
 
             p = sessionManager.getPosition();
             sbg = R.drawable.spinner_selected_item_bg;
             ss = false;
             abtStop = true;
         } else if (sessionManager.hasStarted()) {
-            bg = R.drawable.stop_btn_bg;
-            strTxt = "STOP";
+            bg = R.drawable.stop_another;
+            strTxt = "";
 
             p = sessionManager.getPosition();
             sbg = R.drawable.spinner_bg;

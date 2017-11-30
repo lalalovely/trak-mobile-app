@@ -26,30 +26,25 @@
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="?attr/colorPrimary"
-            app:titleTextColor="@color/white"
-            app:theme="@style/GalaxyZooThemeToolbarDarkOverflow"
-            app:popupTheme="@style/AppTheme.PopupOverlay">
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:theme="@style/GalaxyZooThemeToolbarDarkOverflow">
 
-            <!--<Spinner-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:id="@+id/route_list"-->
-                <!--android:spinnerMode="dropdown"-->
-                <!--android:hint="Select Route"-->
-                <!--android:layout_gravity="end"-->
-                <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
-            <!--</Spinner>-->
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/trak_word" />
 
         </android.support.v7.widget.Toolbar>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/white"
             android:textAlignment="center"
             app:tabSelectedTextColor="@color/buttonColor"
-            app:tabTextColor="@color/dot_inactive"
-            android:background="@color/white"
-            android:layout_width="match_parent"
-            android:layout_height="48dp" />
+            app:tabTextColor="@color/dot_inactive" />
 
     </android.support.design.widget.AppBarLayout>
 
