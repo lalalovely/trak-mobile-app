@@ -5,24 +5,25 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#f6f6f6"
+    android:background="@drawable/log_in_bg"
     android:weightSum="1">
 
-    <ImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:src="@drawable/trak_logo"
-        android:layout_gravity="center"
-        android:id="@+id/logo"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"/>
+    <!--<ImageView-->
+        <!--android:layout_width="294dp"-->
+        <!--android:layout_height="155dp"-->
+        <!--android:src="@drawable/logo_final"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:id="@+id/logo"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintLeft_toLeftOf="parent"-->
+        <!--app:layout_constraintRight_toRightOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="parent"-->
+        <!--app:layout_constraintVertical_bias="0.261"-->
+        <!--tools:layout_constraintLeft_creator="1"-->
+        <!--tools:layout_constraintTop_creator="1"-->
+        <!--app:layout_constraintHorizontal_bias="0.495" />-->
 
     <EditText
         android:id="@+id/busNumText"
@@ -35,15 +36,15 @@
         android:inputType="text"
         android:gravity="center"
         android:background="@drawable/edit_text_background"
-        android:layout_below="@+id/logo"
         android:layout_alignStart="@+id/btnLogin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.576"
+        app:layout_constraintVertical_bias="0.535"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"/>
+        tools:layout_constraintTop_creator="1"
+        app:layout_constraintHorizontal_bias="0.496" />
 
     <!--<Spinner-->
         <!--android:layout_width="249dp"-->
@@ -86,17 +87,20 @@
         android:id="@+id/btnLogin"
         android:layout_width="250dp"
         android:layout_height="48dp"
-        android:text="Sign in"
-        android:textColor="@color/white"
         android:background="@drawable/login_btn_background"
         android:onClick="sendMessage"
-        android:layout_below="@+id/busNumText"
+        android:text="Sign in"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.734"
+        app:layout_constraintVertical_bias="0.687"
         tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1"/>
+        tools:layout_constraintTop_creator="1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        />
 
 </android.support.constraint.ConstraintLayout>

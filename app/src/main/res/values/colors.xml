@@ -3,29 +3,29 @@
     <!--<color name="colorPrimary">#f9f9f9</color>-->
     <!--<color name="colorPrimaryDark">#cccccc</color>-->
     <!--<color name="colorAccent">#1fa6b0</color>-->
-    <color name="colorPrimary">#1fa6b0</color>
-    <color name="colorPrimaryDark">#1d7d84</color>
-    <color name="colorAccent">#1fa6b0</color>
+    <color name="colorPrimary">#273a84</color>
+    <color name="colorPrimaryDark">#273a84</color>
+    <color name="colorAccent">#273a84</color>
     <color name="colorTabs">#f9f9f9</color>
     <color name="blue">#33ccff</color>
     <color name="white">#ffffff</color>
-    <color name="buttonColor">#1fa6b0</color>
+    <color name="buttonColor">#4d6eb5</color>
     <color name="fontColor">#303030</color>
     <color name="bgColor">#f9f9f9</color>
     <color name="start_btn_color">#9fc03c</color>
-    <color name="titleColor">#21b9c4</color>
-    <color name="iconColor">#21A7B0</color>
+    <color name="titleColor">#273a84</color>
+    <color name="iconColor">#4d6eb5</color>
 
     <color name="bg">#f6f6f6</color>
     <color name="dirty_white">#faebd7</color>
     <color name="warning_red">#ff0000</color>
     <color name="okay_green">#9fc03c</color>
 
-    <color name="for_spinner">#233e99</color>
+    <color name="for_spinner">#4d6eb5</color>
 
     <!-- dots active colors -->
     <color name="dot_active">#000000</color>
-    <color name="spinner_border">#1d7d84</color>
+    <color name="spinner_border">#4d6eb5</color>
 
     <!-- dots inactive colors -->
     <color name="dot_inactive">#cccccc</color>

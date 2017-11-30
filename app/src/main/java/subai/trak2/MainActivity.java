@@ -67,19 +67,19 @@ public class MainActivity extends AppCompatActivity {
 
         mSectionPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
-        mToolBar.setTitle("Trak");
+        mToolBar.setTitle("");
 
         if (!sessionManager.hasStarted()) {
-            bg = R.drawable.circle_back;
-            strTxt = "START";
+            bg = R.drawable.start_another;
+            strTxt = "";
 
             p = sessionManager.getPosition();
             sbg = R.drawable.spinner_selected_item_bg;
             ss = false;
             abtStop = true;
         } else if (sessionManager.hasStarted()) {
-            bg = R.drawable.stop_btn_bg;
-            strTxt = "STOP";
+            bg = R.drawable.stop_another;
+            strTxt = "";
 
             p = sessionManager.getPosition();
             sbg = R.drawable.spinner_bg;
@@ -112,9 +112,12 @@ public class MainActivity extends AppCompatActivity {
         sessionManager.setLoggedIn(false);
         sessionManager.setHasStarted(false);
         finish();
-
+        Intent notifIntent = new Intent(this, NotifService.class);
+        this.stopService(notifIntent);
         Intent intent = new Intent(this, SendService.class);
         this.stopService(intent);
+        DatabaseReference statRef = FirebaseDatabase.getInstance().getReference().child("Bus_Accounts").child(sessionManager.getBusNum());
+        statRef.child("status").setValue("In-Active");
         //Toast.makeText(this.getApplicationContext(), "Sending Stopped", Toast.LENGTH_LONG).show();
 
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -162,6 +165,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_menu, menu);
         return true;
+    }
+    @Override
+    public void onBackPressed() {
+        // do nothing
+        // disable back button
     }
 
     @Override

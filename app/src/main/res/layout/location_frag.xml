@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    android:background="@color/bg"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -32,13 +32,13 @@
         android:id="@+id/start_button"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_width="246dp"
-        android:layout_height="250dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:elevation="10dp"
         android:foreground="?attr/selectableItemBackground"
         android:gravity="center_vertical"
-        android:text="START"
-        android:background="@drawable/circle_back"
+        android:text=""
+        android:background="@drawable/start_another"
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textSize="30sp"
@@ -50,6 +50,6 @@
         tools:layout_constraintLeft_creator="1"
         android:layout_marginStart="10dp"
         android:layout_marginEnd="10dp"
-        app:layout_constraintVertical_bias="0.728" />
+        app:layout_constraintVertical_bias="0.731" />
 
 </android.support.constraint.ConstraintLayout>

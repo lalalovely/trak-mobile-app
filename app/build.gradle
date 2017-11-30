@@ -1,6 +1,9 @@
 apply plugin: 'com.android.application'
 
 android {
+    aaptOptions.cruncherEnabled = false
+    aaptOptions.useNewCruncher = false
+
     compileSdkVersion 25
     buildToolsVersion "26.0.2"
     defaultConfig {
@@ -12,9 +15,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         multiDexEnabled true
-    }
-    aaptOptions {
-        cruncherEnabled = false
     }
     buildTypes {
         release {
@@ -45,6 +45,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:25.1.0'
     compile 'com.google.firebase:firebase-auth:10.0.1'
     compile 'com.firebaseui:firebase-ui-database:0.4.4'
+    compile 'com.github.traex.rippleeffect:library:1.3'
     testCompile 'junit:junit:4.12'
 
 }

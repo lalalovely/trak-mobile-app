@@ -37,7 +37,7 @@ public class TwoOptionsDialog extends DialogFragment {
                                 long x = System.currentTimeMillis();
                                 Calendar cal1 = Calendar.getInstance();
                                 cal1.setTimeInMillis(x);
-                                SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd HH:mm:ss");
+                                SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd hh:mm:ss a");
                                 String t = dateFormat.format(cal1.getTime());
 
 

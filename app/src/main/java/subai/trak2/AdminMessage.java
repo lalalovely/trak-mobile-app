@@ -1,9 +1,5 @@
 package subai.trak2;
 
-/**
- * Created by - on 21/11/2017.
- */
-
 public class AdminMessage {
     private String response;
     private String msg;

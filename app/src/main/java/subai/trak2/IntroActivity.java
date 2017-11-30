@@ -50,10 +50,10 @@ public class IntroActivity extends AppCompatActivity {
         btnNext = (Button) findViewById(R.id.btn_next);
 
         layouts = new int[]{
-                R.layout.slide_1,
-                R.layout.slide_3,
-                R.layout.slide_4,
-                R.layout.slide_2,};
+                R.layout.onb_1,
+                R.layout.onb_2,
+                R.layout.onb_3,
+                R.layout.onb_4,};
 
         // adding bottom dots
         addBottomDots(0);

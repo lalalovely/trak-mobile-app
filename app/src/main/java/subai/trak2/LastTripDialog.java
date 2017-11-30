@@ -73,8 +73,8 @@ public class LastTripDialog extends DialogFragment {
 
                                         LocationTab.state = true;
 
-                                        LocationTab.text = "START";
-                                        LocationTab.bg = R.drawable.circle_back;
+                                        LocationTab.text = "";
+                                        LocationTab.bg = R.drawable.start_another;
 
                                         LocationTab.start.setBackground(getResources().getDrawable(LocationTab.bg));
                                         LocationTab.start.setText(LocationTab.text);
