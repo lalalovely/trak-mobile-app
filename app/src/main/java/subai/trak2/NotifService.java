@@ -57,14 +57,16 @@ public class NotifService extends Service {
 
         return START_STICKY;
     }
+
     @Override
     public void onDestroy() {
         super.onDestroy();
         stopSelf();
+
     }
     public void notif() {
         Intent intent = new Intent(NotifService.this, LoginActivity.class); // when notif is tapped go to login activity
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // clear top FLAG_ACTIVITY_SINGLE_TOP
         PendingIntent pd = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
         NotificationCompat.Builder nfBuilder = new NotificationCompat.Builder(getApplicationContext());
         nfBuilder.setContentTitle("You have a message");

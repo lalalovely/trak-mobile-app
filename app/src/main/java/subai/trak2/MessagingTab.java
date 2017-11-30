@@ -74,12 +74,13 @@ public class MessagingTab extends Fragment {
         messageArea = (EditText)v.findViewById(R.id.edit_txt_msg);
         scrollView = (ScrollView)v.findViewById(R.id.scrollView);
         view = inflater.inflate(R.layout.send_user, container, false);
+        bus = 0;
+        admin = 0;
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String messageText = messageArea.getText().toString();
-
                 if(!messageText.equals("")){
                     long x = System.currentTimeMillis();
                     Calendar cal1 = Calendar.getInstance();
@@ -103,7 +104,6 @@ public class MessagingTab extends Fragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if(item.getTitle().equals("Bus Failure")){
-                            Log.d(TAG, " HIII BO");
                             TwoOptionsDialog opts = TwoOptionsDialog.newInstance("Accident");
                             opts.show(getActivity().getFragmentManager(), "dialog");
                         } else if(item.getTitle().equals("Road Accident")){
@@ -120,62 +120,6 @@ public class MessagingTab extends Fragment {
                 menuHelper.show();
             }
         });
-
-        //message dialogs
-        /*accident.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TwoOptionsDialog opts = TwoOptionsDialog.newInstance("Accident");
-                opts.show(getActivity().getFragmentManager(), "dialog");
-
-            }
-        });
-
-        engFail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TwoOptionsDialog opts2 = TwoOptionsDialog.newInstance("Bus failure");
-                opts2.show(getActivity().getFragmentManager(), "dialog");
-            }
-        });*/
-
-        Bus_mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (bus == 0) {
-                    for (DataSnapshot d : dataSnapshot.getChildren()) {
-                        String m = d.child("content").getValue().toString();
-                        messages.add(new Message(m, d.getKey(), "user"));
-                    }
-                    bus += 1;
-                    arrange();
-                }
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-        Admin_mRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                if (admin == 0) {
-                    for (DataSnapshot d : dataSnapshot.getChildren()) {
-                        String m = d.child("content").getValue().toString();
-                        messages.add(new Message(m, d.getKey(), "admin"));
-                    }
-                    admin += 1;
-                    arrange();
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
         Bus_mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -194,7 +138,6 @@ public class MessagingTab extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
-
         Admin_mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -212,7 +155,38 @@ public class MessagingTab extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
+        Bus_mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (bus == 0) {
+                    for (DataSnapshot d : dataSnapshot.getChildren()) {
+                        String m = d.child("content").getValue().toString();
+                        messages.add(new Message(m, d.getKey(), "user"));
+                    }
+                    arrange();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+
+        Admin_mRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                if (admin == 0) {
+                    for (DataSnapshot d : dataSnapshot.getChildren()) {
+                        String m = d.child("content").getValue().toString();
+                        messages.add(new Message(m, d.getKey(), "admin"));
+                    }
+                    arrange();
+                }
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
         return v;
     }
 
@@ -223,7 +197,6 @@ public class MessagingTab extends Fragment {
 
     public void arrange(){
         class compare implements Comparator<Message>{
-
             @Override
             public int compare(Message m1, Message m2) {
                 return m1.time.compareTo(m2.time);
@@ -241,6 +214,8 @@ public class MessagingTab extends Fragment {
                     addMessageBox(m.content, m.time, 2);
                 }
             }
+            bus += 1;
+            admin += 1;
         }
     }
 
@@ -260,6 +235,7 @@ public class MessagingTab extends Fragment {
         lp1.setMargins(0,30,0,0);
         lp1.weight = 1.0f;
         lp2.weight = 1.0f;
+
         content.setText(message);
 
         time.setText(t);
