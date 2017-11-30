@@ -103,16 +103,16 @@ public class MessagingTab extends Fragment {
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
+                        TwoOptionsDialog opts = null;
                         if(item.getTitle().equals("Bus Failure")){
                             Log.d(TAG, " HIII BO");
-                            TwoOptionsDialog opts = TwoOptionsDialog.newInstance("Accident");
-                            opts.show(getActivity().getFragmentManager(), "dialog");
+                            opts = TwoOptionsDialog.newInstance("Accident");
                         } else if(item.getTitle().equals("Road Accident")){
-                            TwoOptionsDialog opts2 = TwoOptionsDialog.newInstance("Bus failure");
-                            opts2.show(getActivity().getFragmentManager(), "dialog");
+                            opts = TwoOptionsDialog.newInstance("Bus failure");
                         } else {
 
                         }
+                        opts.show(getActivity().getFragmentManager(), "dialog");
                         return true;
                     }
                 });
@@ -121,24 +121,6 @@ public class MessagingTab extends Fragment {
                 menuHelper.show();
             }
         });
-
-        //message dialogs
-        /*accident.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TwoOptionsDialog opts = TwoOptionsDialog.newInstance("Accident");
-                opts.show(getActivity().getFragmentManager(), "dialog");
-
-            }
-        });
-
-        engFail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TwoOptionsDialog opts2 = TwoOptionsDialog.newInstance("Bus failure");
-                opts2.show(getActivity().getFragmentManager(), "dialog");
-            }
-        });*/
 
         Bus_mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
