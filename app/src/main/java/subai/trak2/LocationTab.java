@@ -126,6 +126,11 @@ public class LocationTab extends Fragment {// implements LocationListener {
             status = savedInstanceState.getString("stat");
             isClicked = savedInstanceState.getBoolean("clicked");
         }
+        if(sessionManager.isUserLoggedIn()) {
+            Intent notifIntent = new Intent(getActivity(), NotifService.class);
+            getActivity().startService(notifIntent);
+        }
+
 
         spinner = (Spinner) v.findViewById(R.id.route_list);
         //sessionManager.setHasSpinnerSelected(false);
@@ -213,8 +218,7 @@ public class LocationTab extends Fragment {// implements LocationListener {
         });
         start.setBackground(getResources().getDrawable(bg));
         start.setText(text);
-        Intent intent = new Intent(getActivity(), NotifService.class);
-        getActivity().startService(intent);
+
         return v;
     }
 

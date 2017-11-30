@@ -112,9 +112,12 @@ public class MainActivity extends AppCompatActivity {
         sessionManager.setLoggedIn(false);
         sessionManager.setHasStarted(false);
         finish();
-
+        Intent notifIntent = new Intent(this, NotifService.class);
+        this.stopService(notifIntent);
         Intent intent = new Intent(this, SendService.class);
         this.stopService(intent);
+        DatabaseReference statRef = FirebaseDatabase.getInstance().getReference().child("Bus_Accounts").child(sessionManager.getBusNum());
+        statRef.child("status").setValue("In-Active");
         //Toast.makeText(this.getApplicationContext(), "Sending Stopped", Toast.LENGTH_LONG).show();
 
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
@@ -162,6 +165,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_menu, menu);
         return true;
+    }
+    @Override
+    public void onBackPressed() {
+        // do nothing
+        // disable back button
     }
 
     @Override
