@@ -1,6 +1,7 @@
 package subai.trak2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -25,6 +26,14 @@ public class Question3Activity extends AppCompatActivity {
     private int curr;
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HelpActivity.class);
+        startActivity(intent);
+        this.finish();
+        //super.onBackPressed();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question3);
@@ -34,6 +43,15 @@ public class Question3Activity extends AppCompatActivity {
 
         q3_toolbar = (Toolbar) findViewById(R.id.toolbar_help3);
         setSupportActionBar(q3_toolbar);
+
+        q3_toolbar.setNavigationIcon(R.drawable.ic_prev);
+        q3_toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         viewPager = (ViewPager) findViewById(R.id.q3_view_pager);
         help_bar_view = (TextView) findViewById(R.id.text_help3);
         //dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
@@ -41,9 +59,8 @@ public class Question3Activity extends AppCompatActivity {
         btnNext3 = (Button) findViewById(R.id.next_button3);
 
         layouts = new int[]{
-                R.layout.answer1_1,
-                R.layout.answer1_2,
-                R.layout.answer1_3};
+                R.layout.answer3_1,
+                R.layout.answer3_2};
 
         // adding bottom dots
         //addBottomDots(0);
