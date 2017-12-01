@@ -56,13 +56,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "onCreate: Starting...");
         sessionManager = new UserSessionManager(this);
 
         if (!sessionManager.isUserLoggedIn()) {
             logout();
         }
-
         mSectionPageAdapter = new SectionsPageAdapter(getSupportFragmentManager());
         mToolBar = (Toolbar) findViewById(R.id.toolbar);
         mToolBar.setTitle("");
@@ -135,6 +133,18 @@ public class MainActivity extends AppCompatActivity {
         InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         keyboard.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+
+        if (intent != null) {
+            String data = intent.getStringExtra("fromNotif");
+            if (data != null) {
+                ViewPager view = (ViewPager) this.findViewById(R.id.container);
+                view.setCurrentItem(1);
+            }
+        }
+    }
 
     public void logout() {
         sessionManager.setPosition(0);
@@ -197,17 +207,13 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.activity_menu, menu);
         return true;
     }
-    @Override
-    public void onBackPressed() {
-        // do nothing
-        // disable back button
-    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.help_btn) {
             Intent intent = new Intent(MainActivity.this, HelpActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
             startActivity(intent);
             finish();
             return true;

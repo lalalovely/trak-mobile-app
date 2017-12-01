@@ -20,7 +20,7 @@ public class Bus {
     Bus(){
         //dummy values
 
-        destination = new Coordinates(String.valueOf(10.344632), String.valueOf(123.912566));
+        destination = new Coordinates(String.valueOf(10.298432), String.valueOf(123.893072));
         position = new Coordinates("", "");
         busCompany = "";
         route = "";

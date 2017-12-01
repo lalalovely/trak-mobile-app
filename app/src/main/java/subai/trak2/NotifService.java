@@ -69,9 +69,10 @@ public class NotifService extends Service {
 
     }
     public void notif() {
-        Intent intent = new Intent(NotifService.this, LoginActivity.class);
+        Intent intent = new Intent(NotifService.this, MainActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pd = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
+        intent.putExtra("fromNotif", "toMessageTab");
+        PendingIntent pd = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
         NotificationCompat.Builder nfBuilder = new NotificationCompat.Builder(getApplicationContext());
         nfBuilder.setContentTitle("You have a message");
         nfBuilder.setContentText("Tap to open trak");

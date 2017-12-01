@@ -56,6 +56,7 @@ public class HelpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HelpActivity.this, Question1Activity.class);
                 startActivity(intent);
+
             }
         });
 

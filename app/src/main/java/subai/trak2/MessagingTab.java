@@ -53,14 +53,13 @@ public class MessagingTab extends Fragment {
     private static int admin = 0;
     private List<Message> messages;
     private int initialize = 0;
-    private FloatingActionButton accident;
-    private FloatingActionButton engFail;
     private ImageView emergency;
-    private static int scroll;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        
         View v = inflater.inflate(R.layout.messaging_frag, container, false);
         messages = new ArrayList<>();
 
@@ -78,7 +77,6 @@ public class MessagingTab extends Fragment {
         view = inflater.inflate(R.layout.send_user, container, false);
         bus = 0;
         admin = 0;
-        scroll = 20;
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +89,7 @@ public class MessagingTab extends Fragment {
                     SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd hh:mm:ss a");
                     String t = dateFormat.format(cal1.getTime());
                     DatabaseReference pushRef = Bus_mRef.child(t).child(("content"));
-                    pushRef.setValue(messageText);
+                    pushRef.setValue(messageText.trim() );
                     messageArea.setText("");
                 }
             }
@@ -107,10 +105,10 @@ public class MessagingTab extends Fragment {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if(item.getTitle().equals("Bus Failure")){
-                            TwoOptionsDialog opts = TwoOptionsDialog.newInstance("Accident");
+                            TwoOptionsDialog opts = TwoOptionsDialog.newInstance("Bus failure");
                             opts.show(getActivity().getFragmentManager(), "dialog");
                         } else if(item.getTitle().equals("Road Accident")){
-                            TwoOptionsDialog opts2 = TwoOptionsDialog.newInstance("Bus failure");
+                            TwoOptionsDialog opts2 = TwoOptionsDialog.newInstance("Accident");
                             opts2.show(getActivity().getFragmentManager(), "dialog");
                         } else {
 
@@ -127,9 +125,12 @@ public class MessagingTab extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if(bus == 1) {
-                    New_message.setValue("True");
-                    String message = dataSnapshot.child("content").getValue().toString();
-                    addMessageBox(message, getCurrTime(), 1);
+                    if(isAdded()) {
+                        New_message.setValue("True");
+                        Toast.makeText(getActivity().getApplicationContext(), "Message Sent", Toast.LENGTH_LONG).show();
+                        String message = dataSnapshot.child("content").getValue().toString();
+                        addMessageBox(message, getCurrTime(), 1);
+                    }
                 }
 
             }
@@ -146,8 +147,10 @@ public class MessagingTab extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if (admin == 1){
-                    String message = dataSnapshot.child("content").getValue().toString();
-                    addMessageBox(message,getCurrTime(), 2);
+                    if(isAdded()) {
+                        String message = dataSnapshot.child("content").getValue().toString();
+                        addMessageBox(message, getCurrTime(), 2);
+                    }
                 }
             }
             @Override
@@ -242,40 +245,38 @@ public class MessagingTab extends Fragment {
     }
 
     public void addMessageBox(String message, String t,int type){
-        TextView content = new TextView(getActivity().getApplicationContext());
-        TextView time = new TextView(getActivity().getApplicationContext());
-        LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        lp1.setMargins(0,30,0,0);
-        lp1.weight = 1.0f;
-        lp2.weight = 1.0f;
+        if (isAdded()) {
+            TextView content = new TextView(getActivity().getApplicationContext());
+            TextView time = new TextView(getActivity().getApplicationContext());
+            LinearLayout.LayoutParams lp1 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            LinearLayout.LayoutParams lp2 = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp1.setMargins(0, 30, 0, 0);
+            lp1.weight = 1.0f;
+            lp2.weight = 1.0f;
 
-        content.setText(message);
-        content.setTextSize(15);
-        //left top right bottom
-        content.setPadding(15, 15, 15, 15);
+            content.setText(message);
+            content.setTextSize(15);
+            //left top right bottom
+            content.setPadding(15, 15, 15, 15);
 
-        time.setText(t);
-        time.setTextSize(10);
-        time.setTextColor(Color.BLACK);
-        if(type == 1) {
-            lp1.gravity = Gravity.RIGHT;
-            lp2.gravity = Gravity.RIGHT;
-            content.setTextColor(getResources().getColor(R.color.white));
-            content.setBackground(getResources().getDrawable(R.drawable.chat_bubble_dark_blue));
-            //content.setBackgroundResource(R.drawable.s_chat_bloat);
-            //content.setBackgroundColor(Color.BLUE);
+            time.setText(t);
+            time.setTextSize(10);
+            time.setTextColor(Color.BLACK);
+            if (type == 1) {
+                lp1.gravity = Gravity.RIGHT;
+                lp2.gravity = Gravity.RIGHT;
+                content.setTextColor(getResources().getColor(R.color.white));
+                content.setBackground(getResources().getDrawable(R.drawable.chat_bubble_dark_blue));
+            } else {
+                lp1.gravity = Gravity.LEFT;
+                lp2.gravity = Gravity.LEFT;
+                content.setTextColor(getResources().getColor(R.color.fontColor));
+                content.setBackground(getResources().getDrawable(R.drawable.received_chat));
+            }
+            content.setLayoutParams(lp1);
+            time.setLayoutParams(lp2);
+            layout.addView(content);
+            layout.addView(time);
         }
-        else{
-            lp1.gravity = Gravity.LEFT;
-            lp2.gravity = Gravity.LEFT;
-            content.setTextColor(getResources().getColor(R.color.fontColor));
-            content.setBackground(getResources().getDrawable(R.drawable.received_chat));
-            //content.setBackgroundColor(Color.GRAY);
-        }
-        content.setLayoutParams(lp1);
-        time.setLayoutParams(lp2);
-        layout.addView(content);
-        layout.addView(time);
     }
 }
