@@ -15,7 +15,7 @@
     <color name="start_btn_color">#9fc03c</color>
     <color name="titleColor">#273a84</color>
     <color name="iconColor">#4d6eb5</color>
-
+    <color name="dark_gray">#A9A9A9</color>
     <color name="bg">#f6f6f6</color>
     <color name="dirty_white">#faebd7</color>
     <color name="warning_red">#ff0000</color>

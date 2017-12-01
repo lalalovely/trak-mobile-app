@@ -47,13 +47,8 @@ public class LoginActivity extends AppCompatActivity{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-=======
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
->>>>>>> a98c341f4c4d4ed2bedc7530777281c2535dcf91
         setContentView(R.layout.activity_login);
 
         sessionManager = new UserSessionManager(this);

@@ -48,13 +48,15 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/question_two"/>
+        android:src="@drawable/question_two"
+        android:scaleType="fitXY"
+        android:background="@drawable/ripple"
+        />
 
-    <ImageButton
+    <Button
         android:id="@+id/help_3"
         android:layout_below="@id/help_2"
         android:layout_width="match_parent"
-
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/question_three"/>
@@ -65,6 +67,8 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/question_four"/>
+        android:scaleType="fitXY"
+        android:src="@drawable/question_four"
+        android:background="@drawable/ripple"/>
 
 </RelativeLayout>

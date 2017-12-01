@@ -13,6 +13,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -39,7 +41,7 @@ public class HelpActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar_help);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_prev);
-
+        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
         help_btn_1 = (ImageButton) findViewById(R.id.help_1);
         help_btn_2 = (ImageButton) findViewById(R.id.help_2);
         help_btn_3 = (ImageButton) findViewById(R.id.help_3);
@@ -65,6 +67,13 @@ public class HelpActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(HelpActivity.this, Question2Activity.class);
                 startActivity(intent);
+            }
+        });
+
+        help_btn_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                v.startAnimation(animAlpha);
             }
         });
 

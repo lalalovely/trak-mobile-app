@@ -26,12 +26,9 @@
         </activity>
         <activity
             android:name=".MainActivity"
-<<<<<<< HEAD
             android:windowSoftInputMode="adjustPan"
             android:launchMode="singleInstance"/>
-=======
             />
->>>>>>> a98c341f4c4d4ed2bedc7530777281c2535dcf91
         <activity
             android:name=".IntroActivity"
             android:theme="@style/AppTheme.NoActionBar" />
