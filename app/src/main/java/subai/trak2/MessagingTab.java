@@ -251,20 +251,27 @@ public class MessagingTab extends Fragment {
         lp2.weight = 1.0f;
 
         content.setText(message);
+        content.setTextSize(15);
+        //left top right bottom
+        content.setPadding(15, 15, 15, 15);
 
         time.setText(t);
+        time.setTextSize(10);
         time.setTextColor(Color.BLACK);
         if(type == 1) {
             lp1.gravity = Gravity.RIGHT;
             lp2.gravity = Gravity.RIGHT;
-            //content.setBackgroundResource(R.drawable.forsend_chat_bubble);
-            content.setBackgroundColor(Color.BLUE);
+            content.setTextColor(getResources().getColor(R.color.white));
+            content.setBackground(getResources().getDrawable(R.drawable.chat_bubble_dark_blue));
+            //content.setBackgroundResource(R.drawable.s_chat_bloat);
+            //content.setBackgroundColor(Color.BLUE);
         }
         else{
             lp1.gravity = Gravity.LEFT;
             lp2.gravity = Gravity.LEFT;
-            //content.setBackgroundResource(R.drawable.receive_chat_bubble);
-            content.setBackgroundColor(Color.BLUE);
+            content.setTextColor(getResources().getColor(R.color.fontColor));
+            content.setBackground(getResources().getDrawable(R.drawable.received_chat));
+            //content.setBackgroundColor(Color.GRAY);
         }
         content.setLayoutParams(lp1);
         time.setLayoutParams(lp2);

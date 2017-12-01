@@ -36,15 +36,14 @@ public class HelpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar_help);
-        setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(R.drawable.ic_prev);
-
         help_btn_1 = (ImageButton) findViewById(R.id.help_1);
         help_btn_2 = (ImageButton) findViewById(R.id.help_2);
         help_btn_3 = (ImageButton) findViewById(R.id.help_3);
         help_btn_4 = (ImageButton) findViewById(R.id.help_4);
 
+        toolbar = (Toolbar) findViewById(R.id.toolbar_help);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_prev);
         toolbar.setNavigationOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -64,6 +63,22 @@ public class HelpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HelpActivity.this, Question2Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        help_btn_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HelpActivity.this, Question3Activity.class);
+                startActivity(intent);
+            }
+        });
+
+        help_btn_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HelpActivity.this, Question4Activity.class);
                 startActivity(intent);
             }
         });

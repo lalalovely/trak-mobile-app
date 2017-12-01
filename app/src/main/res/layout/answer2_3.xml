@@ -7,6 +7,6 @@
         android:layout_below="@+id/text_help"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@drawable/answer_2_3_2nd"/>
+        android:src="@drawable/trans_2_3"/>
 
 </LinearLayout>
