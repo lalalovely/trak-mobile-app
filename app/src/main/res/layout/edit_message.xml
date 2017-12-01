@@ -54,7 +54,6 @@
         android:layout_height="wrap_content"
         android:background="@drawable/chat_txt_bg"
         android:hint="Type a message"
-        android:imeOptions="actionSend"
         android:inputType="text"
         android:padding="15dp"
         android:textColor="@color/dot_active"
