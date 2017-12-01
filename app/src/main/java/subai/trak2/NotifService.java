@@ -72,7 +72,7 @@ public class NotifService extends Service {
         nfBuilder.setContentTitle("You have a message");
         nfBuilder.setContentText("Tap to open trak");
         nfBuilder.setAutoCancel(true);
-        nfBuilder.setSmallIcon(R.drawable.trak_logo);
+        nfBuilder.setSmallIcon(R.drawable.logo_final);
         nfBuilder.setContentIntent(pd);
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(0, nfBuilder.build());
