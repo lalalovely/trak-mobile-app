@@ -39,13 +39,8 @@ public class Bus {
     public void setRoute(String route) {
         this.route = route;
     }
-
-    public String getBusCompany() { return busCompany; }
-
-    public String getRoute() { return route; }
-
-    public String getAccommodation() { return accommodation; }
-
-
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
 

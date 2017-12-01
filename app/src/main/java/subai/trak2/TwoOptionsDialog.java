@@ -40,7 +40,7 @@ public class TwoOptionsDialog extends DialogFragment {
                                 SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd hh:mm:ss a");
                                 String t = dateFormat.format(cal1.getTime());
 
-
+                                sessionManager.setStatus("Emergency");
                                 DatabaseReference pushRef = Bus_mRef.child(t).child(("content"));
 
                                 if (title.equals("Accident")){

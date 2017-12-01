@@ -22,22 +22,23 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".MainActivity"
-<<<<<<< HEAD
-            android:windowSoftInputMode="adjustPan"
-            android:launchMode="singleInstance"/>
-=======
-            />
->>>>>>> a98c341f4c4d4ed2bedc7530777281c2535dcf91
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".IntroActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".WelcomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -47,16 +48,19 @@
             android:name=".Question1Activity"
             android:label=""
             android:parentActivityName=".HelpActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Question2Activity"
             android:label=""
             android:parentActivityName=".HelpActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".HelpActivity"
             android:label=""
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
         <service android:name=".SendService"
                  android:exported="false">
         </service>

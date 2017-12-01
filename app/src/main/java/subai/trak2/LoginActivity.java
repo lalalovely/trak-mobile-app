@@ -47,17 +47,10 @@ public class LoginActivity extends AppCompatActivity{
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-<<<<<<< HEAD
-=======
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
->>>>>>> a98c341f4c4d4ed2bedc7530777281c2535dcf91
         setContentView(R.layout.activity_login);
-
         sessionManager = new UserSessionManager(this);
-
         busNumber = (EditText) findViewById(R.id.busNumText);
         login = (Button) findViewById(R.id.btnLogin);
 
@@ -99,7 +92,7 @@ public class LoginActivity extends AppCompatActivity{
 
     public void sendMessage() {
         DatabaseReference statRef = ref.child("Bus_Accounts").child(sessionManager.getBusNum());
-        statRef.child("status").setValue("Active");
+        statRef.child("status").setValue("Online");
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -125,12 +118,9 @@ public class LoginActivity extends AppCompatActivity{
                     newFragment.show(getFragmentManager(), "dialog");
                     //Toast.makeText(getApplicationContext(), "PLEASE INPUT BUS NUMBER", Toast.LENGTH_LONG).show();
                 }
-
             }
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {}
         });
     }
 
@@ -155,7 +145,6 @@ public class LoginActivity extends AppCompatActivity{
         sessionManager.setLoggedIn(true);
         sessionManager.setBusNumber(busNumber.getText().toString());
         sendMessage();
-
     }
 
     public void setBusCompany(String company){
@@ -164,7 +153,6 @@ public class LoginActivity extends AppCompatActivity{
     public void setAccommodation(String acc) {
         sessionManager.setAccomodation(acc);
     }
-
     public static String getBusNumber(){
         return busNumber.getText().toString();
     }

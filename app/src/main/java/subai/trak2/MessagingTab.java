@@ -1,6 +1,5 @@
 package subai.trak2;
 
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,6 +41,7 @@ public class MessagingTab extends Fragment {
     private static final String TAG = "@string/messaging_tab";
     private DatabaseReference Bus_mRef;
     private DatabaseReference Admin_mRef;
+    private DatabaseReference New_message;
     private LinearLayout layout;
     private RelativeLayout layout_2;
     private ImageView sendButton;
@@ -55,6 +56,8 @@ public class MessagingTab extends Fragment {
     private FloatingActionButton accident;
     private FloatingActionButton engFail;
     private ImageView emergency;
+    private static int scroll;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,10 +67,9 @@ public class MessagingTab extends Fragment {
         sessionManager = new UserSessionManager(getActivity().getApplicationContext());
         Bus_mRef = FirebaseDatabase.getInstance().getReference().child("Bus_Messages").child(sessionManager.getBusNum());
         Admin_mRef = FirebaseDatabase.getInstance().getReference().child("Admin_Messages").child(sessionManager.getBusNum());
+        New_message = FirebaseDatabase.getInstance().getReference().child("Bus_Accounts").child(sessionManager.getBusNum()).child("newMessage");
 
         layout = (LinearLayout) v.findViewById(R.id.layout1);
-        //accident = (FloatingActionButton) v.findViewById(R.id.road_acc);
-        //engFail = (FloatingActionButton) v.findViewById(R.id.engFail);
         layout_2 = (RelativeLayout)v.findViewById(R.id.layout2);
         emergency = (ImageView)v.findViewById(R.id.emer_button);
         sendButton = (ImageView)v.findViewById(R.id.sendButton);
@@ -76,6 +78,7 @@ public class MessagingTab extends Fragment {
         view = inflater.inflate(R.layout.send_user, container, false);
         bus = 0;
         admin = 0;
+        scroll = 20;
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +127,7 @@ public class MessagingTab extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if(bus == 1) {
+                    New_message.setValue("True");
                     String message = dataSnapshot.child("content").getValue().toString();
                     addMessageBox(message, getCurrTime(), 1);
                 }
@@ -185,6 +189,16 @@ public class MessagingTab extends Fragment {
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
+            }
+        });
+        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                scrollView.post(new Runnable() {
+                    public void run() {
+                        scrollView.fullScroll(View.FOCUS_DOWN);
+                    }
+                });
             }
         });
         return v;
@@ -256,6 +270,5 @@ public class MessagingTab extends Fragment {
         time.setLayoutParams(lp2);
         layout.addView(content);
         layout.addView(time);
-        scrollView.fullScroll(View.FOCUS_DOWN);
     }
 }

@@ -24,10 +24,20 @@ public class UserSessionManager {
     public static final String LASTTRIP = "lasttrip";
     public static final String STOPPED = "stop";
 
+
     public UserSessionManager(Context cont) {
         this.context = cont;
         prefs = context.getSharedPreferences(MYPREFERENCES, Context.MODE_PRIVATE);
         editor = prefs.edit();
+    }
+
+    public void setStatus(String stat) {
+        editor.putString("stat", stat);
+        editor.commit();
+    }
+
+    public String getStatus() {
+        return prefs.getString("stat", null);
     }
 
     public void setIsLastTrip(boolean lastTrip) {
