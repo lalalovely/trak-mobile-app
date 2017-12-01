@@ -41,7 +41,7 @@ public class HelpActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar_help);
         setSupportActionBar(toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_prev);
-        final Animation animAlpha = AnimationUtils.loadAnimation(this, R.anim.anim_alpha);
+        final Animation animFadeIn = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
         help_btn_1 = (ImageButton) findViewById(R.id.help_1);
         help_btn_2 = (ImageButton) findViewById(R.id.help_2);
         help_btn_3 = (ImageButton) findViewById(R.id.help_3);
@@ -57,6 +57,8 @@ public class HelpActivity extends AppCompatActivity {
         help_btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                help_btn_1.setAnimation(animFadeIn);
+
                 Intent intent = new Intent(HelpActivity.this, Question1Activity.class);
                 startActivity(intent);
             }
@@ -65,6 +67,7 @@ public class HelpActivity extends AppCompatActivity {
         help_btn_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                help_btn_2.setAnimation(animFadeIn);
                 Intent intent = new Intent(HelpActivity.this, Question2Activity.class);
                 startActivity(intent);
             }
@@ -73,15 +76,42 @@ public class HelpActivity extends AppCompatActivity {
         help_btn_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                v.startAnimation(animAlpha);
+                help_btn_3.setAnimation(animFadeIn);
+                //if necessary then call:
+                //help_btn_3.setVisibility(View.GONE);
             }
         });
-
     }
 
     public void clickQuestion1() {
         Intent intent = new Intent(this, Question1Activity.class);
         startActivity(intent);
+    }
+
+    public class MyAnimationListener implements Animation.AnimationListener {
+        private ImageButton mImgButton;
+
+        public MyAnimationListener(ImageButton imgButton) {
+            mImgButton = imgButton;
+        }
+
+        @Override
+        public void onAnimationEnd(Animation animation) {
+            mImgButton.setVisibility(View.GONE);
+
+        }
+
+        @Override
+        public void onAnimationRepeat(Animation animation) {
+            // TODO Auto - generated method stub
+        }
+
+        @Override
+        public void onAnimationStart(Animation animation) {
+            // TODO Auto - generated method stub
+
+        }
+
     }
 
 }

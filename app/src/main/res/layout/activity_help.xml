@@ -39,7 +39,10 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/question_one"/>
+        android:scaleType="fitXY"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/question_one"
+        />
         <!--android:onClick="clickQuestion1"-->
 
     <ImageButton
@@ -48,18 +51,21 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
-        android:src="@drawable/question_two"
         android:scaleType="fitXY"
-        android:background="@drawable/ripple"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/question_two"
         />
 
-    <Button
+    <ImageButton
         android:id="@+id/help_3"
         android:layout_below="@id/help_2"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
-        android:background="@drawable/question_three"/>
+        android:scaleType="fitXY"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/question_three"
+        />
 
     <ImageButton
         android:id="@+id/help_4"
@@ -68,7 +74,8 @@
         android:layout_height="70dp"
         android:layout_marginTop="20dp"
         android:scaleType="fitXY"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:src="@drawable/question_four"
-        android:background="@drawable/ripple"/>
+        />
 
 </RelativeLayout>

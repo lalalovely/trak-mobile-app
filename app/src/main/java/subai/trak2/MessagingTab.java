@@ -97,7 +97,6 @@ public class MessagingTab extends Fragment {
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 PopupMenu popup = new PopupMenu(getContext(), emergency);
                 popup.getMenuInflater().inflate(R.menu.emergency_popup, popup.getMenu());
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
