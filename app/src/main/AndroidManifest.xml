@@ -22,7 +22,6 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-<<<<<<< HEAD
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" >
         </activity>
@@ -30,15 +29,8 @@
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize"
             android:launchMode="singleInstance"
-            android:screenOrientation="portrait" />
-
-=======
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MainActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:launchMode="singleInstance"/>
->>>>>>> a24961cd956cc3048f95f512756ce493a61b08e3
         <activity
             android:name=".IntroActivity"
             android:theme="@style/AppTheme.NoActionBar"
