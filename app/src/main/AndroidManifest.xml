@@ -22,15 +22,17 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
+
             android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize"
-            android:launchMode="singleInstance"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".IntroActivity"
             android:theme="@style/AppTheme.NoActionBar"
@@ -69,10 +71,11 @@
         <activity
             android:name=".HelpActivity"
             android:label=""
+            android:launchMode="singleTask"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
         <service android:name=".SendService"
-                 android:exported="false">
+            android:exported="false">
         </service>
         <service android:name=".NotifService"
             android:exported="false">
