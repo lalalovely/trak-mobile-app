@@ -17,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -40,12 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private Bus bus;
     private LocationTab locationTab;
     private MessagingTab messagingTab;
-//<<<<<<< HEAD
-//=======
-    //private DetailsActivity detailsActivity; //details for the bus
+
     private Spinner spinner;
 
-//>>>>>>> 73607e5213982b3fa2686cf4cd379a1e04217dce
     UserSessionManager sessionManager;
     int bg;
     String strTxt;
@@ -104,6 +102,38 @@ public class MainActivity extends AppCompatActivity {
         setupViewPager(mViewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
+
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+                View focus = getCurrentFocus();
+                if (focus != null) {
+                    hiddenKeyboard(focus);
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+                View focus = getCurrentFocus();
+                if (focus != null) {
+                    hiddenKeyboard(focus);
+                }
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+                View focus = getCurrentFocus();
+                if (focus != null) {
+                    hiddenKeyboard(focus);
+                }
+            }
+        });
+    }
+
+    private void hiddenKeyboard(View v) {
+        InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        keyboard.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
 
     public void logout() {
@@ -111,13 +141,14 @@ public class MainActivity extends AppCompatActivity {
         sessionManager.setSpinnerState(true);
         sessionManager.setLoggedIn(false);
         sessionManager.setHasStarted(false);
+        sessionManager.setStatus("In-transit");
         finish();
         Intent notifIntent = new Intent(this, NotifService.class);
         this.stopService(notifIntent);
         Intent intent = new Intent(this, SendService.class);
         this.stopService(intent);
         DatabaseReference statRef = FirebaseDatabase.getInstance().getReference().child("Bus_Accounts").child(sessionManager.getBusNum());
-        statRef.child("status").setValue("In-Active");
+        statRef.child("status").setValue("Offline");
         //Toast.makeText(this.getApplicationContext(), "Sending Stopped", Toast.LENGTH_LONG).show();
 
         startActivity(new Intent(MainActivity.this, LoginActivity.class));

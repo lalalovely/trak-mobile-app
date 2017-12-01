@@ -5,6 +5,8 @@ import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -21,6 +23,7 @@ public class NotifService extends Service {
     UserSessionManager sessionManager;
     String busNumber;
     static  boolean initialized = false;
+    Uri sound;
 
     @Nullable
     @Override
@@ -32,6 +35,7 @@ public class NotifService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+        sound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         initialized = false;
         sessionManager = new UserSessionManager(this);
         busNumber = sessionManager.getBusNum();
@@ -65,15 +69,16 @@ public class NotifService extends Service {
 
     }
     public void notif() {
-        Intent intent = new Intent(NotifService.this, LoginActivity.class); // when notif is tapped go to login activity
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // clear top FLAG_ACTIVITY_SINGLE_TOP
+        Intent intent = new Intent(NotifService.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pd = PendingIntent.getActivity(getApplicationContext(), 0, intent, PendingIntent.FLAG_ONE_SHOT);
         NotificationCompat.Builder nfBuilder = new NotificationCompat.Builder(getApplicationContext());
         nfBuilder.setContentTitle("You have a message");
         nfBuilder.setContentText("Tap to open trak");
         nfBuilder.setAutoCancel(true);
-        nfBuilder.setSmallIcon(R.drawable.trak_logo);
+        nfBuilder.setSmallIcon(R.drawable.logo_final);
         nfBuilder.setContentIntent(pd);
+        nfBuilder.setSound(sound);
         NotificationManager nm = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         nm.notify(0, nfBuilder.build());
     }

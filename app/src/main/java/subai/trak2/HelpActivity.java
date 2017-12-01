@@ -1,24 +1,13 @@
 package subai.trak2;
 
-import android.content.Context;
 import android.content.Intent;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class HelpActivity extends AppCompatActivity {
 
@@ -79,40 +68,25 @@ public class HelpActivity extends AppCompatActivity {
                 help_btn_3.setAnimation(animFadeIn);
                 //if necessary then call:
                 //help_btn_3.setVisibility(View.GONE);
+                Intent intent = new Intent(HelpActivity.this, Question3Activity.class);
+                startActivity(intent);
             }
         });
+
+        help_btn_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                help_btn_4.setAnimation(animFadeIn);
+                Intent intent = new Intent(HelpActivity.this, Question4Activity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void clickQuestion1() {
         Intent intent = new Intent(this, Question1Activity.class);
         startActivity(intent);
     }
-
-    public class MyAnimationListener implements Animation.AnimationListener {
-        private ImageButton mImgButton;
-
-        public MyAnimationListener(ImageButton imgButton) {
-            mImgButton = imgButton;
-        }
-
-        @Override
-        public void onAnimationEnd(Animation animation) {
-            mImgButton.setVisibility(View.GONE);
-
-        }
-
-        @Override
-        public void onAnimationRepeat(Animation animation) {
-            // TODO Auto - generated method stub
-        }
-
-        @Override
-        public void onAnimationStart(Animation animation) {
-            // TODO Auto - generated method stub
-
-        }
-
-    }
-
 }
 

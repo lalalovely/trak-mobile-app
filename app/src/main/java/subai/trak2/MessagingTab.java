@@ -1,6 +1,5 @@
 package subai.trak2;
 
-
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -14,7 +13,11 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -41,6 +44,7 @@ public class MessagingTab extends Fragment {
     private static final String TAG = "@string/messaging_tab";
     private DatabaseReference Bus_mRef;
     private DatabaseReference Admin_mRef;
+    private DatabaseReference New_message;
     private LinearLayout layout;
     private RelativeLayout layout_2;
     private ImageView sendButton;
@@ -54,7 +58,9 @@ public class MessagingTab extends Fragment {
     private int initialize = 0;
     private FloatingActionButton accident;
     private FloatingActionButton engFail;
-    private ImageView emergency;
+    private ImageButton emergency;
+    private static int scroll;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,18 +70,18 @@ public class MessagingTab extends Fragment {
         sessionManager = new UserSessionManager(getActivity().getApplicationContext());
         Bus_mRef = FirebaseDatabase.getInstance().getReference().child("Bus_Messages").child(sessionManager.getBusNum());
         Admin_mRef = FirebaseDatabase.getInstance().getReference().child("Admin_Messages").child(sessionManager.getBusNum());
+        New_message = FirebaseDatabase.getInstance().getReference().child("Bus_Accounts").child(sessionManager.getBusNum()).child("newMessage");
 
         layout = (LinearLayout) v.findViewById(R.id.layout1);
-        //accident = (FloatingActionButton) v.findViewById(R.id.road_acc);
-        //engFail = (FloatingActionButton) v.findViewById(R.id.engFail);
         layout_2 = (RelativeLayout)v.findViewById(R.id.layout2);
-        emergency = (ImageView)v.findViewById(R.id.emer_button);
+        emergency = (ImageButton)v.findViewById(R.id.emer_button);
         sendButton = (ImageView)v.findViewById(R.id.sendButton);
         messageArea = (EditText)v.findViewById(R.id.edit_txt_msg);
         scrollView = (ScrollView)v.findViewById(R.id.scrollView);
         view = inflater.inflate(R.layout.send_user, container, false);
         bus = 0;
         admin = 0;
+        scroll = 20;
 
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,22 +103,27 @@ public class MessagingTab extends Fragment {
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                final Animation aAnim = new AlphaAnimation(1.0f, 0.0f);
+                aAnim.setDuration(100);
+                aAnim.setFillAfter(true);
+                emergency.startAnimation(aAnim);
+                emergency.clearAnimation();
                 PopupMenu popup = new PopupMenu(getContext(), emergency);
                 popup.getMenuInflater().inflate(R.menu.emergency_popup, popup.getMenu());
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem item) {
-                        TwoOptionsDialog opts = null;
-                        if(item.getTitle().equals("Bus Failure")){
-                            opts = TwoOptionsDialog.newInstance("Accident");
-                        } else if(item.getTitle().equals("Road Accident")){
-                            opts = TwoOptionsDialog.newInstance("Bus failure");
-                        } else {
+                     @Override
+                     public boolean onMenuItemClick(MenuItem item) {
+                         TwoOptionsDialog opts = null;
+                         if (item.getTitle().equals("Bus Failure")) {
+                             opts = TwoOptionsDialog.newInstance("Accident");
+                         } else if (item.getTitle().equals("Road Accident")) {
+                             opts = TwoOptionsDialog.newInstance("Bus failure");
+                         } else {
 
-                        }
-                        opts.show(getActivity().getFragmentManager(), "dialog");
-                        return true;
-                    }
+                         }
+                         opts.show(getActivity().getFragmentManager(), "dialog");
+                         return true;
+                     }
                 });
                 MenuPopupHelper menuHelper = new MenuPopupHelper(getContext(), (MenuBuilder) popup.getMenu(), emergency);
                 menuHelper.setForceShowIcon(true);
@@ -123,6 +134,7 @@ public class MessagingTab extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if(bus == 1) {
+                    New_message.setValue("True");
                     String message = dataSnapshot.child("content").getValue().toString();
                     addMessageBox(message, getCurrTime(), 1);
                 }
@@ -186,6 +198,16 @@ public class MessagingTab extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
             }
         });
+        scrollView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                scrollView.post(new Runnable() {
+                    public void run() {
+                        scrollView.fullScroll(View.FOCUS_DOWN);
+                    }
+                });
+            }
+        });
         return v;
     }
 
@@ -235,27 +257,32 @@ public class MessagingTab extends Fragment {
         lp1.weight = 1.0f;
         lp2.weight = 1.0f;
 
-
         content.setText(message);
+        content.setTextSize(15);
+        //left top right bottom
+        content.setPadding(15, 15, 15, 15);
 
         time.setText(t);
+        time.setTextSize(10);
         time.setTextColor(Color.BLACK);
         if(type == 1) {
             lp1.gravity = Gravity.RIGHT;
             lp2.gravity = Gravity.RIGHT;
-            //content.setBackgroundResource(R.layout.text_bubble);
-            content.setBackgroundColor(Color.BLUE);
+            content.setTextColor(getResources().getColor(R.color.white));
+            content.setBackground(getResources().getDrawable(R.drawable.chat_bubble_dark_blue));
+            //content.setBackgroundResource(R.drawable.s_chat_bloat);
+            //content.setBackgroundColor(Color.BLUE);
         }
         else{
             lp1.gravity = Gravity.LEFT;
             lp2.gravity = Gravity.LEFT;
-            //content.setBackgroundResource(R.drawable.receive_chat_bubble);
-            content.setBackgroundColor(Color.BLUE);
+            content.setTextColor(getResources().getColor(R.color.fontColor));
+            content.setBackground(getResources().getDrawable(R.drawable.received_chat));
+            //content.setBackgroundColor(Color.GRAY);
         }
         content.setLayoutParams(lp1);
         time.setLayoutParams(lp2);
         layout.addView(content);
         layout.addView(time);
-        scrollView.fullScroll(View.FOCUS_DOWN);
     }
 }

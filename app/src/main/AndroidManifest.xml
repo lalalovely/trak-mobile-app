@@ -12,7 +12,7 @@
     <application
         android:allowBackup="true"
         android:hardwareAccelerated="false"
-        android:icon="@drawable/trak_logo"
+        android:icon="@drawable/logo_final"
         android:label="@string/app_name"
         android:largeHeap="true"
         android:persistent="true"
@@ -22,19 +22,23 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme.NoActionBar" >
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".MainActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:launchMode="singleInstance"/>
-            />
-        <activity
-            android:name=".IntroActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleInstance"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:name=".IntroActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
+        <activity
             android:name=".WelcomeActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -44,16 +48,29 @@
             android:name=".Question1Activity"
             android:label=""
             android:parentActivityName=".HelpActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".Question2Activity"
+            android:label=""
+            android:parentActivityName=".HelpActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Question3Activity"
+            android:label=""
+            android:parentActivityName=".HelpActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Question4Activity"
             android:label=""
             android:parentActivityName=".HelpActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".HelpActivity"
             android:label=""
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" />
         <service android:name=".SendService"
                  android:exported="false">
         </service>

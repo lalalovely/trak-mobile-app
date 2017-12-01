@@ -30,12 +30,29 @@ public class Question2Activity extends AppCompatActivity {
     private int curr;
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HelpActivity.class);
+        startActivity(intent);
+        this.finish();
+        //super.onBackPressed();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question2);
 
         q2_toolbar = (Toolbar) findViewById(R.id.toolbar_help2);
         setSupportActionBar(q2_toolbar);
+
+        q2_toolbar.setNavigationIcon(R.drawable.ic_prev);
+        q2_toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         viewPager = (ViewPager) findViewById(R.id.q2_view_pager);
         help_bar_view2 = (TextView) findViewById(R.id.text_help2);
         //dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);

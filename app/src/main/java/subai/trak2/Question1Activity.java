@@ -30,6 +30,14 @@ public class Question1Activity extends AppCompatActivity {
     private int curr = 0;
 
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HelpActivity.class);
+        startActivity(intent);
+        this.finish();
+        //super.onBackPressed();
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question1);
@@ -39,6 +47,15 @@ public class Question1Activity extends AppCompatActivity {
 
         q1_toolbar = (Toolbar) findViewById(R.id.toolbar_help1);
         setSupportActionBar(q1_toolbar);
+
+        q1_toolbar.setNavigationIcon(R.drawable.ic_prev);
+        q1_toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         viewPager = (ViewPager) findViewById(R.id.q1_view_pager);
         help_bar_view = (TextView) findViewById(R.id.text_help);
         //dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);

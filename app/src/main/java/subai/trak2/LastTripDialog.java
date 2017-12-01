@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.location.Location;
 import android.os.Bundle;
 import android.app.DialogFragment;
+import android.provider.ContactsContract;
 import android.support.v4.view.ViewPager;
 import android.widget.Toast;
 
@@ -124,6 +125,8 @@ public class LastTripDialog extends DialogFragment {
                                     String stringTime = dateFormat.format(cal1.getTime());
                                     String message = "Hello SBT admin! This will be our last trip. Thanks!";
                                     Bus_mRef.child(stringTime).child("content").setValue(message);
+                                    sessionManager.setStatus("Last Trip");
+
                                 }
 
                                 //LocationTab.doPositiveClick(typ);

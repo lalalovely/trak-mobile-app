@@ -1,6 +1,7 @@
 package subai.trak2;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -20,9 +21,17 @@ public class Question4Activity extends AppCompatActivity {
     //private LinearLayout dotsLayout;
     //private TextView[] dots;
     private int[] layouts;
-    private Button btnSkip4, btnNext4;
+    //private Button btnSkip4, btnNext4;
     private Toolbar q4_toolbar;
     private int curr;
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, HelpActivity.class);
+        startActivity(intent);
+        this.finish();
+        //super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,16 +43,23 @@ public class Question4Activity extends AppCompatActivity {
 
         q4_toolbar = (Toolbar) findViewById(R.id.toolbar_help4);
         setSupportActionBar(q4_toolbar);
+
+        q4_toolbar.setNavigationIcon(R.drawable.ic_prev);
+        q4_toolbar.setNavigationOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
         viewPager = (ViewPager) findViewById(R.id.q4_view_pager);
         help_bar_view4 = (TextView) findViewById(R.id.text_help4);
         //dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
-        btnSkip4 = (Button) findViewById(R.id.prev_button4);
-        btnNext4 = (Button) findViewById(R.id.next_button4);
+//        btnSkip4 = (Button) findViewById(R.id.prev_button4);
+//        btnNext4 = (Button) findViewById(R.id.next_button4);
 
         layouts = new int[]{
-                R.layout.answer1_1,
-                R.layout.answer1_2,
-                R.layout.answer1_3};
+                R.layout.answer4};
 
         // adding bottom dots
         //addBottomDots(0);
@@ -52,18 +68,18 @@ public class Question4Activity extends AppCompatActivity {
         viewPager.setAdapter(viewPagerAdapter);
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
 
-        if (curr == layouts.length - 1) {
-            btnNext4.setVisibility(View.GONE);
-            btnSkip4.setVisibility(View.VISIBLE);
-        } else {
-            if (curr == 0) {
-                btnNext4.setVisibility(View.VISIBLE);
-                btnSkip4.setVisibility(View.GONE);
-            } else {
-                btnNext4.setVisibility(View.VISIBLE);
-                btnSkip4.setVisibility(View.VISIBLE);
-            }
-        }
+//        if (curr == layouts.length - 1) {
+//            btnNext4.setVisibility(View.GONE);
+//            btnSkip4.setVisibility(View.VISIBLE);
+//        } else {
+//            if (curr == 0) {
+//                btnNext4.setVisibility(View.VISIBLE);
+//                btnSkip4.setVisibility(View.GONE);
+//            } else {
+//                btnNext4.setVisibility(View.VISIBLE);
+//                btnSkip4.setVisibility(View.VISIBLE);
+//            }
+//        }
 
     }
 
@@ -79,19 +95,19 @@ public class Question4Activity extends AppCompatActivity {
 
         @Override
         public void onPageSelected(int position) {
-            curr = position;
-            if (position == layouts.length - 1) {
-                btnNext4.setVisibility(View.GONE);
-                btnSkip4.setVisibility(View.VISIBLE);
-            } else {
-                if (position == 0) {
-                    btnNext4.setVisibility(View.VISIBLE);
-                    btnSkip4.setVisibility(View.GONE);
-                } else {
-                    btnNext4.setVisibility(View.VISIBLE);
-                    btnSkip4.setVisibility(View.VISIBLE);
-                }
-            }
+//            curr = position;
+//            if (position == layouts.length - 1) {
+//                btnNext4.setVisibility(View.GONE);
+//                btnSkip4.setVisibility(View.VISIBLE);
+//            } else {
+//                if (position == 0) {
+//                    btnNext4.setVisibility(View.VISIBLE);
+//                    btnSkip4.setVisibility(View.GONE);
+//                } else {
+//                    btnNext4.setVisibility(View.VISIBLE);
+//                    btnSkip4.setVisibility(View.VISIBLE);
+//                }
+//            }
 //            addBottomDots(position);
 //            // changing the next button text 'NEXT' / 'GOT IT'
 //            if (position == layouts.length - 1) {

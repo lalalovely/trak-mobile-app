@@ -69,6 +69,8 @@ public class SendService extends Service implements LocationListener  {
             bus.setBusCompany(sessionManager.getBusCompany());
             bus.setRoute(sessionManager.getRoute());
             bus.setPosition(lat,lng);
+            bus.setStatus(sessionManager.getStatus());
+            Log.d("!!!!!!!!!!!!!!!", sessionManager.getStatus());
             pushRef.setValue(bus);
             Toast.makeText(getApplicationContext(), "DATA SENT", Toast.LENGTH_LONG).show();
         } else {

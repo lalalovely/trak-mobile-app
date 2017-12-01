@@ -26,12 +26,13 @@
         <!--app:layout_constraintLeft_toLeftOf="parent"-->
         <!--app:layout_constraintTop_toTopOf="parent"/>-->
 
-    <ImageView
+    <ImageButton
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:id="@+id/emer_button"
+        android:scaleType="fitXY"
         android:src="@drawable/emer_button"
-        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:background="?attr/selectableItemBackgroundBorderless"
         android:clickable="true"
         app:layout_constraintRight_toLeftOf="@+id/edit_txt_msg"
         tools:layout_constraintTop_creator="1"
@@ -46,8 +47,8 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintHorizontal_bias="0.888"
-        app:layout_constraintVertical_bias="1.0" />
-    <!--android:background="?attr/selectableItemBackgroundBorderless"-->
+        app:layout_constraintVertical_bias="1.0"
+        />
 
     <EditText
         android:id="@+id/edit_txt_msg"
@@ -76,8 +77,9 @@
         android:clickable="true"
         android:src="@drawable/ic_sends"
         android:tint="@android:color/white"
-        app:backgroundTint="#4D6EB5"
+        app:backgroundTint="@color/buttonColor"
         app:fabSize="mini"
+        app:rippleColor="@color/colorAccent"
         tools:layout_constraintRight_creator="1"
         tools:layout_constraintBottom_creator="1"
         app:layout_constraintBottom_toBottomOf="parent"
