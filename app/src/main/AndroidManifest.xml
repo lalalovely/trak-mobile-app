@@ -75,7 +75,7 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" />
         <service android:name=".SendService"
-                 android:exported="false">
+            android:exported="false">
         </service>
         <service android:name=".NotifService"
             android:exported="false">

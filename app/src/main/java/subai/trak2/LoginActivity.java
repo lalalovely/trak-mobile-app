@@ -67,8 +67,8 @@ public class LoginActivity extends AppCompatActivity{
 
         login.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-            Toast.makeText(getApplicationContext(), "CHECKING FOR VALIDITY", Toast.LENGTH_SHORT).show();
-            checkBusNumber();
+                Toast.makeText(getApplicationContext(), "CHECKING FOR VALIDITY", Toast.LENGTH_SHORT).show();
+                checkBusNumber();
 
             }
 
@@ -167,5 +167,3 @@ public class LoginActivity extends AppCompatActivity{
 
 
 }
-
-
