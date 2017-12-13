@@ -18,11 +18,13 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+//this activity contains the questions that may guide the user in using the application
 public class HelpActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private ImageButton help_btn_1, help_btn_2, help_btn_3, help_btn_4;
 
+    //when the back button is clicked
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
@@ -51,6 +53,7 @@ public class HelpActivity extends AppCompatActivity {
             }
         });
 
+        //on click listener for the first question
         help_btn_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -60,6 +63,7 @@ public class HelpActivity extends AppCompatActivity {
             }
         });
 
+        //on click listener for the second question
         help_btn_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -68,6 +72,7 @@ public class HelpActivity extends AppCompatActivity {
             }
         });
 
+        //on click listener for the third question
         help_btn_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +81,7 @@ public class HelpActivity extends AppCompatActivity {
             }
         });
 
+        //on click listener for the fourth question
         help_btn_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -83,13 +89,6 @@ public class HelpActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
-
-    public void clickQuestion1() {
-        Intent intent = new Intent(this, Question1Activity.class);
-        startActivity(intent);
-    }
-
 }
 

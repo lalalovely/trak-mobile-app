@@ -37,11 +37,11 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+//this contains the log in activity
 public class LoginActivity extends AppCompatActivity{
     private static EditText busNumber;
     private Button login;
     private static DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
-
 
     UserSessionManager sessionManager;
 
@@ -59,12 +59,15 @@ public class LoginActivity extends AppCompatActivity{
         busNumber = (EditText) findViewById(R.id.busNumText);
         login = (Button) findViewById(R.id.btnLogin);
 
+        //checks if the user is logged in
         if (sessionManager.isUserLoggedIn()) {
             sessionManager.setPosition(sessionManager.getPosition());
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
         }
 
+        //on click listener of the log in button
+        //checks the validity of the inputted bus number
         login.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 Toast.makeText(getApplicationContext(), "CHECKING FOR VALIDITY", Toast.LENGTH_SHORT).show();
@@ -103,6 +106,7 @@ public class LoginActivity extends AppCompatActivity{
         finish();
     }
 
+    //checks if the user inputted a bus number, if the bus number is valid, etc
     public void checkBusNumber(){
         DatabaseReference busRef = ref.child("Bus_Accounts");
         busRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -132,8 +136,8 @@ public class LoginActivity extends AppCompatActivity{
         });
     }
 
+    //checks if the bus number is a registered/valid bus number in the database
     public void valid(){
-
         ref.child("Bus_Accounts").child(busNumber.getText().toString()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -155,15 +159,18 @@ public class LoginActivity extends AppCompatActivity{
         sendMessage();
     }
 
+    //sets the bus company based on the bus number
     public void setBusCompany(String company){
         sessionManager.setBusCompany(company);
     }
+
+    //sets the accommodation of the bus
     public void setAccommodation(String acc) {
         sessionManager.setAccomodation(acc);
     }
+
+    //returns the bus number inputted by the user
     public static String getBusNumber(){
         return busNumber.getText().toString();
     }
-
-
 }

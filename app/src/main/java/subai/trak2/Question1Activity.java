@@ -17,18 +17,18 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+//this activity holds the contents for the answers in the first question that appears in the help page
 public class Question1Activity extends AppCompatActivity {
 
     private ViewPager viewPager;
     private ViewPagerAdapter viewPagerAdapter;
     private TextView help_bar_view;
-    //private LinearLayout dotsLayout;
-    //private TextView[] dots;
     private int[] layouts;
     private Button btnSkip, btnNext;
     private Toolbar q1_toolbar;
     private int curr = 0;
 
+    //when back button is clicked
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(this, HelpActivity.class);
@@ -41,9 +41,6 @@ public class Question1Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.question1);
-
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
-//        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         q1_toolbar = (Toolbar) findViewById(R.id.toolbar_help1);
         setSupportActionBar(q1_toolbar);
@@ -58,17 +55,14 @@ public class Question1Activity extends AppCompatActivity {
 
         viewPager = (ViewPager) findViewById(R.id.q1_view_pager);
         help_bar_view = (TextView) findViewById(R.id.text_help);
-        //dotsLayout = (LinearLayout) findViewById(R.id.layoutDots);
         btnSkip = (Button) findViewById(R.id.prev_button);
         btnNext = (Button) findViewById(R.id.next_button);
 
+        //the layouts are the answer pages that can be found that can be found in the activity
         layouts = new int[]{
                 R.layout.answer1_1,
                 R.layout.answer1_2,
                 R.layout.answer1_3};
-
-        // adding bottom dots
-        //addBottomDots(0);
 
         viewPagerAdapter = new ViewPagerAdapter();
         viewPager.setAdapter(viewPagerAdapter);
@@ -77,54 +71,29 @@ public class Question1Activity extends AppCompatActivity {
         if (curr == layouts.length - 1) {
             btnNext.setVisibility(View.GONE);
             btnSkip.setVisibility(View.VISIBLE);
-
-//            btnSkip.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    viewPager.arrowScroll(View.FOCUS_LEFT);
-//                }
-//            });
         } else {
             if (curr == 0) {
                 btnNext.setVisibility(View.VISIBLE);
                 btnSkip.setVisibility(View.GONE);
-
-//                btnNext.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        viewPager.arrowScroll(View.FOCUS_RIGHT);
-//                    }
-//                });
             } else {
                 btnNext.setVisibility(View.VISIBLE);
                 btnSkip.setVisibility(View.VISIBLE);
-
-//                btnSkip.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        viewPager.arrowScroll(View.FOCUS_LEFT);
-//                    }
-//                });
-//
-//                btnNext.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        viewPager.arrowScroll(View.FOCUS_RIGHT);
-//                    }
-//                });
             }
         }
 
     }
 
+    //this function shows the previous page when the back button represented by back arrow is clicked
     public void btnSkipClick1(View v) {
         viewPager.arrowScroll(View.FOCUS_LEFT);
     }
 
+    //this function shows the next page when the next button represented by next arrow is clicked
     public void btnNextClick1(View v) {
         viewPager.arrowScroll(View.FOCUS_RIGHT);
     }
 
+    //listens to the pages that are being swiped by the user
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
 
         @Override
@@ -142,20 +111,6 @@ public class Question1Activity extends AppCompatActivity {
                     btnSkip.setVisibility(View.VISIBLE);
                 }
             }
-//            if (position == 0) {
-//                btnSkip.setVisibility(View.GONE);
-//            }
-//            addBottomDots(position);
-//            // changing the next button text 'NEXT' / 'GOT IT'
-//            if (position == layouts.length - 1) {
-//                // last page. make button text to GOT IT
-//                btnNext.setText(getString(R.string.start));
-//                btnSkip.setVisibility(View.GONE);
-//            } else {
-//                // still pages are left
-//                btnNext.setText(getString(R.string.next));
-//                btnSkip.setVisibility(View.VISIBLE);
-//            }
         }
 
         @Override
@@ -174,6 +129,8 @@ public class Question1Activity extends AppCompatActivity {
         return viewPager.getCurrentItem() + i;
     }
 
+    //adapter of view pager
+    //necessary when using viewpager
     public class ViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
 

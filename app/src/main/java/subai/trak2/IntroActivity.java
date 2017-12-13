@@ -26,6 +26,7 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+//this activity is contains the onboarding pages
 public class IntroActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
@@ -35,6 +36,7 @@ public class IntroActivity extends AppCompatActivity {
     private int[] layouts;
     private Button btnSkip, btnNext;
 
+    //initializes variables
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,13 +51,14 @@ public class IntroActivity extends AppCompatActivity {
         btnSkip = (Button) findViewById(R.id.btn_skip);
         btnNext = (Button) findViewById(R.id.btn_next);
 
+        //onboarding pages
         layouts = new int[]{
                 R.layout.onb_1,
                 R.layout.onb_2,
                 R.layout.onb_3,
                 R.layout.onb_4,};
 
-        // adding bottom dots
+        //adding bottom dots
         addBottomDots(0);
 
         viewPagerAdapter = new ViewPagerAdapter();
@@ -63,10 +66,12 @@ public class IntroActivity extends AppCompatActivity {
         viewPager.addOnPageChangeListener(viewPagerPageChangeListener);
     }
 
+    //if the user clicks skip button
     public  void btnSkipClick(View v) {
         launchLoginScreen();
     }
 
+    //if the user clicks next button
     public  void btnNextClick(View v) {
         // checking for last page
         // if last page home screen will be launched
@@ -80,7 +85,6 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     ViewPager.OnPageChangeListener viewPagerPageChangeListener = new ViewPager.OnPageChangeListener() {
-
         @Override
         public void onPageSelected(int position) {
             addBottomDots(position);
@@ -98,19 +102,15 @@ public class IntroActivity extends AppCompatActivity {
 
         @Override
         public void onPageScrolled(int arg0, float arg1, int arg2) {
-
         }
 
         @Override
         public void onPageScrollStateChanged(int arg0) {
-
         }
     };
 
-
     private void addBottomDots(int currentPage) {
         dots = new TextView[layouts.length];
-
         dotsLayout.removeAllViews();
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(this);
@@ -119,7 +119,6 @@ public class IntroActivity extends AppCompatActivity {
             dots[i].setTextColor(getResources().getColor(R.color.dot_inactive));
             dotsLayout.addView(dots[i]);
         }
-
         if (dots.length > 0)
             dots[currentPage].setTextColor(getResources().getColor(R.color.dot_active));
     }
@@ -128,6 +127,7 @@ public class IntroActivity extends AppCompatActivity {
         return viewPager.getCurrentItem() + i;
     }
 
+    //launch log-in screen when skip or start button is clicked
     private void launchLoginScreen() {
         startActivity(new Intent(this, LoginActivity.class));
         finish();
@@ -135,7 +135,6 @@ public class IntroActivity extends AppCompatActivity {
 
     public class ViewPagerAdapter extends PagerAdapter {
         private LayoutInflater layoutInflater;
-
 
         public ViewPagerAdapter() {
 

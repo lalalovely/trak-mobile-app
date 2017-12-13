@@ -12,6 +12,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+//displays pop-up dialogs when the user clicks any of the emergencies
 public class TwoOptionsDialog extends DialogFragment {
 
     public static TwoOptionsDialog newInstance(String title) {
@@ -50,7 +51,6 @@ public class TwoOptionsDialog extends DialogFragment {
                                 if (title.equals("Bus failure")){
                                     String m = "Hello SBT admin! The bus is currently experiencing problems. There will be a slight delay in our arrival";
                                     pushRef.setValue(m);
-
                                 }
                             }
                         }
@@ -58,7 +58,6 @@ public class TwoOptionsDialog extends DialogFragment {
                 .setNegativeButton("NO",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int whichButton) {
-
                             }
                         }
                 )

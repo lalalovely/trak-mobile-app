@@ -1,11 +1,9 @@
 package subai.trak2;
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.text.style.BulletSpan;
-import android.util.Log;
 
+//UserSessionManager saves the important information such bus number, bus route, etc in the SharedPreferences
 public class UserSessionManager {
 
     SharedPreferences prefs;
@@ -24,80 +22,44 @@ public class UserSessionManager {
     public static final String LASTTRIP = "lasttrip";
     public static final String STOPPED = "stop";
 
-
+    //constructor
     public UserSessionManager(Context cont) {
         this.context = cont;
         prefs = context.getSharedPreferences(MYPREFERENCES, Context.MODE_PRIVATE);
         editor = prefs.edit();
     }
 
+    //status includes emergencies
     public void setStatus(String stat) {
         editor.putString("stat", stat);
         editor.commit();
     }
 
+    //returns the saved status of the bus
     public String getStatus() {
         return prefs.getString("stat", null);
     }
 
-    public void setIsLastTrip(boolean lastTrip) {
-        editor.putBoolean(LASTTRIP, lastTrip);
-        editor.commit();
-    }
-
-    public boolean getIsLastTrip() {
-        return prefs.getBoolean(LASTTRIP, false);
-    }
-
-    public void setIsStop(boolean stop) {
-        editor.putBoolean(STOPPED, stop);
-        editor.commit();
-    }
-
-    public boolean getIsStop() {
-        return prefs.getBoolean(STOPPED, false);
-    }
-
-    public void createUserLoginSession(String bus_num){
-        editor.putBoolean(IS_USER_LOGGEDIN, true);
-        editor.putString(KEY_BUS_NUM, bus_num);
-        editor.commit();
-    }
-
+    //sets the position to be saved in the SharedPreferences
     public void setPosition(int pos) {
         editor.putInt(POSITION, pos);
         editor.commit();
     }
 
+    //returns the position
     public int getPosition() {
        return prefs.getInt(POSITION, 0);
     }
 
-    public void setStop(boolean stop) {
-        editor.putBoolean("stopped", stop);
-        editor.commit();
-    }
-
-    public boolean getStop() {
-        return prefs.getBoolean("stopped", false);
-    }
-
+    //sets the state of the spinner
     public void setSpinnerState(boolean state) {
         editor.putBoolean(SPINNERSTATE, state);
         editor.commit();
     }
 
-    public boolean getSpinnerState() {
-        return prefs.getBoolean(SPINNERSTATE, false);
-    }
-
     public void setHasSpinnerSelected(boolean hasSelected) {
         editor.putBoolean(KEY_SPINNER_SELECT, hasSelected);
         editor.commit();
-    }
-
-    public boolean hasSpinnerSelected() {
-        return prefs.getBoolean(KEY_SPINNER_SELECT, false);
     }
 
     public void setHasStarted(boolean hasStarted) {
@@ -153,38 +115,4 @@ public class UserSessionManager {
     public String getRoute() {
         return prefs.getString(KEY_ROUTE, null);
     }
-
-    public boolean checkLogin(){
-        if(!this.isUserLoggedIn()){
-            // user is not logged in redirect him to Login Activity
-            Intent i = new Intent(context, LoginActivity.class);
-            // Closing all the Activities from stack
-            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            // Add new Flag to start new Activity
-            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            // Staring Login Activity
-            context.startActivity(i);
-            return true;
-        }
-        return false;
-    }
-
-    public String getUser() {
-        return prefs.getString(KEY_BUS_NUM, null);
-    }
-
-    public void logoutUser(){
-        // Clearing all user data from Shared Preferences
-        editor.clear();
-        editor.commit();
-        // After logout redirect user to Login Activity
-        Intent i = new Intent(context, LoginActivity.class);
-        // Closing all the Activities
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        // Add new Flag to start new Activity
-        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        // Staring Login Activity
-        context.startActivity(i);
-    }
-
 }
