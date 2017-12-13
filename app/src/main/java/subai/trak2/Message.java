@@ -37,9 +37,9 @@ public class Message {
         } else if (month.equals("12")){
             t = "December " + time.substring(3);
         }
-
-
+        String a = t.substring(15);
+        a = a.toUpperCase();
+        t = t.substring(0,15) + a;
         this.time = t;
     }
-
 }

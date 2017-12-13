@@ -99,6 +99,15 @@ public class LastTripDialog extends DialogFragment {
                                         Intent intent = new Intent(getActivity(), SendService.class);
                                         getActivity().stopService(intent);
                                         Toast.makeText(getActivity().getApplicationContext(), "Sending Stopped", Toast.LENGTH_LONG).show();
+                                        UserSessionManager sessionManager1 = new UserSessionManager(getActivity().getApplicationContext());
+                                        DatabaseReference Bus_mRef = FirebaseDatabase.getInstance().getReference().child("Bus_Messages").child(sessionManager1.getBusNum());
+                                        long x = System.currentTimeMillis();
+                                        Calendar cal1 = Calendar.getInstance();
+                                        cal1.setTimeInMillis(x);
+                                        SimpleDateFormat dateFormat = new SimpleDateFormat("MM-dd hh:mm:ss a");
+                                        String stringTime = dateFormat.format(cal1.getTime());
+                                        String message = "Trip ended!";
+                                        Bus_mRef.child(stringTime).child("content").setValue(message);
                                     } else {
                                         LocationTab.spinnerState = false;
                                         LocationTab.position = sessionManager.getPosition();

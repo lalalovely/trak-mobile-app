@@ -114,9 +114,12 @@ public class LoginActivity extends AppCompatActivity{
                         busNumber.setText("");
                         DialogFragment newFragment = AlertDialogFragment.newInstance("Please input a valid bus number.");
                         newFragment.show(getFragmentManager(), "dialog");
-                        //Toast.makeText(getApplicationContext(), "BUS DOES NOT EXIST", Toast.LENGTH_LONG).show();
                     } else {
-                        valid();
+                        if(dataSnapshot.child(bNum).child("status").getValue().equals("Offline")) {
+                            valid();
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Invalid Login", Toast.LENGTH_LONG).show();
+                        }
                     }
                 } else {
                     DialogFragment newFragment = AlertDialogFragment.newInstance("Please input bus number.");

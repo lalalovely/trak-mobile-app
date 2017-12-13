@@ -133,6 +133,8 @@ public class MainActivity extends AppCompatActivity {
         InputMethodManager keyboard = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         keyboard.hideSoftInputFromWindow(v.getWindowToken(), 0);
     }
+
+
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
@@ -178,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
         ref.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Iterable<DataSnapshot> children = dataSnapshot.child(LoginActivity.getBusNumber()).getChildren();
+                Iterable<DataSnapshot> children = dataSnapshot.child(sessionManager.getBusNum()).getChildren();
                 for (DataSnapshot child : children){
                     if (child.getKey().equals("accommodation")){
                         bus.setAccommodation(child.getValue().toString());
