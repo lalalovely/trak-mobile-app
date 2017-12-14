@@ -31,7 +31,8 @@ public class NotifService extends Service {
         return null;
     }
 
-
+    //  listener for the messages in the database
+    //  new 'items' in the database will trigger the listener and fire notification
     @Override
     public void onCreate() {
         super.onCreate();

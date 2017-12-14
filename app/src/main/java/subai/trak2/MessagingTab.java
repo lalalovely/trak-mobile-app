@@ -59,7 +59,7 @@ public class MessagingTab extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        
+
         View v = inflater.inflate(R.layout.messaging_frag, container, false);
         messages = new ArrayList<>();
 
@@ -77,7 +77,7 @@ public class MessagingTab extends Fragment {
         view = inflater.inflate(R.layout.send_user, container, false);
         bus = 0;
         admin = 0;
-
+        // send to database the text in textfield
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,7 +94,7 @@ public class MessagingTab extends Fragment {
                 }
             }
         });
-
+        // for emergency
         emergency.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -121,6 +121,7 @@ public class MessagingTab extends Fragment {
                 menuHelper.show();
             }
         });
+        // listener for message to admin
         Bus_mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -143,6 +144,7 @@ public class MessagingTab extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
+        // listener for message from admin
         Admin_mRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -162,6 +164,8 @@ public class MessagingTab extends Fragment {
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
+
+        // gets message to admin from database. initializing and sorting the prvevios messages
         Bus_mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -178,7 +182,7 @@ public class MessagingTab extends Fragment {
 
             }
         });
-
+        // gets admin message from database. initializing and sorting the prvevios messages
         Admin_mRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -211,7 +215,7 @@ public class MessagingTab extends Fragment {
     public void onStart() {
         super.onStart();
     }
-
+    // sort the messages
     public void arrange(){
         class compare implements Comparator<Message>{
             @Override
@@ -235,7 +239,7 @@ public class MessagingTab extends Fragment {
             admin += 1;
         }
     }
-
+    // get current time
     public String getCurrTime(){
         long x = System.currentTimeMillis();
         Calendar cal1 = Calendar.getInstance();
@@ -243,7 +247,9 @@ public class MessagingTab extends Fragment {
         SimpleDateFormat dateFormat = new SimpleDateFormat("hh:mm:ss a");
         return dateFormat.format(cal1.getTime());
     }
-
+    //  display the message
+    //  type = 1, display on the right. message to admin
+    //  type = 2, display on the left. message from admin
     public void addMessageBox(String message, String t,int type){
         if (isAdded()) {
             TextView content = new TextView(getActivity().getApplicationContext());

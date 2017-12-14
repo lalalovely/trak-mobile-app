@@ -19,7 +19,8 @@ import com.google.android.gms.location.LocationServices;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-
+// AUTO UPDATE OF COORDINATES EVERY X SECS / MIN
+// SENDS COORDINATES TO DATABASE ON BACKGROUND
 public class SendService extends Service implements LocationListener  {
     private double fusedLatitude = 0.0;
     private  double fusedLongitude = 0.0;
